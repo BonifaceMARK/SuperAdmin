@@ -29,7 +29,7 @@
                 <i class="bi bi-menu-button-wide"></i><span>Finance 5</span><i class="bi bi-chevron-down ms-auto"></i>
               </a>
               <ul id="f5" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li><a class="dropdown-item" href="{{ route('payment') }}">Payment Gateway 1</a></li>
+                <li><a class="dropdown-item" href="{{ route('payment') }}">Payment Gateway</a></li>
                 <li><a class="dropdown-item" href="{{route('communication')}}">Communication & Collaboration</a></li>
                 <li><a class="dropdown-item" href="{{route('standards')}}">Accounting Standards</a></li>
             </ul>

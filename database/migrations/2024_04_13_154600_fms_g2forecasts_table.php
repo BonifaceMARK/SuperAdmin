@@ -20,9 +20,9 @@ class CreateForecastsTable extends Migration
             $table->decimal('amount', 15, 2);
             $table->date('date');
             $table->string('status')->default('pending');
-            $table->string('approved_by')->nullable(); // Changed to string
+            $table->string('approved_by')->nullable();
             $table->text('comments')->nullable();
-            $table->string('created_by')->nullable(); // Changed to string
+            $table->string('created_by')->nullable();
             $table->timestamps();
         });
     }

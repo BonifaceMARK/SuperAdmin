@@ -310,7 +310,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Freight Payment Form</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Payment Form</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -318,15 +318,15 @@
                 <form id="freightPaymentForm" action="{{ route('freightpayments.store') }}" method="POST">
                     @csrf
                     <div class="mb-3">
-                        <label for="freightService" class="form-label">Freight Service</label>
+                        <label for="freightService" class="form-label"> Service</label>
                         <input type="text" class="form-control" id="freightService" name="freightService" readonly>
                     </div>
                     <div class="mb-3">
-                        <label for="freightAmount" class="form-label">Freight Amount</label>
+                        <label for="freightAmount" class="form-label"> Amount</label>
                         <input type="number" step="0.01" class="form-control" id="freightAmount" name="freightAmount">
                     </div>
                     <div class="mb-3">
-                        <label for="freightDate" class="form-label">Freight Date</label>
+                        <label for="freightDate" class="form-label"> Date</label>
                         <input type="datetime-local" class="form-control" id="freightDate" name="freightDate">
                     </div>
                     <div class="mb-3">
