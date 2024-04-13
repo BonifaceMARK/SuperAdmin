@@ -12,6 +12,12 @@ USE App\Http\Controllers\PendingController;
 USE App\Http\Controllers\ClientController;
 USE App\Http\Controllers\Reports;
 use App\Http\Controllers\fms5Controller;
+
+
+
+use App\Http\Controllers\EmployeeController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
