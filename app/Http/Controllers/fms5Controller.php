@@ -14,14 +14,9 @@ use Illuminate\Support\Facades\Auth;
 class fms5Controller extends Controller
 {
 
-    public function fms5payment()
-    {
 
 
-       return view ('F5.payment');
-    }
-
-    public function fms5communication()
+    public function fms5index()
     {
 
      $messages = ChatMessage::latest()->with('user')->limit(10)->get();
@@ -30,15 +25,10 @@ class fms5Controller extends Controller
         $user = Auth::user();
         $name = $user->name;
         $department = $user->department;
-       return view ('F5.c&c', compact('messages', 'name', 'department'));
+       return view ('F5.index', compact('messages', 'name', 'department'));
     }
 
-    public function fms5standards()
-    {
-
-
-       return view ('F5.standards');
-    }
+  
 
     public function storeHotel(Request $request)
     {
@@ -99,17 +89,7 @@ class fms5Controller extends Controller
 
         return redirect()->back()->with('success', 'Freight payment created successfully');
     }
-    public function index()
-    {
-
-        $messages = ChatMessage::latest()->with('user')->limit(10)->get();
-
-        $user = Auth::user();
-        $name = $user->name;
-
-
-        return view('F5.c&c', compact('messages', 'name',));
-    }
+  
 
     public function storeMessage(Request $request)
     {

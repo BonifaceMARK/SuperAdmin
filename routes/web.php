@@ -12,6 +12,7 @@ USE App\Http\Controllers\PendingController;
 USE App\Http\Controllers\ClientController;
 USE App\Http\Controllers\Reports;
 use App\Http\Controllers\fms5Controller;
+use App\Http\Controllers\fms1Controller;
 
 use App\Http\Controllers\G10Controller;
 
@@ -61,9 +62,8 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
 
 
     // PAYMENT GATEWAYS COMMUNICATION & COLLABORATION ACCOUNTING STANDARDS
-    Route::get('/fms5pay', [fms5Controller::class, 'fms5payment'])->name('payment');
-    Route::get('/fms5com', [fms5Controller::class, 'fms5communication'])->name('communication');
-    Route::get('/fms5stan', [fms5Controller::class, 'fms5standards'])->name('standards');
+    Route::get('/fms5index', [fms5Controller::class, 'fms5index'])->name('fms5.index');
+
 
     Route::post('/paymentgateways', [fms5Controller::class, 'storeHotel'])->name('paymentgateways.store');
     Route::post('/freight-payments', [fms5Controller::class, 'storeFreight'])->name('freightpayments.store');
@@ -72,11 +72,11 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
     Route::post('/chat/store', [fms5Controller::class, 'storeMessage'])->name('chat.store');
     Route::get('/chat/fetch', [fms5Controller::class, 'fetch'])->name('chat.fetch');
     Route::post('/fixedassetpayments', [fms5Controller::class, 'storeFixedAsset'])->name('fixedassetpayments.store');
+    Route::post('/taxpayments', [fms5Controller::class, 'storeTax'])->name('taxpayments.store');
 
-
-
-
-
+    // FINANCIAL PLANNING FINANCIAL REPORTING CASH MANAGEMENT 
+    Route::post('/financial-planning', [fms1Controller::class, 'storeFinancialPlanning'])->name('financial-planning.store');
+    Route::get('/fms1index', [fms1Controller::class, 'fms1index'])->name('fms1.index');
 
 
 

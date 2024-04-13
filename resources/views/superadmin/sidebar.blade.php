@@ -23,17 +23,8 @@
                   <span>Home</span>
                 </a>
                 </li><!-- End Dashboard Nav -->
-                <li class="nav-item">
-                  <a class="nav-link collapsed" data-bs-target="#components-nav"   href="{{route('manageRole')}}">
-                      <i class="bi bi-person-fill-gear"></i><span>User Management</span>
-                  </a>
-                </li><!-- End Components Nav -->
+      
 
-                <li class="nav-item">
-                  <a class="nav-link collapsed" data-bs-target="#components-nav"   href="{{route('manageRole')}}">
-                      <i class="bi bi-person-fill-gear"></i><span>User Management</span>
-                  </a>
-                </li><!-- End Components Nav -->
 
                 <li class="nav-item">
                   <a class="nav-link collapsed" data-bs-target="#components-nav"   href="{{route('payment')}}">

@@ -239,7 +239,7 @@
       </a>
     </li>
     <hr>
-    <li class="nav-heading">Payment Transaction</li>
+    <li class="nav-heading"></li>
 
       {{-- <li class="nav-item">
       <a class="nav-link collapsed" href="{{url('/superadmin/dashboard')}}">
@@ -260,23 +260,18 @@
       </li><!-- End Components Nav --> --}}
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#components-nav"   href="{{route('payment')}}">
-            <i class="bi bi-credit-card"></i><span style="font-size: 0.8rem;">Payment Gateways</span>
+        <a class="nav-link collapsed" data-bs-target="#components-nav"   href="{{route('fms5.index')}}">
+            <i class="bi bi-credit-card"></i><span style="font-size: 0.8rem;">Payment Gateways Communication & Collaboration Accounting Standards</span>
         </a>
       </li><!-- End Components Nav -->
 
-
-
-          <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#components-nav"   href="{{route('communication')}}">
-                <i class="bi bi-chat-left-dots"></i><span style="font-size: 0.8rem;">Communication & Collaboration</span>
-            </a>
-          </li><!-- End Components Nav -->
-          <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#components-nav"   href="{{route('standards')}}">
-                <i class="bi bi-list-columns"></i><span style="font-size: 0.8rem;">Accounting Standards</span>
-            </a>
-          </li><!-- End Components Nav -->
+<hr>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#components-nav"   href="{{route('fms1.index')}}">
+            <i class="bi bi-file-text"></i><span style="font-size: 0.8rem;">Financial Planning Financial Reporting & Cash Management</span>
+        </a>
+      </li><!-- End Components Nav -->
+        
     {{-- <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#components-superadmin" data-bs-toggle="collapse" href="#">
         <i class="bi bi-menu-button-wide"></i><span>Super Admin</span><i class="bi bi-chevron-down ms-auto"></i>

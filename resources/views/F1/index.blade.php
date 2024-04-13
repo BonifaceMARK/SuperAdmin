@@ -137,7 +137,7 @@
   </header><!-- End Header -->
 
   <!-- ======= Sidebar ======= -->
-  @include('superadmin.sidebar')
+  @include('layouts.appsidebar');
 
   <main id="main" class="main">
 
@@ -147,53 +147,64 @@
                     {{ Session::get('success') }}
                 </div>
                 @endif
-                @if(session('error'))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    {{ session('error') }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            @endif
+                @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header bg-primary text-white">
-                    Chat
-                </div>
+<!-- Button to trigger the modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#financialPlanningModal">
+    Create Financial Planning
+</button>
 
-                <div class="card-body d-flex flex-column justify-content-between">
-                    <!-- HTML Structure -->
-                    <div class="chat-container flex-grow-1 overflow-auto" style="width: 100%;">
-                        <div class="chat-box" id="chatBox">
-                            <!-- Messages will appear here -->
-                            @foreach($messages->reverse() as $message)
-                            <div class="message{{ $message->user->id == Auth::user()->id ? ' outgoing' : ' incoming' }}">
-                                <div class="message-details{{ $message->user->id == Auth::user()->id ? ' text-end' : '' }}">
-                                    <span class="message-sender">{{ $message->user->name }}</span>
-                                    <span class="message-time">{{ $message->created_at->format('M d, Y H:i A') }}</span>
-                                </div>
-                                <div class="message-content{{ $message->user->id == Auth::user()->id ? ' outgoing' : ' incoming' }}">{{ $message->message }}</div>
-                            </div>
-                            @endforeach
-                        </div>
+<!-- Modal -->
+<div class="modal fade" id="financialPlanningModal" tabindex="-1" aria-labelledby="financialPlanningModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="financialPlanningModalLabel">Create Financial Planning</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Form for adding financial planning -->
+                <form action="{{ route('financial-planning.store') }}" method="POST">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" name="name">
                     </div>
-
-                    <form action="{{ route('chat.store') }}" method="post">
-                        @csrf
-                        <div class="input-group">
-                            <input type="text" class="form-control chat-input" placeholder="Type your message..." id="messageInput" name="message">
-                            <button type="submit" class="btn btn-primary" id="sendMessageBtn"><i class="fas fa-paper-plane"></i></button>
-                        </div>
-                    </form>
-                </div>
-
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="target_revenue" class="form-label">Target Revenue</label>
+                        <input type="number" class="form-control" id="target_revenue" name="target_revenue">
+                    </div>
+                    <div class="mb-3">
+                        <label for="target_expense" class="form-label">Target Expense</label>
+                        <input type="number" class="form-control" id="target_expense" name="target_expense">
+                    </div>
+                    <div class="mb-3">
+                        <label for="start_date" class="form-label">Start Date</label>
+                        <input type="date" class="form-control" id="start_date" name="start_date">
+                    </div>
+                    <div class="mb-3">
+                        <label for="end_date" class="form-label">End Date</label>
+                        <input type="date" class="form-control" id="end_date" name="end_date">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
             </div>
         </div>
     </div>
 </div>
+
 
 
 

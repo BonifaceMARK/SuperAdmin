@@ -136,7 +136,7 @@
   </header><!-- End Header -->
 
   <!-- ======= Sidebar ======= -->
-  @include('superadmin.sidebar')
+  @include('layouts.appsidebar');
 
   <main id="main" class="main">
 
@@ -156,17 +156,66 @@
     </div>
 @endif
 
-<div class="row">
-    <div class="col-12">
-        <!-- Button with custom styling -->
-        <button type="button" class="btn btn-primary btn-custom" data-bs-toggle="modal" data-bs-target="#servicesModal" style="background-image: url('{{ asset("assets/img/REST.jpg") }}'); background-size: cover; font-size: 35px; padding: 50px 300px;">
-            Hotel & Restaurants
-        </button>
+
+
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <div class="card h-100">
+                <div class="card-header bg-primary text-white">
+                    Chat
+                </div>
+                <div class="card-body">
+                    <div class="chat-container overflow-auto">
+                        <div class="chat-box" id="chatBox">
+                            <!-- Messages will appear here -->
+                            @foreach($messages->reverse() as $message)
+                            <div class="message{{ $message->user->id == Auth::user()->id ? ' outgoing' : ' incoming' }}">
+                                <div class="message-details{{ $message->user->id == Auth::user()->id ? ' text-end' : '' }}">
+                                    <span class="message-sender">{{ $message->user->name }}</span>
+                                    <span class="message-time">{{ $message->created_at->format('M d, Y H:i A') }}</span>
+                                </div>
+                                <div class="message-content{{ $message->user->id == Auth::user()->id ? ' outgoing' : ' incoming' }}">{{ $message->message }}</div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <form action="{{ route('chat.store') }}" method="post">
+                        @csrf
+                        <div class="input-group">
+                            <input type="text" class="form-control chat-input" placeholder="Type your message..." id="messageInput" name="message">
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body"style="background-image: url('{{ asset("assets/img/calculate.jpg") }}');">
+                    <button type="button" class="btn btn-primary btn-block mb-3" data-bs-toggle="modal" data-bs-target="#adminPaymentsModal">
+                        Pay Administrative Expenses
+                    </button>
+                    <button type="button" class="btn btn-primary btn-block mb-3" data-bs-toggle="modal" data-bs-target="#taxPaymentsModal">
+                        Pay Tax
+                    </button>
+                    <button type="button" class="btn btn-primary btn-block mb-3" data-bs-toggle="modal" data-bs-target="#fixedAssetPaymentModal">
+                        Pay Fixed Asset
+                    </button>
+                    <button type="button" class="btn btn-primary btn-block mb-3" data-bs-toggle="modal" data-bs-target="#freightServicesModal">
+                        Freight Services
+                    </button>
+                    <button type="button" class="btn btn-primary btn-block" data-bs-toggle="modal" data-bs-target="#servicesModal">
+                        Hotel & Restaurants
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
-
-
 
 
 
@@ -260,14 +309,7 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-12">
-        <!-- Button with custom styling for Freight -->
-        <button type="button" class="btn btn-primary btn-custom" data-bs-toggle="modal" data-bs-target="#freightServicesModal" style="background-image: url('{{ asset("assets/img/freight.jpg") }}'); background-size: cover; font-size: 35px; padding: 50px 335px;">
-            Freight Services
-        </button>
-    </div>
-</div>
+
 
 <!-- Freight Services Modal -->
 <div class="modal fade" id="freightServicesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -343,21 +385,8 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-12">
-        <!-- Button with custom styling for Administrative Payments -->
-        <button type="button" class="btn btn-primary btn-custom" data-bs-toggle="modal" data-bs-target="#adminPaymentsModal" style="background-image: url('{{ asset("assets/img/admin.jpg") }}'); background-size: cover; font-size: 35px; padding: 50px 270px;">
-            Administrative Payments
-        </button>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taxPaymentsModal"style="background-image: url('{{ asset("assets/img/admin.jpg") }}'); background-size: cover; font-size: 35px; padding: 50px 270px;">
-            Open Tax Payments Modal
-        </button>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#fixedAssetPaymentModal">
-            Add Fixed Asset Payment
-        </button>
 
-    </div>
-</div>
+
 <div class="modal fade" id="fixedAssetPaymentModal" tabindex="-1" aria-labelledby="fixedAssetPaymentModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -608,7 +637,71 @@
         }
     }
 </script>
+<section class="section dashboard">
+    <div class="container">
+      <div class="row">
 
+
+
+
+        <!-- Card with an image on left -->
+        <div class="card mb-3">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="{{asset('assets/img/account.jpg')}}" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                  <h3 class="card-title">Introduction to Accounting Standards in the Philippines</h3>
+                  <p class="card-text">
+                      In the Philippines, accounting standards play a crucial role in ensuring transparency, reliability, and comparability in financial reporting across various entities. These standards provide a framework for how financial transactions are recorded, presented, and disclosed in financial statements, facilitating informed decision-making by stakeholders.
+                  </p>
+                  <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Philippine Financial Reporting Standards (PFRS).</h5>
+
+                        <!-- Vertical Pills Tabs -->
+                        <div class="d-flex align-items-start">
+                          <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                            <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">PFRS</button>
+                            <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">SMEs</button>
+                            <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">PAS</button>
+                          </div>
+                          <div class="tab-content" id="v-pills-tabContent">
+                            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                              The primary accounting standards governing financial reporting in the Philippines are the Philippine Financial Reporting Standards (PFRS). Aligned with International Financial Reporting Standards (IFRS) issued by the International Accounting Standards Board (IASB), PFRS sets the benchmark for accounting practices in the country. Endorsed by the Financial Reporting Standards Council (FRSC), PFRS applies to all entities reporting under the Philippine Financial Reporting Framework, ensuring consistency with global accounting principles.
+                            </div>
+                            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                              For small and medium-sized entities (SMEs), the Philippine Financial Reporting Standards for SMEs (PFRS for SMEs) offer a simplified version of full PFRS, tailored to the specific needs of smaller businesses. This framework provides SMEs with a less complex set of accounting standards while maintaining comparability and reliability in financial reporting.
+                            </div>
+                            <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                              Additionally, the Philippine Accounting Standards (PAS), though largely superseded by PFRS, were previously utilized in the Philippines and may still be relevant for certain entities that have not transitioned to PFRS.
+
+      To address specific accounting issues and provide guidance on the application of PFRS, the Philippine Interpretations Committee (PIC) issues interpretations and clarifications, ensuring consistent and appropriate application of accounting standards in the Philippine context.
+
+      Enforced by the Securities and Exchange Commission (SEC), compliance with these accounting standards is mandatory for various entities, including publicly traded companies, large corporations, SMEs, and others subject to financial reporting regulations. Adherence to these standards enhances the reliability of financial information, fosters investor confidence, and promotes the efficient functioning of capital markets in the Philippines.
+                            </div>
+                          </div>
+                        </div>
+                        <!-- End Vertical Pills Tabs -->
+
+                      </div>
+              </div>
+
+
+            </div>
+          </div>
+
+        </div><!-- End Card with an image on left -->
+
+
+
+    </div>
+    <div class="pdf-viewer">
+      <h4>Philippine Financial Reporting Standards / Philippine Accounting Standards</h4>
+      <iframe src="{{ asset('assets/img/PAS.pdf') }}" width="100%" height="600px" frameborder="0"></iframe>
+  </div>
+  </section>
 
 
 @include('layout.footer')
