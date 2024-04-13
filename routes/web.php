@@ -42,32 +42,29 @@ Route::get('/logout',           [AuthController::class,'logout']);
 
 // ********** Super Admin Routes *********
 Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],function(){
+
+
     Route::get('/dashboard',[SuperAdminController::class,'dashboard']);
     Route::get('/users',[SuperAdminController::class,'users'])->name('superAdminUsers');
     Route::get('/manage-role',[SuperAdminController::class,'manageRole'])->name('manageRole');
     Route::post('/update-role',[SuperAdminController::class,'updateRole'])->name('updateRole');
     Route::get('/users/{id}/edit', [SuperAdminController::class, 'edit'])->name('users.edit');
-Route::put('/users/{id}', [SuperAdminController::class, 'updateRole'])->name('users.update');
-Route::delete('/users/{id}', [SuperAdminController::class, 'destroy'])->name('users.destroy');
+
+
+    Route::put('/users/{id}', [SuperAdminController::class, 'updateRole'])->name('users.update');
+    Route::delete('/users/{id}', [SuperAdminController::class, 'destroy'])->name('users.destroy');
 
 
 
 
-// PAYMENT GATEWAYS COMMUNICATION & COLLABORATION ACCOUNTING STANDARDS
-Route::get('/fms5pay', [fms5Controller::class, 'fms5payment'])->name('payment');
-Route::get('/fms5com', [fms5Controller::class, 'fms5communication'])->name('communication');
-Route::get('/fms5stan', [fms5Controller::class, 'fms5standards'])->name('standards');
+    // PAYMENT GATEWAYS COMMUNICATION & COLLABORATION ACCOUNTING STANDARDS
+    Route::get('/fms5pay', [fms5Controller::class, 'fms5payment'])->name('payment');
+    Route::get('/fms5com', [fms5Controller::class, 'fms5communication'])->name('communication');
+    Route::get('/fms5stan', [fms5Controller::class, 'fms5standards'])->name('standards');
 
-Route::post('/paymentgateways', [fms5Controller::class, 'storeHotel'])->name('paymentgateways.store');
-Route::post('/freight-payments', [fms5Controller::class, 'storeFreight'])->name('freightpayments.store');
-Route::post('/admin-payments', [fms5Controller::class, 'store'])->name('adminpayments.store');
-
-
-
-
-
-
-
+    Route::post('/paymentgateways', [fms5Controller::class, 'storeHotel'])->name('paymentgateways.store');
+    Route::post('/freight-payments', [fms5Controller::class, 'storeFreight'])->name('freightpayments.store');
+    Route::post('/admin-payments', [fms5Controller::class, 'store'])->name('adminpayments.store');
 
 
 
@@ -79,7 +76,14 @@ Route::post('/admin-payments', [fms5Controller::class, 'store'])->name('adminpay
 
 
 
-    Route::get('/dashboard',        [SuperAdminController::class,'dashboard']);
+
+
+
+
+
+
+
+    Route::get('/dashboard',        [SuperAdminController::class,'dashboard'])  ->name('home');;
     Route::get('/users',            [SuperAdminController::class,'users'])->name('superAdminUsers');
     Route::get('/manage-role',      [SuperAdminController::class,'manageRole'])->name('manageRole');
     Route::post('/update-role',     [SuperAdminController::class,'updateRole'])->name('updateRole');
@@ -89,7 +93,7 @@ Route::post('/admin-payments', [fms5Controller::class, 'store'])->name('adminpay
 
 
 
-    Route::GET('/home',                            [App\Http\Controllers\SuperadminController::class, 'home'])                       ->name('home');
+    // Route::GET('/home',                            [App\Http\Controllers\SuperadminController::class, 'home'])                       ->name('home');
     Route::GET('/user-management',                 [App\Http\Controllers\SuperadminController::class, 'usermanagement'])             ->name('user-management');
     Route::GET('/depreciation-calculation',        [App\Http\Controllers\SuperadminController::class, 'depreciation'])               ->name('user-depreciation');
     Route::GET('/customer-service',                [App\Http\Controllers\SuperadminController::class, 'cservice'])                   ->name('cservice');
