@@ -88,14 +88,17 @@ class AuthController extends Controller
         ]);
 
         $userCredential = $request->only('email','password');
+        //
         if(Auth::attempt($userCredential)){
-
-            $route = $this->redirectDash();
-            // dd($route);
-            return redirect($route);
+            // dd(Auth::attempt($userCredential));
+            if(auth::user()->role == '1' || auth::user()->role == '0') 
+            {
+                return response()->json(['redirect' => route('home'), 'message' => 'Login successful']);
+            } 
         }
         else{
-            return back()->with('error','Username & Password is incorrect');
+            return response()->json(['error' => 'Username & Password is incorrect'], 401);     
+            // return back()->with('error','Username & Password is incorrect');
         }
     }
 
