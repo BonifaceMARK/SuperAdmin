@@ -140,75 +140,74 @@
 
   <main id="main" class="main">
 
+    <div class="pagetitle">
+        <div class="d-flex justify-content-between align-items-center">
+            <h1 class="mb-0"><i class="bi bi-house-door"></i> Home</h1>
+            <div class="d-flex">
 
-
+            </div>
+        </div>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Dashboard</li>
                 @if(Session::has('success'))
                 <div class="alert alert-success" role="alert">
                     {{ Session::get('success') }}
                 </div>
                 @endif
                 @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+            </ol>
+        </nav>
     </div>
-@endif
+    <div class="card">
+        <div class="card-header">
+            <h2 class="mb-4">Users</h2>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{-- @foreach ($users as $user)
+                    <tr>
+                        <td>{{ $user->id }}</td>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>
+                            @if ($user->role === 0)
+                                User
 
-
-
-    <div class="container">
-        <div class="row">
-            <div class="col-3">
-                <a href="{{ route('payment') }}" class="btn btn-primary mb-3 d-block w-100" style="background-image: url('{{ asset('assets/img/budget.jpg') }}'); background-size: cover; background-position: center; color: white; text-decoration: none; padding: 30px 60px; border: none; cursor: pointer; font-size: 2rem;">
-                    Finance 5
-                </a>
-                <a href="#" class="btn btn-primary mb-3 d-block w-100" style="background-image: url('{{ asset('assets/img/allocated.jpg') }}'); background-size: cover; background-position: center; color: white; text-decoration: none; padding: 30px 60px; border: none; cursor: pointer; font-size: 2rem;">
-                    Another Link
-                </a>
-                <a href="#" class="btn btn-primary mb-3 d-block w-100" style="background-image: url('{{ asset('assets/img/calculate.jpg') }}'); background-size: cover; background-position: center; color: white; text-decoration: none; padding: 30px 60px; border: none; cursor: pointer; font-size: 2rem;">
-                    Another Link
-                </a>
-                <!-- Add more buttons as needed -->
-            </div>
-            <div class="col-3">
-                <a href="{{ route('payment') }}" class="btn btn-primary mb-3 d-block w-100" style="background-image: url('{{ asset('assets/img/expense.jpg') }}'); background-size: cover; background-position: center; color: white; text-decoration: none; padding: 30px 60px; border: none; cursor: pointer; font-size: 2rem;">
-                    Finance 5
-                </a>
-                <a href="#" class="btn btn-primary mb-3 d-block w-100" style="background-image: url('{{ asset('assets/img/forecast.jpg') }}'); background-size: cover; background-position: center; color: white; text-decoration: none; padding: 30px 60px; border: none; cursor: pointer; font-size: 2rem;">
-                    Another Link
-                </a>
-                <a href="#" class="btn btn-primary mb-3 d-block w-100" style="background-image: url('{{ asset('assets/img/monitor.jpg') }}'); background-size: cover; background-position: center; color: white; text-decoration: none; padding: 30px 60px; border: none; cursor: pointer; font-size: 2rem;">
-                    Another Link
-                </a>
-                <!-- Add more buttons as needed -->
-            </div>
-            <div class="col-3">
-                <a href="{{ route('payment') }}" class="btn btn-primary mb-3 d-block w-100" style="background-image: url('{{ asset('assets/img/budget.jpg') }}'); background-size: cover; background-position: center; color: white; text-decoration: none; padding: 30px 60px; border: none; cursor: pointer; font-size: 2rem;">
-                    Finance 5
-                </a>
-                <a href="#" class="btn btn-primary mb-3 d-block w-100" style="background-image: url('{{ asset('assets/img/budget.jpg') }}'); background-size: cover; background-position: center; color: white; text-decoration: none; padding: 30px 60px; border: none; cursor: pointer; font-size: 2rem;">
-                    Another Link
-                </a>
-                <a href="#" class="btn btn-primary mb-3 d-block w-100" style="background-image: url('{{ asset('assets/img/budget.jpg') }}'); background-size: cover; background-position: center; color: white; text-decoration: none; padding: 30px 60px; border: none; cursor: pointer; font-size: 2rem;">
-                    Another Link
-                </a>
-                <!-- Add more buttons as needed -->
-            </div>
+                            @elseif ($user->role === 2)
+                                Admin
+                            @elseif ($user->role === 3)
+                                Employee
+                            @else
+                                Unknown
+                            @endif
+                        </td>
+                    </tr>
+                    @endforeach --}}
+                </tbody>
+            </table>
         </div>
     </div>
 
-
-
-
-
-
-
-    {{-- <a href="{{ route('route.name') }}" class="btn btn-primary" style="background-image: url('{{ asset('assets/img/card.jpg') }}'); background-size: cover; background-position: center; color: white; text-decoration: none; padding: 10px 20px; border: none; cursor: pointer;">
-        Go to Route
-    </a> --}}
 
 
 
@@ -221,3 +220,7 @@
 </body>
 
 </html>
+
+
+
+
