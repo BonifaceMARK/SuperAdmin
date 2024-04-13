@@ -21,11 +21,14 @@ use App\Http\Controllers\fms5Controller;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/register',[AuthController::class,'loadRegister']);
-Route::post('/register',[AuthController::class,'register'])->name('register');
-Route::get('/loginload',[AuthController::class,'loadLogin'])->name('loadlogin');
-Route::post('/login',[AuthController::class,'login'])->name('login');
-Route::get('/logout',[AuthController::class,'logout']);
+
+    Route::get('/register',         [AuthController::class,'loadRegister']);
+    Route::post('/register',        [AuthController::class,'register'])->name('register');
+    Route::get('/loginload',        [AuthController::class,'loadLogin'])->name('loadlogin');
+    Route::post('/login',           [AuthController::class,'login'])->name('login');
+    Route::get('/logout',           [AuthController::class,'logout']);
+
+
 // ********** Super Admin Routes *********
 Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],function(){
     Route::get('/dashboard',[SuperAdminController::class,'dashboard']);
@@ -74,15 +77,15 @@ Route::get('/fms5stan', [fms5Controller::class, 'fms5standards'])->name('standar
 });
 // ********** Sub Admin Routes *********
 Route::group(['prefix' => 'sub-admin','middleware'=>['web','isSubAdmin']],function(){
-    Route::get('/dashboard',[SubAdminController::class,'dashboard'])->name('sub-admin.dash');
+    Route::get('/dashboard',        [SubAdminController::class,'dashboard'])->name('sub-admin.dash');
 });
 // ********** Admin Routes *********
-Route::group(['prefix' => 'admin','middleware'=>['web','isAdmin']],function(){
-Route::get('/dashboard',[AdminController::class,'dashboard'])->name('admin.dash');
+    Route::group(['prefix' => 'admin','middleware'=>['web','isAdmin']],function(){
+    Route::get('/dashboard',            [AdminController::class,'dashboard'])->name('admin.dash');
 
 });
 // ********** User Routes *********
 Route::group(['prefix' => 'user','middleware'=>['web','isUser']],function(){
-    Route::get('/dashboard',[UserController::class,'dashboard'])->name('user.dash');
+    Route::get('/dashboard',        [UserController::class,'dashboard'])->name('user.dash');
 
 });
