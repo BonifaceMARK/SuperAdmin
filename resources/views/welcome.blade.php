@@ -570,7 +570,7 @@
                 @endif
             </ul>
           </li>
-   
+
           <li><a class="getstarted scrollto" href="#features">Get Started</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -655,7 +655,7 @@
       </div>
     </section>
 
-  
+
     <section id="details" class="details">
       <div class="container">
 
@@ -669,7 +669,7 @@
             <ul>
               <li><i class="bi bi-check"></i> Monitor financial health with live analytics.</li>
               <li><i class="bi bi-check"></i> Track income, expenses, and budgets in real-time.</li>
-              
+
             </ul>
           </div>
         </div>
@@ -684,7 +684,7 @@
             <p>
                 A comprehensive solution designed to revolutionize the way you handle your finances. With real-time insights, you can monitor your financial health effortlessly, keeping track of income, expenses, and budgets in the blink of an eye. Intelligent budgeting tools empower you to plan and forecast with ease, helping you set and achieve financial goals seamlessly. Customize your financial reporting to present complex data in a visually appealing manner, simplifying the understanding of crucial information.
             </p>
-            
+
           </div>
         </div>
 
@@ -698,10 +698,10 @@
             <ul>
               <li><i class="bi bi-check"></i> Plan and forecast with smart budgeting tools.</li>
               <li><i class="bi bi-check"></i> Set and achieve financial goals effortlessly.</li>
-    
+
             </ul>
             <p>
-                The app's custom integrations enable seamless connectivity with other business tools, allowing you to tailor integrations to meet your specific needs. 
+                The app's custom integrations enable seamless connectivity with other business tools, allowing you to tailor integrations to meet your specific needs.
             </p>
             <p>
                 Stay informed with smart notifications, receiving timely alerts and reminders for upcoming payments and important financial milestones.
@@ -716,7 +716,7 @@
           <div class="col-md-8 pt-5 order-2 order-md-1" data-aos="fade-up">
             <h3>Collaboration and Sharing</h3>
             <p >
-                Streamline the tracking of expenses, optimize spending, and effortlessly categorize receipts. 
+                Streamline the tracking of expenses, optimize spending, and effortlessly categorize receipts.
             </p>
             <p>
                 Sync transactions, payments, and milestones seamlessly with our integrated financial calendar, ensuring you never miss a deadline or an important financial event.
@@ -732,19 +732,19 @@
       </div>
     </section>
 
-  
+
   </main>
 
 
   <footer id="footer">
 
-    
 
-   
+
+
     <div class="container py-4">
       <div class="copyright">
         &copy; Copyright <strong> &nbsp;<?= date('Y');?>&nbsp; <span>Financial Guardian System</span></strong>. All Rights Reserved
-       
+
       </div>
     </div>
   </footer>>
@@ -760,7 +760,7 @@
 
   <script src="mainpage/js/main.js"></script>
   {{-- <script>
-   
+
   </script> --}}
 
 </body>

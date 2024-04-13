@@ -21,8 +21,13 @@ class fms5Controller extends Controller
     public function fms5communication()
     {
 
+     $messages = ChatMessage::latest()->with('user')->limit(10)->get();
 
-       return view ('F5.c&c');
+
+        $user = Auth::user();
+        $name = $user->name;
+        $department = $user->department;
+       return view ('F5.c&c', compact('messages', 'name', 'department'));
     }
 
     public function fms5standards()

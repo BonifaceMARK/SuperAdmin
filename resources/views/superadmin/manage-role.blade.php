@@ -1,7 +1,7 @@
 
 @extends('layout.title')
 
-@section('title','Home')
+@section('title','User Management')
 @include('layout.title')
 <body>
 
@@ -142,7 +142,7 @@
 
     <div class="pagetitle">
         <div class="d-flex justify-content-between align-items-center">
-            <h1 class="mb-0"><i class="bi bi-house-door"></i> Home</h1>
+            <h1 class="mb-0"> Users</h1>
             <div class="d-flex">
 
             </div>
@@ -150,7 +150,7 @@
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">User Management</a></li>
-                <li class="breadcrumb-item active">Manage Roles</li>
+                <li class="breadcrumb-item active">Users</li>
                 @if(Session::has('success'))
                 <div class="alert alert-success" role="alert">
                     {{ Session::get('success') }}
@@ -172,9 +172,7 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <h1 class="card-title">User Management</h1><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#manageRoleModal">
-                    Manage Role
-                </button>
+                <h1 class="card-title">Users</h1>
             </div>
             <div class="card-body">
                 <table class="table">
