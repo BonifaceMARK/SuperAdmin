@@ -7,11 +7,18 @@ use Illuminate\Http\Request;
 class G10Controller extends Controller
 {
     //
-    public function dashboard()
+    public function investmentDashboard()
     {
 
-        return view('F10.investmentmanagement');
+        return view('F10.investment');
     }
+
+    public function vendorDashboard()
+    {
+
+        return view('F10.vendor');
+    }
+
 
     public function fetchData()
     {

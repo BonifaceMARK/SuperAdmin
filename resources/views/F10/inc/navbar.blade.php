@@ -6,12 +6,12 @@
         </a>
         <ul id="components-reports1" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="tax-management-reports">
+            <a href="{{ route('vendor.dashboard') }}">
               <i class="bi bi-circle"></i><span>Vendor Management</span>
             </a>
           </li>
           <li>
-            <a href="fix-asset-reports">
+            <a href="{{ route('investment.dashboard') }}">
               <i class="bi bi-circle"></i><span>Investment Management</span>
             </a>
           </li><!-- End Forms Nav -->
