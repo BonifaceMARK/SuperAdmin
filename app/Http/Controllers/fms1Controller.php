@@ -13,7 +13,7 @@ class fms1Controller extends Controller
 
        return view ('F1.index');
     }
-    public function storeFinancialPlanning(Request $request)
+    public function storeBudgetPlan(Request $request)
     {
         // Validate the request data
         $validatedData = $request->validate([

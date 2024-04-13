@@ -79,7 +79,7 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
     Route::post('/taxpayments', [fms5Controller::class, 'storeTax'])->name('taxpayments.store');
 
     // FINANCIAL PLANNING FINANCIAL REPORTING CASH MANAGEMENT 
-    Route::post('/financial-planning', [fms1Controller::class, 'storeFinancialPlanning'])->name('financial-planning.store');
+    Route::post('/financial-planning', [fms1Controller::class, 'storeBudgetPlan'])->name('BudgetPlan.store');
     Route::get('/fms1index', [fms1Controller::class, 'fms1index'])->name('fms1.index');
 
 

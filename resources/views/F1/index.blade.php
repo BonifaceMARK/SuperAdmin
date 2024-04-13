@@ -172,7 +172,7 @@
             </div>
             <div class="modal-body">
                 <!-- Form for adding financial planning -->
-                <form action="{{ route('financial-planning.store') }}" method="POST">
+                <form action="{{ route('BudgetPlan.store') }}" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
