@@ -21,12 +21,12 @@
             </a>
           </li>
           <li>
-            <a href="bank-reconcilation">
+            <a href="bank">
               <i class="bi bi-circle"></i><span>Credit Management - Bank Reconcilation</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " data-bs-target="#forms-nav"  href="{{ asset('Clients') }}">
+            <a class="nav-link " data-bs-target="#forms-nav"  href="clients">
               <i class="bi bi-journal-text"></i><span>Clients</span>
             </a>
           </li><!-- End Forms Nav -->
