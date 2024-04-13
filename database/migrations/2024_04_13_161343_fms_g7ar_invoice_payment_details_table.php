@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('fms_g7ar_invoice_payment_details', function (Blueprint $table) {
             $table->id();
+            $table->uuid('reference_no');
             $table->unsignedBigInteger('invoice_id')->nullable();
             $table->string('account_holder_name', 255)->nullable();
             $table->string('bank_name', 255)->nullable();
@@ -36,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ar_invoice_payment_details');
+        Schema::dropIfExists('fms_g7ar_invoice_payment_details');
     }
 };

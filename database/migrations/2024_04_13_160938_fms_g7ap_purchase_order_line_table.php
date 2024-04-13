@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('fms_g7ap_purchase_order_line', function (Blueprint $table) {
             $table->id();
+            $table->uuid('reference_no');
             $table->unsignedBigInteger('po_id');
             $table->unsignedBigInteger('product_id');
             $table->integer('quantity');
@@ -35,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ap_purchase_order_line');
+        Schema::dropIfExists('fms_g7ap_purchase_order_line');
     }
 };

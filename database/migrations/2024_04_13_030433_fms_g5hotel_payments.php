@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fg_5paymentgateways');
+        Schema::dropIfExists('fms_g5hotel_payments');
     }
 };

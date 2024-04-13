@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('firstname');
             $table->string('lastname');
             $table->string('tax_amount');
+            $table->string('reference_no');
             $table->decimal('amount', 10, 2);
             $table->string('type');
             $table->date('investment_date');

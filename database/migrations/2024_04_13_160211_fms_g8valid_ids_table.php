@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('valid_ids');
+        Schema::dropIfExists('fms_g8valid_ids');
     }
 };

@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('credit_type');
+        Schema::dropIfExists('fms_g8credit_type');
     }
 };

@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('fms_g2cost_allocations', function (Blueprint $table) {
             $table->id();
+            $table->uuid('reference_no');
             $table->string('cost'); // Changed from 'name' to 'cost'
             $table->string('cost_type'); // Added 'cost_type' field
             $table->text('description')->nullable();

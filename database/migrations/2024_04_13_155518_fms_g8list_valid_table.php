@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('list_valid');
+        Schema::dropIfExists('fms_g8list_valid');
     }
 };

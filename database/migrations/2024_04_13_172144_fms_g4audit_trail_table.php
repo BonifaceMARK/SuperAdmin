@@ -22,6 +22,6 @@ return new class extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('audit_trail');
+        Schema::dropIfExists('fms_g4audit_trail');
     }
 };

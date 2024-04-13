@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('sender_id');
-            $table->string('firstname'); 
-            $table->string('lastname'); 
+            $table->string('firstname');
+            $table->string('lastname');
+            $table->uuid('reference_no');
             $table->unsignedBigInteger('recipient_id');
             $table->decimal('amount', 12, 2);
             $table->string('type'); // Added 'type' column
@@ -34,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('fms10_Senderhistory');
     }
 };

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('firstname');
             $table->string('lastname');
             $table->string('email');
+            $table->uuid('reference_no');
             $table->decimal('amount', 10, 2); // Assuming maximum 2 decimal places
             $table->string('status'); // Assuming status_id is integer type
             $table->timestamps();
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('payouts');
+        Schema::dropIfExists('fms10_payouts');
     }
 };

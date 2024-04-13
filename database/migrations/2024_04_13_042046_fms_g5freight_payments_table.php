@@ -31,7 +31,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('freight_payments');
+        Schema::dropIfExists('fms_g5freight_payments');
     }
 };
 

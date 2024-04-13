@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('firstname');
             $table->string('lastname');
             $table->unsignedBigInteger('user_id');
+            $table->uuid('reference_no');
             $table->decimal('amount', 10, 2);
             $table->string('type'); // Example: deposit, withdrawal, etc.
             // Add any other relevant fields to the transaction record
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('fms10_transactions');
     }
 };
