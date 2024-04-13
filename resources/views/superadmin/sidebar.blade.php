@@ -25,6 +25,26 @@
 
 
 
+
+      @include('finance.sidebar')
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
     </ul>
 
-  </aside><!-- End Sidebar-->
+</aside><!-- End Sidebar-->
