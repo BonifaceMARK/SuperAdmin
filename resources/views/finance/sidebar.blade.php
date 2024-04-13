@@ -1,7 +1,14 @@
+<ul class="sidebar-nav" id="sidebar-nav">
+    <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#components-finance" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-menu-button-wide"></i><span>Finance</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="components-finance" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+
  {{-- set condition for finance --}}
  @if(Auth::user()->role == '3'|| Auth::user()->role == '0'  )
  <li class="nav-item">
-   
+
 
    {{-- @dd(!Auth::user()->usertype == '3' && Auth::user()->isSuper == '1' ); --}}
      @if(!Auth::user()->role == '3' || !Auth::user()->role == '0' )
@@ -22,7 +29,7 @@
      <i class="bi bi-tag"></i><span style="font-size: 0.8rem;">Asset Tracking Management</span>
    </a>
  </li>
- 
+
  {{-- <li class="nav-item">
    <a class="nav-link collapsed">
      <i class="bi bi-files"></i><span style="font-size: 0.8rem;">Reports and Analytics</span>
@@ -72,7 +79,7 @@
        <a href="">
          <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Company File</span>
        </a>
-     </li> 
+     </li>
      <li>
        <a href="">
          <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Employee Information</span>
@@ -96,13 +103,13 @@
          <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Company File</span>
        </a>
      </li>
-     
+
      <li>
        <a href="{{ route('employee') }}">
          <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Employee Information</span>
        </a>
      </li>
-     
+
      <li>
        <a href="{{ route('user-management') }}">
          <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">User Accounts</span>
@@ -126,4 +133,5 @@
    </a>
  </li>
  @endif
-
+</ul>
+</li>
