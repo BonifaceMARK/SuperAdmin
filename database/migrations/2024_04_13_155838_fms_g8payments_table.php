@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
-class CreatePaymentsTable extends Migration
+
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -40,4 +41,4 @@ class CreatePaymentsTable extends Migration
     {
         Schema::dropIfExists('payments');
     }
-}
+};

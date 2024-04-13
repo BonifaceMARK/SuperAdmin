@@ -3,7 +3,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#components-superadmin" data-bs-toggle="collapse" href="#">
-              <i class="bi bi-menu-button-wide"></i><span>Super Admin</span><i class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-menu-button-wide"></i><span>Super Admin</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="components-superadmin" class="nav-content collapse " data-bs-parent="#sidebar-nav">
       <li class="nav-item">
@@ -13,11 +13,11 @@
         </a>
       </li><!-- End Dashboard Nav -->
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#components-nav"   href="{{route('manageRole')}}">
-            <i class="bi bi-person-fill-gear"></i><span>User Management</span>
-        </a>
-      </li><!-- End Components Nav -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#components-nav" href="{{ route('manageRole') }}">
+                        <i class="bi bi-person-fill-gear"></i><span>User Management</span>
+                    </a>
+                </li><!-- End Components Nav -->
 
 
 
@@ -43,8 +43,9 @@
 
 
 
-    @include('finance.sidebar')
-    @include('f3.inc.navbar')
+        @include('finance.sidebar')
+        @include('f3.inc.navbar')
+        @include('f3.inc.navbar')
 
 
 

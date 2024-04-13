@@ -25,7 +25,6 @@ return new class extends Migration
             $table->string('transactionStatus');
             $table->string('reasonForCancellation')->nullable();
             $table->text('comment')->nullable();
-
             $table->timestamps();
         });
     }

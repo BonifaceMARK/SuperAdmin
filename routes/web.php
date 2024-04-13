@@ -13,6 +13,7 @@ USE App\Http\Controllers\ClientController;
 USE App\Http\Controllers\Reports;
 use App\Http\Controllers\fms5Controller;
 
+use App\Http\Controllers\G10Controller;
 
 
 use App\Http\Controllers\EmployeeController;
@@ -80,7 +81,14 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
 
 
 
+    // PAYMENT GATEWAYS COMMUNICATION & COLLABORATION ACCOUNTING STANDARDS
+    Route::get('/fms5pay', [fms5Controller::class, 'fms5payment'])->name('payment');
+    Route::get('/fms5com', [fms5Controller::class, 'fms5communication'])->name('communication');
+    Route::get('/fms5stan', [fms5Controller::class, 'fms5standards'])->name('standards');
 
+    Route::post('/paymentgateways', [fms5Controller::class, 'storeHotel'])->name('paymentgateways.store');
+    Route::post('/freight-payments', [fms5Controller::class, 'storeFreight'])->name('freightpayments.store');
+    Route::post('/admin-payments', [fms5Controller::class, 'store'])->name('adminpayments.store');
 
 
     Route::get('/dashboard',        [SuperAdminController::class,'dashboard'])  ->name('home');;
@@ -158,10 +166,12 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
     // // Route::get('admin/configuration',        [App\Http\Controllers\ConfigurationController::class, 'index'])        ->name('configuration');
 
     Route::POST('/notice',                         [App\Http\Controllers\UniversalProcess::class, 'isNotice'])                ->name('notice');
-
-
+    
+    //JAKE VENDOR AND INVESMENT WEB :)
+    Route::get('/group10', [G10Controller::class, 'dashboard'])->name('investment.dashboard');
 
 });
+
 // ********** Sub Admin Routes *********
 Route::group(['prefix' => 'sub-admin','middleware'=>['web','isSubAdmin']],function(){
     Route::get('/dashboard',        [SubAdminController::class,'dashboard'])->name('sub-admin.dash');
@@ -171,12 +181,10 @@ Route::group(['prefix' => 'sub-admin','middleware'=>['web','isSubAdmin']],functi
     Route::get('/dashboard',            [AdminController::class,'dashboard'])->name('admin.dash');
 
 });
+
 // ********** User Routes *********
 Route::group(['prefix' => 'user','middleware'=>['web','isUser']],function(){
     Route::get('/dashboard',        [UserController::class,'dashboard'])->name('user.dash');
-
-
-
 
 
     Route::GET('/getAssetInventory',               [App\Http\Controllers\SuperadminController::class, 'getAssetInventory'])            ->name('mgetAssetInventory');
@@ -191,11 +199,6 @@ Route::group(['prefix' => 'user','middleware'=>['web','isUser']],function(){
     // Process
     Route::GET('/getdepreciation',                 [App\Http\Controllers\SuperadminController::class, 'getdepreciation'])              ->name('mgetdepreciation');
     Route::POST('/recompute',                      [App\Http\Controllers\RecomputeAssetController::class, 'recdepreciation'])          ->name('mrecompute');
-
-
-
-
-
 
 
     Route::GET('/generate-report',       [App\Http\Controllers\ReportAccessController::class, 'generateReport'])          ->name('ugenerateReport');
