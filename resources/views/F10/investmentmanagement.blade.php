@@ -32,37 +32,37 @@
         <li class="nav-item dropdown">
 
      <!-- Notifications Nav -->
-<li class="nav-item dropdown">
-    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-        <i class="bi bi-bell"></i>
+    <li class="nav-item dropdown">
+        <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <i class="bi bi-bell"></i>
 
-    </a>
-    <!-- Notification Dropdown Items -->
-    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-        <li class="dropdown-header">
+        </a>
+        <!-- Notification Dropdown Items -->
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+            <li class="dropdown-header">
 
-        </li>
-        <li><hr class="dropdown-divider"></li>
-        <!-- Notification Items -->
-        <div class="notification-scroll">
-            <!-- Notification Items for Expenses -->
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <!-- Notification Items -->
+            <div class="notification-scroll">
+                <!-- Notification Items for Expenses -->
 
-            <!-- End of Notification Items for Expenses -->
+                <!-- End of Notification Items for Expenses -->
 
-            <!-- Notification Items for RequestBudget -->
+                <!-- Notification Items for RequestBudget -->
 
-            <!-- End of Notification Items for RequestBudget -->
+                <!-- End of Notification Items for RequestBudget -->
 
-            <!-- Notification Items for CostAllocation -->
+                <!-- Notification Items for CostAllocation -->
 
-            <!-- End of Notification Items for CostAllocation -->
-        </div>
-        <li class="dropdown-footer">
-        </li>
-    </ul>
-    <!-- End Notification Dropdown Items -->
-</li>
-<!-- End Notifications Nav -->
+                <!-- End of Notification Items for CostAllocation -->
+            </div>
+            <li class="dropdown-footer">
+            </li>
+        </ul>
+        <!-- End Notification Dropdown Items -->
+    </li>
+    <!-- End Notifications Nav -->
 
 
           <li class="nav-item dropdown">
