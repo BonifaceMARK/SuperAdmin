@@ -1,7 +1,8 @@
 
 @extends('layout.title')
 
-@section('title','Home')
+@section('title', env('APP_NAME'))
+
 @include('layout.title')
 <body>
 
@@ -136,21 +137,11 @@
   </header><!-- End Header -->
 
   <!-- ======= Sidebar ======= -->
-  @include('finance5.sidebar')
+  @include('F5.sidebar')
 
   <main id="main" class="main">
 
-    <div class="pagetitle">
-        <div class="d-flex justify-content-between align-items-center">
-            <h1 class="mb-0"><i class="bi bi-house-door"></i> Home</h1>
-            <div class="d-flex">
 
-            </div>
-        </div>
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Dashboard</li>
                 @if(Session::has('success'))
                 <div class="alert alert-success" role="alert">
                     {{ Session::get('success') }}
@@ -166,9 +157,7 @@
     </div>
 @endif
 
-            </ol>
-        </nav>
-    </div>
+
 
 
 
