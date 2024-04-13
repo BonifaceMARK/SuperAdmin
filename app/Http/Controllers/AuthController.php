@@ -60,7 +60,7 @@ class AuthController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
 
-        // lagyan mo condtion to pag di nag set automatic 0 wag static 'inassume ko na superadmin to'
+        // lagyan mo condtion to pag di nag set ng role automatic 0 wag static 'inassume ko na superadmin to'
         $user->role = 0;
 
         $user->save();

@@ -88,17 +88,17 @@ Route::get('/fms5stan', [fms5Controller::class, 'fms5standards'])->name('standar
 
 
 
-    Route::GET('/home',                            [App\Http\Controllers\SuperadminController::class, 'home'])               ->name('home');
-    Route::GET('/user-management',                 [App\Http\Controllers\SuperadminController::class, 'usermanagement'])     ->name('user-management');
-    Route::GET('/depreciation-calculation',        [App\Http\Controllers\SuperadminController::class, 'depreciation'])       ->name('user-depreciation');
-    Route::GET('/customer-service',                [App\Http\Controllers\SuperadminController::class, 'cservice'])           ->name('cservice');
-    Route::GET('/tax-rate',                        [App\Http\Controllers\SuperadminController::class, 'tax'])                ->name('taxrate');
-    Route::GET('/tracking',                        [App\Http\Controllers\SuperadminController::class, 'tracking'])           ->name('tracking');
-    Route::GET('/announcement',                    [App\Http\Controllers\SuperadminController::class, 'announcement'])       ->name('announcement');
-    Route::GET('/messaging',                       [App\Http\Controllers\SuperadminController::class, 'messaging'])          ->name('messaging');
-    Route::GET('/company',                         [App\Http\Controllers\SuperadminController::class, 'company'])            ->name('company');
-    Route::GET('/employee',                        [App\Http\Controllers\SuperadminController::class, 'employee'])           ->name('employee');
-    Route::GET('/reports',                         [App\Http\Controllers\SuperadminController::class, 'reportIndex'])       ->name('reports');
+    Route::GET('/home',                            [App\Http\Controllers\SuperadminController::class, 'home'])                       ->name('home');
+    Route::GET('/user-management',                 [App\Http\Controllers\SuperadminController::class, 'usermanagement'])             ->name('user-management');
+    Route::GET('/depreciation-calculation',        [App\Http\Controllers\SuperadminController::class, 'depreciation'])               ->name('user-depreciation');
+    Route::GET('/customer-service',                [App\Http\Controllers\SuperadminController::class, 'cservice'])                   ->name('cservice');
+    Route::GET('/tax-rate',                        [App\Http\Controllers\SuperadminController::class, 'tax'])                        ->name('taxrate');
+    Route::GET('/tracking',                        [App\Http\Controllers\SuperadminController::class, 'tracking'])                   ->name('tracking');
+    Route::GET('/announcement',                    [App\Http\Controllers\SuperadminController::class, 'announcement'])               ->name('announcement');
+    Route::GET('/messaging',                       [App\Http\Controllers\SuperadminController::class, 'messaging'])                  ->name('messaging');
+    Route::GET('/company',                         [App\Http\Controllers\SuperadminController::class, 'company'])                    ->name('company');
+    Route::GET('/employee',                        [App\Http\Controllers\SuperadminController::class, 'employee'])                   ->name('employee');
+    Route::GET('/reports',                         [App\Http\Controllers\SuperadminController::class, 'reportIndex'])                ->name('reports');
     Route::GET('/tax-calculation',                 [App\Http\Controllers\SuperadminController::class, 'taxcalculationIndex'])        ->name('taxcalculation');
     Route::GET('/asset/depreciation',              [App\Http\Controllers\SuperadminController::class, 'assetdepreciationIndex'])     ->name('assetdepreciation');
     Route::GET('/asset/details',                   [App\Http\Controllers\SuperadminController::class, 'assetdetailIndex'])           ->name('assetdetail');
