@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateArInvoicePaymentDetailsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -38,4 +38,4 @@ class CreateArInvoicePaymentDetailsTable extends Migration
     {
         Schema::dropIfExists('ar_invoice_payment_details');
     }
-}
+};
