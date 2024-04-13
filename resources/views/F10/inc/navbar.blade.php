@@ -5,7 +5,8 @@
         </a>
         <ul id="components-reports1" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="{{ route('index.dashboard') }}">
+            <a href="{{ route('home') }}">
+            {{-- <a href="{{ route('index.dashboard') }}"> --}}
               <i class="bi bi-grid-fill fs-5"></i></i><span>Dashboard</span>
             </a>
           </li>

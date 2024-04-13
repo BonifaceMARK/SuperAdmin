@@ -113,7 +113,7 @@
 </head>
 <body>
 
-            {{-- @include('layouts.modal') --}}
+            @include('layouts.modal')
             @yield('content')
 
 </body>

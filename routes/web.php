@@ -38,12 +38,14 @@ Route::get('/register',         [AuthController::class,'loadRegister']);
 Route::post('/register',        [AuthController::class,'register'])->name('register');
 Route::get('/loginload',        [AuthController::class,'loadLogin'])->name('loadlogin');
 Route::post('/login',           [AuthController::class,'login'])->name('login');
-Route::get('/logout',           [AuthController::class,'logout']);
+Route::get('/logout',           [AuthController::class,'logout'])->name('logout');
 
 
 // ********** Super Admin Routes *********
 Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],function(){
 
+
+    Route::get('/dashboard',[SuperAdminController::class,'dashboard'])->name('home');
 
 
     Route::get('/users',[SuperAdminController::class,'users'])->name('superAdminUsers');
@@ -93,7 +95,7 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
     Route::post('/admin-payments', [fms5Controller::class, 'store'])->name('adminpayments.store');
 
 
-    Route::get('/dashboard',        [SuperAdminController::class,'dashboard'])  ->name('home');;
+    // Route::get('/dashboard',        [SuperAdminController::class,'dashboard'])  ->name('home');
     Route::get('/users',            [SuperAdminController::class,'users'])->name('superAdminUsers');
     Route::get('/manage-role',      [SuperAdminController::class,'manageRole'])->name('manageRole');
     Route::post('/update-role',     [SuperAdminController::class,'updateRole'])->name('updateRole');
@@ -169,8 +171,10 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
 
     Route::POST('/notice',                         [App\Http\Controllers\UniversalProcess::class, 'isNotice'])                ->name('notice');
 
-    //JAKE VENDOR AND INVESMENT WEB :)
-    Route::get('dashboard', [G10Controller::class, 'dashboard'])->name('index.dashboard');
+    // JAKE VENDOR AND INVESMENT WEB :) nagrredirect sayo pagkalogin ng superadmin
+
+
+    // Route::get('dashboard', [G10Controller::class, 'dashboard'])->name('index.dashboard');
     Route::get('vendorManagement', [G10Controller::class, 'vendorDashboard'])->name('vendor.dashboard');
     Route::get('investmentManagement', [G10Controller::class, 'investmentDashboard'])->name('investment.dashboard');
 
