@@ -3,19 +3,43 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Vendors;
+use App\Models\Role;
+use App\Models\User;
+use App\Models\Account;
+use App\Models\Payouts;
+use App\Models\Investments;
+use App\Models\DepositRequest;
+use App\Models\InvestmentRequest;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Artisan;
+use Dompdf\Dompdf;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\DB;
 
 class G10Controller extends Controller
 {
     //
+    public function dashboard()
+    {
+        $userCount = User::where('role', '=', 0)->count();
+
+        $investment = DB::table('fms10_investments')->sum(DB::raw('CAST(amount AS DECIMAL(10, 2))'));
+
+        $countBalance = DB::table('fms10_accounts')->sum(DB::raw('CAST(balance AS DECIMAL(10, 2))'));
+
+        $data = Payouts::whereNotNull('amount')->sum('amount');
+
+        return view('F10.dashboard', compact('countBalance','investment','data','userCount'));
+    }
+
     public function investmentDashboard()
     {
-
         return view('F10.investment');
     }
 
     public function vendorDashboard()
     {
-
         return view('F10.vendor');
     }
 

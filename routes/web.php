@@ -168,6 +168,7 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
     Route::POST('/notice',                         [App\Http\Controllers\UniversalProcess::class, 'isNotice'])                ->name('notice');
     
     //JAKE VENDOR AND INVESMENT WEB :)
+    Route::get('dashboard', [G10Controller::class, 'dashboard'])->name('index.dashboard');
     Route::get('vendorManagement', [G10Controller::class, 'vendorDashboard'])->name('vendor.dashboard');
     Route::get('investmentManagement', [G10Controller::class, 'investmentDashboard'])->name('investment.dashboard');
 
