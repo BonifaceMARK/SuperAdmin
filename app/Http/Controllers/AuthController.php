@@ -60,7 +60,7 @@ class AuthController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
 
-
+        // lagyan mo condtion to pag di nag set automatic 0 wag static 'inassume ko na superadmin to'
         $user->role = 0;
 
         $user->save();
@@ -108,18 +108,28 @@ class AuthController extends Controller
 
         if (Auth::user()) {
             switch (Auth::user()->role) {
+                // paayos na lang to
+                // case 0:
+                //     $redirect = '/user/dashboard';
+                //     break;
                 case 0:
-                    $redirect = '/user/dashboard';
-                    break;
-                case 1:
                     $redirect = '/superadmin/dashboard';
-                    break;
-                case 2:
+                        break;
+                case 1:
                     $redirect = '/admin/dashboard';
                     break;
+<<<<<<< HEAD
                 case 3:
                     $redirect = '/subadmin/dashboard';
                     break;
+=======
+                case 2:
+                    $redirect = '/subadmin/dashboard';
+                    break;
+                    // case 3:
+                    //     $redirect = '/subadmin/dashboard';
+                    //     break;
+>>>>>>> b896e76625e61fd916b31c7e65490c0953d3a07e
                 default:
                     $redirect = '/';
                     break;

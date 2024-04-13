@@ -157,73 +157,57 @@
                 </div>
                 @endif
                 @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
             </ol>
         </nav>
     </div>
+    <div class="card">
+        <div class="card-header">
+            <h2 class="mb-4">Users</h2>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{-- @foreach ($users as $user)
+                    <tr>
+                        <td>{{ $user->id }}</td>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>
+                            @if ($user->role === 0)
+                                User
 
-<<<<<<< HEAD
-    {{-- <a href="{{ route('route.name') }}" class="btn btn-primary" style="background-image: url('{{ asset('assets/img/card.jpg') }}'); background-size: cover; background-position: center; color: white; text-decoration: none; padding: 10px 20px; border: none; cursor: pointer;"> --}}
-=======
-    <div class="container">
-        <div class="row">
-            <div class="col-3">
-                <a href="{{ route('payment') }}" class="btn btn-primary mb-3 d-block w-100" style="background-image: url('{{ asset('assets/img/budget.jpg') }}'); background-size: cover; background-position: center; color: white; text-decoration: none; padding: 30px 60px; border: none; cursor: pointer; font-size: 2rem;">
-                    Finance 5
-                </a>
-                <a href="#" class="btn btn-primary mb-3 d-block w-100" style="background-image: url('{{ asset('assets/img/allocated.jpg') }}'); background-size: cover; background-position: center; color: white; text-decoration: none; padding: 30px 60px; border: none; cursor: pointer; font-size: 2rem;">
-                    Another Link
-                </a>
-                <a href="#" class="btn btn-primary mb-3 d-block w-100" style="background-image: url('{{ asset('assets/img/calculate.jpg') }}'); background-size: cover; background-position: center; color: white; text-decoration: none; padding: 30px 60px; border: none; cursor: pointer; font-size: 2rem;">
-                    Another Link
-                </a>
-                <!-- Add more buttons as needed -->
-            </div>
-            <div class="col-3">
-                <a href="{{ route('payment') }}" class="btn btn-primary mb-3 d-block w-100" style="background-image: url('{{ asset('assets/img/expense.jpg') }}'); background-size: cover; background-position: center; color: white; text-decoration: none; padding: 30px 60px; border: none; cursor: pointer; font-size: 2rem;">
-                    Finance 5
-                </a>
-                <a href="#" class="btn btn-primary mb-3 d-block w-100" style="background-image: url('{{ asset('assets/img/forecast.jpg') }}'); background-size: cover; background-position: center; color: white; text-decoration: none; padding: 30px 60px; border: none; cursor: pointer; font-size: 2rem;">
-                    Another Link
-                </a>
-                <a href="#" class="btn btn-primary mb-3 d-block w-100" style="background-image: url('{{ asset('assets/img/monitor.jpg') }}'); background-size: cover; background-position: center; color: white; text-decoration: none; padding: 30px 60px; border: none; cursor: pointer; font-size: 2rem;">
-                    Another Link
-                </a>
-                <!-- Add more buttons as needed -->
-            </div>
-            <div class="col-3">
-                <a href="{{ route('payment') }}" class="btn btn-primary mb-3 d-block w-100" style="background-image: url('{{ asset('assets/img/budget.jpg') }}'); background-size: cover; background-position: center; color: white; text-decoration: none; padding: 30px 60px; border: none; cursor: pointer; font-size: 2rem;">
-                    Finance 5
-                </a>
-                <a href="#" class="btn btn-primary mb-3 d-block w-100" style="background-image: url('{{ asset('assets/img/budget.jpg') }}'); background-size: cover; background-position: center; color: white; text-decoration: none; padding: 30px 60px; border: none; cursor: pointer; font-size: 2rem;">
-                    Another Link
-                </a>
-                <a href="#" class="btn btn-primary mb-3 d-block w-100" style="background-image: url('{{ asset('assets/img/budget.jpg') }}'); background-size: cover; background-position: center; color: white; text-decoration: none; padding: 30px 60px; border: none; cursor: pointer; font-size: 2rem;">
-                    Another Link
-                </a>
-                <!-- Add more buttons as needed -->
-            </div>
+                            @elseif ($user->role === 2)
+                                Admin
+                            @elseif ($user->role === 3)
+                                Employee
+                            @else
+                                Unknown
+                            @endif
+                        </td>
+                    </tr>
+                    @endforeach --}}
+                </tbody>
+            </table>
         </div>
     </div>
 
-
-
-
-
-
-
-    {{-- <a href="{{ route('route.name') }}" class="btn btn-primary" style="background-image: url('{{ asset('assets/img/card.jpg') }}'); background-size: cover; background-position: center; color: white; text-decoration: none; padding: 10px 20px; border: none; cursor: pointer;">
->>>>>>> b896e76625e61fd916b31c7e65490c0953d3a07e
-        Go to Route
-    </a> --}}
 
 
 
@@ -236,3 +220,7 @@
 </body>
 
 </html>
+
+
+
+

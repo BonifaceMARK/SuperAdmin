@@ -15,15 +15,23 @@ use Illuminate\Support\Facades\Log;
 class UserController extends Controller
 {
     public function dashboard(Request $request)
-{
+    {
+        // $user = Auth::user();
+        // $expenses = Expense::where('user_id', $user->id)->get();
+        // $cost_allocations = CostAllocation::where('user_id', $user->id)->get();
+        // $request_budgets = RequestBudget::where('user_id', $user->id)->get();
+        // $budget_plans = BudgetPlan::where('user_id', $user->id)->get();
+        // $budget_proposals = BudgetProposal::where('user_id', $user->id)->get();
 
+        // return view('user.dashboard', compact('expenses', 'cost_allocations','request_budgets', 'budget_plans', 'budget_proposals'));
+        
 
-
-
-    return view('user.dashboard');
-}
-
-
-
+        $info = Auth::user();
+        if($info->role == '0'){
+            return view('accessible.dashboard');
+        }
+  
+        
+    }
 
 }

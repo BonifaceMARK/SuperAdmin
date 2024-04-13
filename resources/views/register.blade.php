@@ -69,6 +69,7 @@
                                                 <option value="Hotel & Restaurant">Hotel & Restaurant</option>
                                                 <option value="E-Commerce">E-Commerce</option>
                                                 <option value="Local Government Unit">Local Government Unit</option>
+                                                <option value="Local Government Unit">Local Government Unit</option>
                                             </select>
                                             <div class="invalid-feedback">Please select a department.</div>
                                         </div>
