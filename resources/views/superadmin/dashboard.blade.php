@@ -170,9 +170,6 @@
         </nav>
     </div>
 
-<<<<<<< HEAD
-    {{-- <a href="{{ route('route.name') }}" class="btn btn-primary" style="background-image: url('{{ asset('assets/img/card.jpg') }}'); background-size: cover; background-position: center; color: white; text-decoration: none; padding: 10px 20px; border: none; cursor: pointer;"> --}}
-=======
     <div class="container">
         <div class="row">
             <div class="col-3">
@@ -221,7 +218,6 @@
 
 
     {{-- <a href="{{ route('route.name') }}" class="btn btn-primary" style="background-image: url('{{ asset('assets/img/card.jpg') }}'); background-size: cover; background-position: center; color: white; text-decoration: none; padding: 10px 20px; border: none; cursor: pointer;">
->>>>>>> b896e76625e61fd916b31c7e65490c0953d3a07e
         Go to Route
     </a> --}}
 
