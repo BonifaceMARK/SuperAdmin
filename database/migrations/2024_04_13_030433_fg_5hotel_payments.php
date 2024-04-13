@@ -14,19 +14,19 @@ return new class extends Migration
         Schema::create('fg_5hotel_payments', function (Blueprint $table) {
             $table->id();
             $table->uuid('reference');
-            $table->string('service'); // Add service column
+            $table->string('service'); 
             $table->string('productName');
             $table->string('transactionName');
-            $table->string('paymentMethod'); // Add paymentMethod column
-            $table->string('cardType'); // Add cardType column
+            $table->string('paymentMethod'); 
+            $table->string('cardType'); 
             $table->string('transactionType');
             $table->decimal('transactionAmount', 10, 2);
             $table->dateTime('transactionDate');
-            $table->text('description')->nullable(); // Add description column
+            $table->text('description')->nullable(); 
             $table->string('transactionStatus');
             $table->string('reasonForCancellation')->nullable();
             $table->text('comment')->nullable();
-            // Add more columns if needed
+            
             $table->timestamps();
         });
     }

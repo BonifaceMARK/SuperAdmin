@@ -13,7 +13,7 @@ class CreateFreightPaymentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('freight_payments', function (Blueprint $table) {
+        Schema::create('fg_5freight_payments', function (Blueprint $table) {
             $table->id();
             $table->string('freightService');
             $table->decimal('freightAmount', 10, 2);
