@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('pendingdocu_id');
-            $table->foreign('pendingdocu_id')->references('id')->on('pendingdocus')->onDelete('cascade');
+            // $table->foreign('pendingdocu_id')->references('id')->on('pendingdocus')->onDelete('cascade');
             $table->text('comment')->nullable();
             $table->timestamps();
         });
