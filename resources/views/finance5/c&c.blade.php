@@ -136,7 +136,7 @@
   </header><!-- End Header -->
 
   <!-- ======= Sidebar ======= -->
-  @include('superadmin.sidebar')
+  @include('finance5.sidebar')
 
   <main id="main" class="main">
 
@@ -169,53 +169,6 @@
             </ol>
         </nav>
     </div>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-3">
-                <a href="{{ route('payment') }}" class="btn btn-primary mb-3 d-block w-100" style="background-image: url('{{ asset('assets/img/budget.jpg') }}'); background-size: cover; background-position: center; color: white; text-decoration: none; padding: 30px 60px; border: none; cursor: pointer; font-size: 2rem;">
-                    Finance 5
-                </a>
-                <a href="#" class="btn btn-primary mb-3 d-block w-100" style="background-image: url('{{ asset('assets/img/allocated.jpg') }}'); background-size: cover; background-position: center; color: white; text-decoration: none; padding: 30px 60px; border: none; cursor: pointer; font-size: 2rem;">
-                    Another Link
-                </a>
-                <a href="#" class="btn btn-primary mb-3 d-block w-100" style="background-image: url('{{ asset('assets/img/calculate.jpg') }}'); background-size: cover; background-position: center; color: white; text-decoration: none; padding: 30px 60px; border: none; cursor: pointer; font-size: 2rem;">
-                    Another Link
-                </a>
-                <!-- Add more buttons as needed -->
-            </div>
-            <div class="col-3">
-                <a href="{{ route('payment') }}" class="btn btn-primary mb-3 d-block w-100" style="background-image: url('{{ asset('assets/img/expense.jpg') }}'); background-size: cover; background-position: center; color: white; text-decoration: none; padding: 30px 60px; border: none; cursor: pointer; font-size: 2rem;">
-                    Finance 5
-                </a>
-                <a href="#" class="btn btn-primary mb-3 d-block w-100" style="background-image: url('{{ asset('assets/img/forecast.jpg') }}'); background-size: cover; background-position: center; color: white; text-decoration: none; padding: 30px 60px; border: none; cursor: pointer; font-size: 2rem;">
-                    Another Link
-                </a>
-                <a href="#" class="btn btn-primary mb-3 d-block w-100" style="background-image: url('{{ asset('assets/img/monitor.jpg') }}'); background-size: cover; background-position: center; color: white; text-decoration: none; padding: 30px 60px; border: none; cursor: pointer; font-size: 2rem;">
-                    Another Link
-                </a>
-                <!-- Add more buttons as needed -->
-            </div>
-            <div class="col-3">
-                <a href="{{ route('payment') }}" class="btn btn-primary mb-3 d-block w-100" style="background-image: url('{{ asset('assets/img/budget.jpg') }}'); background-size: cover; background-position: center; color: white; text-decoration: none; padding: 30px 60px; border: none; cursor: pointer; font-size: 2rem;">
-                    Finance 5
-                </a>
-                <a href="#" class="btn btn-primary mb-3 d-block w-100" style="background-image: url('{{ asset('assets/img/budget.jpg') }}'); background-size: cover; background-position: center; color: white; text-decoration: none; padding: 30px 60px; border: none; cursor: pointer; font-size: 2rem;">
-                    Another Link
-                </a>
-                <a href="#" class="btn btn-primary mb-3 d-block w-100" style="background-image: url('{{ asset('assets/img/budget.jpg') }}'); background-size: cover; background-position: center; color: white; text-decoration: none; padding: 30px 60px; border: none; cursor: pointer; font-size: 2rem;">
-                    Another Link
-                </a>
-                <!-- Add more buttons as needed -->
-            </div>
-        </div>
-    </div>
-
-
-
-
-
-
 
 
 

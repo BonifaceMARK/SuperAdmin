@@ -6,6 +6,7 @@ use App\Http\Controllers\SubAdminController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\fms5Controller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,6 +35,42 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
     Route::get('/users/{id}/edit', [SuperAdminController::class, 'edit'])->name('users.edit');
 Route::put('/users/{id}', [SuperAdminController::class, 'updateRole'])->name('users.update');
 Route::delete('/users/{id}', [SuperAdminController::class, 'destroy'])->name('users.destroy');
+
+
+
+
+// PAYMENT GATEWAYS COMMUNICATION & COLLABORATION ACCOUNTING STANDARDS
+Route::get('/fms5pay', [fms5Controller::class, 'fms5payment'])->name('payment');
+Route::get('/fms5com', [fms5Controller::class, 'fms5communication'])->name('communication');
+Route::get('/fms5stan', [fms5Controller::class, 'fms5standards'])->name('standards');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 });
 // ********** Sub Admin Routes *********
 Route::group(['prefix' => 'sub-admin','middleware'=>['web','isSubAdmin']],function(){
