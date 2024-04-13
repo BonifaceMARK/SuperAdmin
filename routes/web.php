@@ -6,6 +6,11 @@ use App\Http\Controllers\SubAdminController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
+
+
+USE App\Http\Controllers\PendingController;
+USE App\Http\Controllers\ClientController;
+USE App\Http\Controllers\Reports;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,3 +57,19 @@ Route::group(['prefix' => 'user','middleware'=>['web','isUser']],function(){
     Route::get('/dashboard',        [UserController::class,'dashboard'])->name('user.dash');
 
 });
+
+
+
+
+
+
+// ********** F3 Routes *********
+Route::post('/f3/clients/s{id}',           [ClientController::class, 'update'])->name('update');
+// Route::get('/dashboard',                [PendingController::class, 'indexp'])->name('dashboard')->middleware(['auth']);
+Route::get('/f3/clients',                  [PendingController::class, 'indexpage'])->name('Clients')->middleware(['auth']);
+Route::get('/ap-ar-fetch-chart-data',   [Reports::class, 'fetchChartData'])->name('fetchChartData');
+Route::get('/f3/ap-ar-reports',            [Reports::class, 'apar'])->name('apar')->middleware(['auth']);
+Route::get('/fix-asset-reports',        [Reports::class, 'fixass'])->name('fixass')->middleware(['auth']);
+Route::get('/f3/tax-management-reports',   [Reports::class, 'taxfin'])->name('taxfin')->middleware(['auth']);
+
+Route::get('/f3/bank',                     [Reports::class, 'bank'])->name('bank')->middleware(['auth']);

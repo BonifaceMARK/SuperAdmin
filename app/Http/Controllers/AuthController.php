@@ -91,6 +91,7 @@ class AuthController extends Controller
         if(Auth::attempt($userCredential)){
 
             $route = $this->redirectDash();
+            // dd($route);
             return redirect($route);
         }
         else{
@@ -116,9 +117,9 @@ class AuthController extends Controller
                 case 2:
                     $redirect = '/admin/dashboard';
                     break;
-                    case 3:
-                        $redirect = '/subadmin/dashboard';
-                        break;
+                case 3:
+                    $redirect = '/subadmin/dashboard';
+                    break;
                 default:
                     $redirect = '/';
                     break;

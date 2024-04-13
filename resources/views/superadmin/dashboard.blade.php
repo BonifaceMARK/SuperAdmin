@@ -170,7 +170,7 @@
         </nav>
     </div>
 
-    <a href="{{ route('route.name') }}" class="btn btn-primary" style="background-image: url('{{ asset('assets/img/card.jpg') }}'); background-size: cover; background-position: center; color: white; text-decoration: none; padding: 10px 20px; border: none; cursor: pointer;">
+    {{-- <a href="{{ route('route.name') }}" class="btn btn-primary" style="background-image: url('{{ asset('assets/img/card.jpg') }}'); background-size: cover; background-position: center; color: white; text-decoration: none; padding: 10px 20px; border: none; cursor: pointer;"> --}}
         Go to Route
     </a>
 

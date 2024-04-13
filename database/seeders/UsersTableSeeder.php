@@ -46,6 +46,7 @@ class UsersTableSeeder extends Seeder
                 'last_ip_loggedin' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'email_verified_at' => now(),
             ],
             // Add more users with different roles as needed
         ];
