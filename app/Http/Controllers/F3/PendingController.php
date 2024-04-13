@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\F3;
+namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
@@ -71,8 +71,8 @@ class PendingController extends Controller
         }
 
     $recentpending = Pendingdocu::latest()->take(5)->get()->map(function ($item) {
-        $item->title = Crypt::decryptString($item->title);
-        $item->description = Crypt::decryptString($item->description);
+        $item->title = ($item->title);
+        $item->description = ($item->description);
         return $item;
     });
 
@@ -80,15 +80,15 @@ class PendingController extends Controller
     $users = User::all();
     $pendingdocuCount = Pendingdocu::count();
     $pendingdocu = Pendingdocu::where('status', 'pending')->get()->map(function ($item) {
-        $item->title = Crypt::decryptString($item->title);
-        $item->description = Crypt::decryptString($item->description);
-        $item->budget = Crypt::decryptString($item->budget);
+        $item->title = ($item->title);
+        $item->description = ($item->description);
+        $item->budget = ($item->budget);
         return $item;
     });
     $pendingDocs = Pendingdocu::all();
     $totalPrice = 0;
     foreach ($pendingDocs as $pendingDoc) {
-        $decryptedBudget = Crypt::decryptString($pendingDoc->budget);
+        $decryptedBudget = ($pendingDoc->budget);
         $totalPrice += (float) $decryptedBudget;
     }
     return view('dash', compact('pendingdocu', 'pendingdocuCount', 'totalPrice','userCount','users','recentpending'));
@@ -224,8 +224,8 @@ foreach ($mergedData as $item) {
 // dd($mergedData);
 
     $users = User::orderBy('id', 'asc')->get()->map(function ($item) {
-        $item->name = Crypt::decryptString($item->name);
-        $item->username = Crypt::decryptString($item->username);
+        $item->name = ($item->name);
+        $item->username = ($item->username);
         return $item;
     });
     $userCount = User::count();
@@ -236,16 +236,16 @@ foreach ($mergedData as $item) {
         $document->save();
     }
     $pendingdocux = Pendingdocu::orderBy('id', 'asc')->get()->map(function ($item) {
-        $item->title = Crypt::decryptString($item->title);
-        $item->description = Crypt::decryptString($item->description);
-        $item->budget = Crypt::decryptString($item->budget);
+        $item->title = ($item->title);
+        $item->description = ($item->description);
+        $item->budget = ($item->budget);
         return $item;
     });
 
     $messages = Message::all();
     $decryptedMessages = [];
     foreach ($messages as $message) {
-        $decryptedMessage = Crypt::decryptString($message->message);
+        $decryptedMessage = ($message->message);
         $decryptedMessages[] = [
             'user_name' => $message->user_name,
             'message' => $decryptedMessage,
@@ -258,7 +258,7 @@ foreach ($mergedData as $item) {
     $messages = Message::all();
     $decryptedMessages = [];
     foreach ($messages as $message) {
-        $decryptedMessage = Crypt::decryptString($message->message);
+        $decryptedMessage = ($message->message);
         $decryptedMessages[] = [
             'user_name' => $message->user_name,
             'message' => $decryptedMessage,
