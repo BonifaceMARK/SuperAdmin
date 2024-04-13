@@ -121,6 +121,12 @@ class AuthController extends Controller
                 case 3:
                     $redirect = '/subadmin/dashboard';
                     break;
+                case 2:
+                    $redirect = '/subadmin/dashboard';
+                    break;
+                    // case 3:
+                    //     $redirect = '/subadmin/dashboard';
+                    //     break;
                 default:
                     $redirect = '/';
                     break;
