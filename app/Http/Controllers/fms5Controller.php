@@ -11,20 +11,20 @@ class fms5Controller extends Controller
     {
 
 
-       return view ('finance5.payment');
+       return view ('F5.payment');
     }
 
     public function fms5communication()
     {
 
 
-       return view ('finance5.c&c');
+       return view ('F5.c&c');
     }
 
     public function fms5standards()
     {
 
 
-       return view ('finance5.standards');
+       return view ('F5.standards');
     }
 }
