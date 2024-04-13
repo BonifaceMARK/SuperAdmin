@@ -49,7 +49,8 @@
 
 
 
-      @include('finance.sidebar')
+    @include('finance.sidebar')
+    @include('f3.inc.navbar')
 
 
 
@@ -60,7 +61,6 @@
 
 
 
-   
 
 
 
