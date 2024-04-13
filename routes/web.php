@@ -60,7 +60,7 @@ Route::get('/fms5stan', [fms5Controller::class, 'fms5standards'])->name('standar
 
 Route::post('/paymentgateways', [fms5Controller::class, 'storeHotel'])->name('paymentgateways.store');
 Route::post('/freight-payments', [fms5Controller::class, 'storeFreight'])->name('freightpayments.store');
-Route::post('/admin-payments', [fms5Controller::class, 'store'])->name('adminpayments.store');
+Route::post('/admin-payments', [fms5Controller::class, 'storeAdmin'])->name('adminpayments.store');
 
 
 

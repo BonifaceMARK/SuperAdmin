@@ -13,7 +13,7 @@ class CreateAdminPaymentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('fg_5admin_payments', function (Blueprint $table) {
+        Schema::create('fms_g5admin_payments', function (Blueprint $table) {
             $table->id();
             $table->string('paymentType');
             $table->decimal('amount', 10, 2);

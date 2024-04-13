@@ -11,22 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fg_5hotel_payments', function (Blueprint $table) {
+        Schema::create('fms_g5communicationcollaboration', function (Blueprint $table) {
             $table->id();
             $table->uuid('reference');
-            $table->string('service'); 
             $table->string('productName');
             $table->string('transactionName');
-            $table->string('paymentMethod'); 
-            $table->string('cardType'); 
+            $table->string('paymentMethod');
+            $table->string('cardType');
             $table->string('transactionType');
             $table->decimal('transactionAmount', 10, 2);
             $table->dateTime('transactionDate');
-            $table->text('description')->nullable(); 
+            $table->text('description')->nullable();
             $table->string('transactionStatus');
             $table->string('reasonForCancellation')->nullable();
             $table->text('comment')->nullable();
-            
+
             $table->timestamps();
         });
     }
@@ -36,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fg_5paymentgateways');
+        //
     }
 };

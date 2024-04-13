@@ -5,6 +5,8 @@ use App\Models\PaymentGateway;
 use App\Models\FreightPayment;
 use Illuminate\Http\Request;
 use App\Models\AdminPayment;
+use App\Models\ChatMessage;
+use Illuminate\Support\Facades\Auth;
 
 class fms5Controller extends Controller
 {
@@ -89,6 +91,44 @@ class fms5Controller extends Controller
 
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Freight payment created successfully');
+    }
+    public function index()
+    {
+        // Fetch the last 10 messages with the associated user
+        $messages = ChatMessage::latest()->with('user')->limit(10)->get();
+
+        // Return the authenticated user's name and department
+        $user = Auth::user();
+        $name = $user->name;
+
+
+        return view('F5.c&c', compact('messages', 'name',));
+    }
+
+    public function storeMessage(Request $request)
+    {
+        $request->validate([
+            'message' => 'required|string',
+        ]);
+
+        // Create a new message instance
+        $message = new ChatMessage();
+        $message->message = $request->input('message');
+
+        // Associate the message with the authenticated user
+        $message->user_id = Auth::id();
+
+        // Save the message
+        $message->save();
+
+        return redirect()->back()->with('success', 'Message sent successfully.');
+    }
+    public function fetch()
+    {
+        // Fetch the latest chat messages
+        $messages = ChatMessage::latest()->limit(10)->pluck('message');
+
+        return response()->json($messages, 200);
     }
 
 }

@@ -346,7 +346,7 @@
 <div class="row">
     <div class="col-12">
         <!-- Button with custom styling for Administrative Payments -->
-        <button type="button" class="btn btn-primary btn-custom" data-bs-toggle="modal" data-bs-target="#adminPaymentsModal" style="background-image: url('{{ asset("assets/img/admin.jpg") }}'); background-size: cover; font-size: 35px; padding: 50px 300px;">
+        <button type="button" class="btn btn-primary btn-custom" data-bs-toggle="modal" data-bs-target="#adminPaymentsModal" style="background-image: url('{{ asset("assets/img/admin.jpg") }}'); background-size: cover; font-size: 35px; padding: 50px 270px;">
             Administrative Payments
         </button>
     </div>
@@ -403,23 +403,23 @@
                     @csrf
                     <div class="mb-3">
                         <label for="adminPaymentType" class="form-label">Payment Type</label>
-                        <input type="text" class="form-control" id="adminPaymentType" name="adminPaymentType" readonly>
+                        <input type="text" class="form-control" id="adminPaymentType" name="paymentType" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="adminPaymentAmount" class="form-label">Payment Amount</label>
-                        <input type="number" step="0.01" class="form-control" id="adminPaymentAmount" name="adminPaymentAmount">
+                        <input type="number" step="0.01" class="form-control" id="adminPaymentAmount" name="amount">
                     </div>
                     <div class="mb-3">
                         <label for="adminPaymentDate" class="form-label">Payment Date</label>
-                        <input type="datetime-local" class="form-control" id="adminPaymentDate" name="adminPaymentDate">
+                        <input type="datetime-local" class="form-control" id="adminPaymentDate" name="paymentDate">
                     </div>
                     <div class="mb-3">
                         <label for="adminPaymentDescription" class="form-label">Description</label>
-                        <textarea class="form-control" id="adminPaymentDescription" name="adminPaymentDescription"></textarea>
+                        <textarea class="form-control" id="adminPaymentDescription" name="description"></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="adminPaymentStatus" class="form-label">Status</label>
-                        <input type="text" class="form-control" id="adminPaymentStatus" name="adminPaymentStatus">
+                        <input type="text" class="form-control" id="adminPaymentStatus" name="status">
                     </div>
                     <button type="submit" class="btn btn-primary">Pay now</button>
                 </form>
