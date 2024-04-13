@@ -9,6 +9,9 @@ class ChatMessage extends Model
 {
     use HasFactory;
 
+
+protected $table = 'fms_g5chat_messages';
+
     protected $fillable = [
         'user_id',
         'message',

@@ -549,32 +549,34 @@
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="#features">App Features</a></li>
-          <li class="dropdown"><a><span>Portal</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown">
+            <a><span>Portal</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-                @if (Route::has('login'))
-                @auth
-                @if ( Auth::user()->role == '0')
-                <li><a class="dropdown-item" href="{{ url('/admin/home') }}">Home</a></li>
-                {{-- @elseif ( Auth::user()->usertype == '2' )
-                <li><a class="dropdown-item" href="{{ url('/manager/home') }}">Home</a></li>
-                @elseif ( Auth::user()->usertype == '3' )
-                <li><a class="dropdown-item" href="{{ url('/customer/home') }}">Home</a></li> --}}
-                @endif
-                <li><hr class="dropdown-divider" /></li>
-                @else
-                <li><a class="dropdown-item" href="{{ route('loadlogin') }}">Login</a></li>
-                @if (Route::has('register'))
-                <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
-                @endif
-                @endauth
-                @endif
+              @if (Route::has('login'))
+              @auth
+              @if (Auth::user()->role == '0')
+              <li><a class="dropdown-item" href="{{ route('loadlogin') }}">Login</a></li>
+              {{-- @elseif ( Auth::user()->usertype == '2' )
+              <li><a class="dropdown-item" href="{{ url('/manager/home') }}">Home</a></li>
+              @elseif ( Auth::user()->usertype == '3' )
+              <li><a class="dropdown-item" href="{{ url('/customer/home') }}">Home</a></li> --}}
+              @endif
+              <li><hr class="dropdown-divider" /></li>
+              @else
+
+              <li><a class="dropdown-item" href="{{ url('/admin/home') }}">Vendor Portal</a></li>
+              @if (Route::has('register'))
+              <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
+              @endif
+              @endauth
+              @endif
             </ul>
           </li>
-
           <li><a class="getstarted scrollto" href="#features">Get Started</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav>
+
 
     </div>
   </header>

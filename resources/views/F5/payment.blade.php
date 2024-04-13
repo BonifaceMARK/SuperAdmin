@@ -349,8 +349,104 @@
         <button type="button" class="btn btn-primary btn-custom" data-bs-toggle="modal" data-bs-target="#adminPaymentsModal" style="background-image: url('{{ asset("assets/img/admin.jpg") }}'); background-size: cover; font-size: 35px; padding: 50px 270px;">
             Administrative Payments
         </button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taxPaymentsModal"style="background-image: url('{{ asset("assets/img/admin.jpg") }}'); background-size: cover; font-size: 35px; padding: 50px 270px;">
+            Open Tax Payments Modal
+        </button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#fixedAssetPaymentModal">
+            Add Fixed Asset Payment
+        </button>
+
     </div>
 </div>
+<div class="modal fade" id="fixedAssetPaymentModal" tabindex="-1" aria-labelledby="fixedAssetPaymentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="fixedAssetPaymentModalLabel">Add Fixed Asset Payment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Form for adding fixed asset payments -->
+                <form id="fixedAssetPaymentForm" action="{{ route('fixedassetpayments.store') }}" method="POST">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="assetName" class="form-label">Asset Name</label>
+                        <input type="text" class="form-control" id="assetName" name="asset_name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="assetDescription" class="form-label">Asset Description</label>
+                        <textarea class="form-control" id="assetDescription" name="asset_description"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="amount" class="form-label">Amount</label>
+                        <input type="number" step="0.01" class="form-control" id="amount" name="amount">
+                    </div>
+                    <div class="mb-3">
+                        <label for="paymentDate" class="form-label">Payment Date</label>
+                        <input type="datetime-local" class="form-control" id="paymentDate" name="payment_date">
+                    </div>
+                    <div class="mb-3">
+                        <label for="paymentMethod" class="form-label">Payment Method</label>
+                        <input type="text" class="form-control" id="paymentMethod" name="payment_method">
+                    </div>
+                    <div class="mb-3">
+                        <label for="paymentReference" class="form-label">Payment Reference</label>
+                        <input type="text" class="form-control" id="paymentReference" name="payment_reference">
+                    </div>
+                    <div class="mb-3">
+                        <label for="status" class="form-label">Status</label>
+                        <input type="text" class="form-control" id="status" name="status">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Payment</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="taxPaymentsModal" tabindex="-1" aria-labelledby="taxPaymentsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="taxPaymentsModalLabel">Tax Payments</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Form for adding tax payments -->
+                <form id="taxPaymentForm" action="{{ route('taxpayments.store') }}" method="POST">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="taxpayerName" class="form-label">Taxpayer Name</label>
+                        <input type="text" class="form-control" id="taxpayerName" name="taxpayer_name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="taxType" class="form-label">Tax Type</label>
+                        <input type="text" class="form-control" id="taxType" name="tax_type">
+                    </div>
+                    <div class="mb-3">
+                        <label for="paymentAmount" class="form-label">Payment Amount</label>
+                        <input type="number" step="0.01" class="form-control" id="paymentAmount" name="amount">
+                    </div>
+                    <div class="mb-3">
+                        <label for="paymentDate" class="form-label">Payment Date</label>
+                        <input type="datetime-local" class="form-control" id="paymentDate" name="payment_date">
+                    </div>
+                    <div class="mb-3">
+                        <label for="paymentMethod" class="form-label">Payment Method</label>
+                        <input type="text" class="form-control" id="paymentMethod" name="payment_method">
+                    </div>
+                    <div class="mb-3">
+                        <label for="status" class="form-label">Status</label>
+                        <input type="text" class="form-control" id="status" name="status">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Pay Now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <!-- Administrative Payments Modal -->
 <div class="modal fade" id="adminPaymentsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

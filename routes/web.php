@@ -45,7 +45,7 @@ Route::get('/logout',           [AuthController::class,'logout']);
 Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],function(){
 
 
-    Route::get('/dashboard',[SuperAdminController::class,'dashboard']);
+
     Route::get('/users',[SuperAdminController::class,'users'])->name('superAdminUsers');
     Route::get('/manage-role',[SuperAdminController::class,'manageRole'])->name('manageRole');
     Route::post('/update-role',[SuperAdminController::class,'updateRole'])->name('updateRole');
@@ -66,8 +66,10 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
     Route::post('/paymentgateways', [fms5Controller::class, 'storeHotel'])->name('paymentgateways.store');
     Route::post('/freight-payments', [fms5Controller::class, 'storeFreight'])->name('freightpayments.store');
     Route::post('/admin-payments', [fms5Controller::class, 'storeAdmin'])->name('adminpayments.store');
-
-
+    Route::get('/chat', [fms5Controller::class, 'index'])->name('chat.index');
+    Route::post('/chat/store', [fms5Controller::class, 'storeMessage'])->name('chat.store');
+    Route::get('/chat/fetch', [fms5Controller::class, 'fetch'])->name('chat.fetch');
+    Route::post('/fixedassetpayments', [fms5Controller::class, 'storeFixedAsset'])->name('fixedassetpayments.store');
 
 
 
@@ -166,7 +168,7 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
     // // Route::get('admin/configuration',        [App\Http\Controllers\ConfigurationController::class, 'index'])        ->name('configuration');
 
     Route::POST('/notice',                         [App\Http\Controllers\UniversalProcess::class, 'isNotice'])                ->name('notice');
-    
+
     //JAKE VENDOR AND INVESMENT WEB :)
     Route::get('dashboard', [G10Controller::class, 'dashboard'])->name('index.dashboard');
     Route::get('vendorManagement', [G10Controller::class, 'vendorDashboard'])->name('vendor.dashboard');

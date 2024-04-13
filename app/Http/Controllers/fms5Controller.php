@@ -6,6 +6,9 @@ use App\Models\FreightPayment;
 use Illuminate\Http\Request;
 use App\Models\AdminPayment;
 use App\Models\ChatMessage;
+use App\Models\TaxPayment;
+use App\Models\FixedAssetPayment;
+
 use Illuminate\Support\Facades\Auth;
 
 class fms5Controller extends Controller
@@ -53,18 +56,17 @@ class fms5Controller extends Controller
             'transactionStatus' => 'required|string',
             'reasonForCancellation' => 'nullable|string',
             'comment' => 'nullable|string',
-            // Add validation rules for other fields if needed
+
         ]);
 
-        // Create a new PaymentGateway instance and store in the database
+
         PaymentGateway::create($validatedData);
 
-        // Redirect back with a success message
         return redirect()->back()->with('success', 'Payment created successfully');
     }
     public function storeAdmin(Request $request)
     {
-        // Validate incoming request data
+
         $validatedData = $request->validate([
             'paymentType' => 'required|string',
             'amount' => 'required|numeric',
@@ -73,36 +75,35 @@ class fms5Controller extends Controller
             'status' => 'nullable|string',
         ]);
 
-        // Create a new AdminPayment instance and store it in the database
+
         AdminPayment::create($validatedData);
 
-        // Redirect back with a success message
+
         return redirect()->back()->with('success', 'Admin payment created successfully');
     }
     public function storeFreight(Request $request)
     {
-        // Validate incoming request data
+
         $validatedData = $request->validate([
             'freightService' => 'required|string',
             'freightAmount' => 'required|numeric',
             'freightDate' => 'required|date',
             'freightDescription' => 'nullable|string',
             'freightStatus' => 'required|string',
-            // Add validation rules for other fields if needed
+
         ]);
 
-        // Create a new FreightPayment instance and store it in the database
+
         FreightPayment::create($validatedData);
 
-        // Redirect back with a success message
+
         return redirect()->back()->with('success', 'Freight payment created successfully');
     }
     public function index()
     {
-        // Fetch the last 10 messages with the associated user
+
         $messages = ChatMessage::latest()->with('user')->limit(10)->get();
 
-        // Return the authenticated user's name and department
         $user = Auth::user();
         $name = $user->name;
 
@@ -116,24 +117,66 @@ class fms5Controller extends Controller
             'message' => 'required|string',
         ]);
 
-        // Create a new message instance
         $message = new ChatMessage();
         $message->message = $request->input('message');
 
-        // Associate the message with the authenticated user
         $message->user_id = Auth::id();
 
-        // Save the message
         $message->save();
 
         return redirect()->back()->with('success', 'Message sent successfully.');
     }
     public function fetch()
     {
-        // Fetch the latest chat messages
+
         $messages = ChatMessage::latest()->limit(10)->pluck('message');
 
         return response()->json($messages, 200);
     }
+    public function storeTax(Request $request)
+    {
+        // Validate the incoming request data
+        $validatedData = $request->validate([
+            'taxpayer_name' => 'required|string|max:255',
+            'tax_type' => 'required|string|max:255',
+            'amount' => 'required|numeric',
+            'payment_date' => 'required|date',
+            'payment_method' => 'required|string|max:255',
+            'status' => 'required|string|max:255',
+        ]);
 
+        // Create a new tax payment instance
+        $taxPayment = new TaxPayment();
+        $taxPayment->taxpayer_name = $validatedData['taxpayer_name'];
+        $taxPayment->tax_type = $validatedData['tax_type'];
+        $taxPayment->amount = $validatedData['amount'];
+        $taxPayment->payment_date = $validatedData['payment_date'];
+        $taxPayment->payment_method = $validatedData['payment_method'];
+        $taxPayment->status = $validatedData['status'];
+
+        // Save the tax payment to the database
+        $taxPayment->save();
+
+        // Redirect back or return a response
+        return redirect()->back()->with('success', 'Tax payment has been successfully added.');
+    }
+    public function storeFixedAsset(Request $request)
+    {
+        // Validate the request data
+        $validatedData = $request->validate([
+            'asset_name' => 'required|string|max:255',
+            'asset_description' => 'nullable|string',
+            'amount' => 'required|numeric',
+            'payment_date' => 'required|date',
+            'payment_method' => 'required|string|max:255',
+            'payment_reference' => 'nullable|string|max:255',
+            'status' => 'required|string|max:255',
+        ]);
+
+        // Create a new fixed asset payment instance
+        $fixedAssetPayment = FixedAssetPayment::create($validatedData);
+
+        // Redirect back or return a response
+        return redirect()->back()->with('success', 'Fixed asset payment has been successfully added.');
+    }
 }

@@ -16,42 +16,15 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         // Define sample user data with different roles
-        $users = [
-            [
-                'name' => 'John Doe',
-                'email' => 'john@example.com',
-                'department' => 'IT',
-                'role' => 0, // Role 0: Default role
-                'password' => Hash::make('password'),
-                'last_ip_loggedin' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'name' => 'Jane Smith',
-                'email' => 'jane@example.com',
-                'department' => 'HR',
-                'role' => 1, // Role 1: HR role
-                'password' => Hash::make('password'),
-                'last_ip_loggedin' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'name' => 'Admin User',
-                'email' => 'admin@example.com',
-                'department' => 'Admin',
-                'role' => 2, // Role 2: Admin role
-                'password' => Hash::make('password'),
-                'last_ip_loggedin' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
-                'email_verified_at' => now(),
-            ],
-            // Add more users with different roles as needed
-        ];
+        DB::table('users')->insert([
+            'name' => 'John Doe',
+            'email' => 'john@example.com',
+            'password' => Hash::make('password'),
+            'role' => 0, // Assuming role 0 is for regular users
+            'status' => 'Active',
+            // Add more fields as needed
+            // Ensure that the fields you're populating align with the columns defined in your migration
+        ]);
 
-        // Insert data into the users table
-        DB::table('users')->insert($users);
     }
 }
