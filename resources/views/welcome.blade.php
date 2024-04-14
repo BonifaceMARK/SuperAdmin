@@ -564,7 +564,7 @@
               <li><hr class="dropdown-divider" /></li>
               @else
 
-              <li><a class="dropdown-item" href="{{ url('/admin/home') }}">Vendor Portal</a></li>
+              <li><a class="dropdown-item" href="{{ route('loadlogin') }}">Vendor Portal</a></li>
               @if (Route::has('register'))
               <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
               @endif

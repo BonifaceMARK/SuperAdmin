@@ -20,7 +20,7 @@ class UniversalController extends Controller
 
     // as index
     public function index(Request $request){
-        $path = view('manager/index');
+        $path = view('employee/index');
         return $path;
     }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\UserDescription;
 
 
 
@@ -45,6 +46,7 @@ class SuperAdminController extends Controller
         $data = Payouts::whereNotNull('amount')->sum('amount');
 
         return view('superadmin.dashboard', compact('countBalance','investment','data','userCount'));
+
     }
 
     public function users()
@@ -62,6 +64,7 @@ class SuperAdminController extends Controller
 
     public function updateRole(Request $request)
     {
+        
         User::where('id', $request->user_id)->update([
             'role' => $request->role_id
         ]);
@@ -86,19 +89,6 @@ public function update(Request $request, $id)
     $user->update($request->all());
     return redirect()->route('manageRole')->with('success', 'User updated successfully');
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -132,9 +122,7 @@ public function assetdetailIndex(){
 }
 
 public function taxcalculationIndex(){
-
     return view('admin.taxcalculation');
-
 }
 
 public function employee(Request $request) {
@@ -150,15 +138,11 @@ public function company(Request $request) {
 }
 
 public function messaging(Request $request) {
-
     return view('admin.messaging');
-    
 }
 
 public function announcement(Request $request) {
-
     return view('admin.announcement');
-
 }
 
 public function index(Request $request){
@@ -540,14 +524,16 @@ public function getdepreciation(Request $request){
        
 
             $formattedPromotions[] = [
-                'id'    => $data->AssetID,
-                'aname' => $data->AssetName,
-                'adata' => $formattedDate,
-                'icost' => '₱'.$data->InitialCost,
-                'uyears' => $data->UsefulLifeInYears,
-                'svalue' => '₱'.$data->SalvageValue,
-                'dmethod' => $data->DepreciationMethod ?: '',
+
+                'id'        => $data->AssetID,
+                'aname'     => $data->AssetName,
+                'adata'     => $formattedDate,
+                'icost'     => '₱'.$data->InitialCost,
+                'uyears'    => $data->UsefulLifeInYears,
+                'svalue'    => '₱'.$data->SalvageValue,
+                'dmethod'   => $data->DepreciationMethod ?: '',
                 'dExpenses' => '₱'.number_format($data->DepreciationExpense ?: '0',2),
+
             ];
             
         }
@@ -567,7 +553,7 @@ public function addusers(Request $request){
 
     try {
         $var = (object) $request;
-
+        // dd($var);
 
         if($var->newpass != $var->confirmpass){
             return response()->json([
@@ -575,24 +561,40 @@ public function addusers(Request $request){
              'message' => 'Passwords do not match'
             ], 400);
         }
-
+        
         $taken = User::where('email', $var->pemail)->exists();
 
         if (!$taken) {
 
+
+            // dd($var);
+
+            // $role = '';
+
+            // if($var->selRole == '15'){
+            //     $role = $var->selRole;
+            // }
+
+
             $year = now()->year;
-            $latestUserId = DB::table('fms_g9_users')->where('userid', 'like', $year . '%')->max('userid');
+            $latestUserId = User::where('userid', 'like', $year . '%')->max('userid');
             $incrementedNumber = intval(substr($latestUserId, 4)) + 1;
             $userID = $year . sprintf('%04d', $incrementedNumber);
 
+
+            $desc = UserDescription::where('usertype', $var->selRole)->first();
+            
             User::insert([
+
                 'name' => $var->lname.', '.$var->fname.' '.$var->mname,
                 'email' => $var->pemail,
                 'password' => bcrypt($var->newpass),
-                'usertype' => $var->selRole ?: '1',
+                'department' => $desc->userdesc,
+                'role' =>  $var->selRole, 
                 'userid'   => $userID,
                 'created_at' => now(),
                 'updated_at' => now()
+
             ]);
 
             DB::table('_personaldata')->insert([
@@ -606,7 +608,7 @@ public function addusers(Request $request){
                 'updated_at' => now(),
             ]);
 
-            $response = 'User created successfully!';
+            $response = 'User account has been successfully created!';
 
         } else {
 
@@ -625,31 +627,36 @@ public function addusers(Request $request){
 
 public function getusers(Request $request){
 
+    $requestData = (object) $request;
+
+    // $usersQuery = DB::table('fms_g9_users as u')
+    //         ->select('userid','name','u.email','usertype')
+    //         ->leftjoin('_personaldata as pd','pd.employeeid','u.userid');
+    
+    // dd($formattedPromotions);
+
     try {
   
-        $requestData = (object) $request;
+        $usersQuery = User::select('users.userid','name','users.email','role')
+    ->leftjoin('_personaldata as pd','pd.employeeid','users.userid');
 
-        $usersQuery = DB::table('fms_g9_users as u')
-                ->select('userid','name','u.email','usertype')
-                ->leftjoin('_personaldata as pd','pd.employeeid','u.userid');
+    if ($requestData->roleSelector != "") {
+        $usersQuery = $usersQuery->where('role', '=', $requestData->roleSelector);
+    }
+
+    $usersQuery = $usersQuery->get();
+    
+    $formattedPromotions = [];
+    foreach ($usersQuery as $data) {
        
-        if ($requestData->roleSelector != "") {
-            $usersQuery = $usersQuery->where('usertype', '=', $requestData->roleSelector);
-        }
-
-        $usersQuery = $usersQuery->get();
-     
-        $formattedPromotions = [];
-        foreach ($usersQuery as $data) {
-           
-            $formattedPromotions[] = [
-                'id' => $data->userid ?: 'N/A',
-                'Name' => $data->name,
-                'MicrosoftEmail' => $data->email,
-                'PersonalEmail' => $data->email,
-                'usertype' =>  $this->userdesc($data->usertype)
-            ];
-        }
+        $formattedPromotions[] = [
+            'id' => $data->userid ?: 'N/A',
+            'Name' => $data->name,
+            'MicrosoftEmail' => $data->email,
+            'PersonalEmail' => $data->email,
+            'usertype' =>  $this->userdesc($data->role)
+        ];
+    }
 
         return response()->json($formattedPromotions);
 

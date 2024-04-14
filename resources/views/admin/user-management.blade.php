@@ -1,5 +1,5 @@
 <?php
-    // $options = DB::table('fms_g9_tbluserdescrip')->pluck('userdesc','usertype');
+    $options = DB::table('fms_g9_tbluserdescrip')->pluck('userdesc','usertype');
 ?>
 @extends('layouts.app')
 
@@ -25,8 +25,8 @@
                 <div class="col-md-12">
                     {{-- <div class="card"> --}}
                         <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-                          {{-- <img src="../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle"> --}}
-                          <img src="https://www.kindpng.com/picc/m/80-807524_no-profile-hd-png-download.png"  style="width: 120px; height:120px;"class="rounded-circle" alt="Profile">
+                          {{-- <img src="{{ URL::asset('/assets/img/subhead.png')}}" alt="Profile" class="rounded-circle"> --}}
+                          <img src="{{ URL::asset('/assets/img/subhead.png')}}" style="width: 120px; height:120px;"class="rounded-circle" alt="Profile">
                           {{-- <h2>Kevin Anderson</h2>
                           <h3>Web Designer</h3>
                           <div class="social-links mt-2">
@@ -45,9 +45,9 @@
                     <div class="form-floating mb-3">
                         <select class="form-select" id="selRole" name="selRole" aria-label="Floating label select example">
                             <option value="" selected>- All users -</option>
-                            {{-- @foreach($options as $usertype => $userdesc)
+                            @foreach($options as $usertype => $userdesc)
                             <option value='{{ $usertype }}'>{{ $userdesc }}</option>
-                            @endforeach --}}
+                            @endforeach
                         </select>
                         <label for="floatingSelect">User Type</label>
                     </div>
@@ -207,13 +207,19 @@
   <section class="section dashboard">
     <div class="row">
       <div class="col-lg-12">
+        <div class="alert alert-primary alert-dismissible fade show mt-4" role="alert">
+            <h4 class="alert-heading" style="font-size: 1rem;">User Management Overview</h4>
+            <p style="font-size: 0.8rem; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Overseeing this module entails defining and configuring user roles and permissions, ensuring the system's security by enforcing stringent password policies, and maintaining a comprehensive audit trail of user activities for compliance purposes. </p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+           
+          </div>
+          <br/>
         <div class="card">
-            <br/>
             <div class="card-body">
-                <div class="row">
+                <div class="row mt-4">
                     <div class="col-lg-4">
                         <div class="form-floating mb-3">
-                          <p class="card-title" style="font-size: 1rem">Filters</p>
+                          {{-- <p class="card-title" style="font-size: 1rem">Filters</p> --}}
                             {{-- <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
                               <option selected>Open this select menu</option>
                               <option value="1">One</option>
@@ -227,9 +233,9 @@
                         <div class="form-floating mb-3">
                             <select class="form-select" id="selRoler" aria-label="Floating label select example">
                                 <option value="" selected>- All users -</option>
-                                {{-- @foreach($options as $usertype => $userdesc)
+                                @foreach($options as $usertype => $userdesc)
                                 <option value='{{ $usertype }}'>{{ $userdesc }}</option>
-                                @endforeach --}}
+                                @endforeach
                             </select>
                             <label for="floatingSelect">User Type</label>
                         </div>
@@ -251,11 +257,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                <br/>
                 {{-- <table class="table datatable"> --}}
                     <table id="dynamic_Datable"  cellspacing="0" style="width:100%">
                     <thead>
@@ -298,7 +299,7 @@
                 dataType: "json",
                 success: function(response){
 
-                    if(response.message == 'User created successfully!') {
+                    if(response.message == 'User account has been successfully created!') {
                               const Toast = Swal.mixin({
                               toast: true,
                               position: 'top-end',

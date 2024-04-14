@@ -91,16 +91,28 @@ class AuthController extends Controller
         $userCredential = $request->only('email','password');
         //
         // e{
-            // dd($request->all());
+        
         if(Auth::attempt($userCredential)){
             // dd(Auth::user()->role);
+            
             if( Auth::user()->role == '0' || Auth::user()->role == '0') 
             {
-                $route = $this->redirectDash();
+                // $route = $this->redirectDash();
                 // // return redirect($route);
                 //     return response()->json(['redirect' => $route, 'message' => 'Login successful']);
                 return response()->json(['redirect' => route('home'), 'message' => 'Login successful']);
-            } 
+
+            } else if ( Auth::user()->role == '2' ){
+
+                return response()->json(['redirect' => route('manager.home'), 'message' => 'Login successful']);
+                
+            } else if ( Auth::user()->role == '1' ) {
+                return response()->json(['redirect' => route('manager.home'), 'message' => 'Login successful']);
+            } else if ( Auth::user()->role == '3' ){
+                return response()->json(['redirect' => route('ehome'), 'message' => 'Login successful']);
+            }
+            
+            
         }
         else{
             return response()->json(['error' => 'Username & Password is incorrect'], 401);     

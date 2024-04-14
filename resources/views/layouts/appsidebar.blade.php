@@ -11,7 +11,7 @@
   Extra Large Modal
 </button> --}}
 
-{{-- @include('asset.report') --}}
+@include('asset.report')
 
 
 <div class="modal fade" id="ExtralargeModalInventory" tabindex="-1">
@@ -152,13 +152,13 @@
         <i class="bi bi-grid"></i>
         <span style="font-size : 13.5px; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif">Dashboard</span>
       </a>
-      {{-- @elseif( auth::user()->role == '2' )
-      <a class="nav-link " href="{{route('uhome')}}">
+       @elseif( auth::user()->role == '3' )
+      <a class="nav-link " href="{{route('ehome')}}">
         <i class="bi bi-house"></i>
         <span style="font-size : 13.5px; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif">Home</span>
       </a>
-      @elseif( auth::user()->role == '3')
-      <a class="nav-link " href="{{route('uhome')}}">
+      {{-- @elseif( auth::user()->role == '3')
+      <a class="nav-link " href="{{route('ehome')}}">
         <i class="bi bi-house"></i>
         <span style="font-size : 13.5px; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif">Home</span>
       </a>
@@ -426,10 +426,28 @@
         <i class="bi bi-person-vcard-fill fs-5"></i><span style="font-size: 0.8rem;">Investment Management</span>
       </a>
     </li>
+
+ 
+    {{-- set condition for finance --}}
+    @if(Auth::user()->role == '2'|| Auth::user()->role == '1' || Auth::user()->role == '0' )
     <hr>
     <li class="nav-heading">Financial Management</li>
-    {{-- set condition for finance --}}
-    @if(Auth::user()->role == '3'|| Auth::user()->role == '1' || Auth::user()->role == '0' )
+    <li class="nav-item">
+      
+
+      {{-- @dd(!Auth::user()->usertype == '3' && Auth::user()->isSuper == '1' ); --}}
+      {{-- {{ dd(Auth::user()) }} --}}
+        @if(!Auth::user()->role == '3' || Auth::user()->role == '0' )
+        <a class="nav-link collapsed" href="{{ route('user-depreciation') }}">
+         
+        @else
+        {{-- {{ dd(Auth::user()) }} --}}
+        <a class="nav-link collapsed" href="{{ route('mdepreciation') }}">
+        @endif
+        <i class="bi bi-calculator"></i>
+        <span style="font-size: 0.8rem;">Appreciation Calculation</span>
+      </a>
+    </li>
     <li class="nav-item">
 
 
@@ -446,11 +464,14 @@
         <span style="font-size: 0.8rem;">Depreciation Calculation</span>
       </a>
     </li>
+   
     <li class="nav-item">
       @if(!Auth::user()->role == '3' || !Auth::user()->role == '0' )
-        <a class="nav-link collapsed" href="{{ route('mtracking') }}">
+      <a class="nav-link collapsed" href="{{ route('tracking') }}">
+        
       @else
-        <a class="nav-link collapsed" href="{{ route('tracking') }}">
+      <a class="nav-link collapsed" href="{{ route('mtracking') }}">
+        {{-- <a class="nav-link collapsed" href="{{ route('tracking') }}"> --}}
       @endif
         <i class="bi bi-tag"></i><span style="font-size: 0.8rem;">Asset Tracking Management</span>
       </a>

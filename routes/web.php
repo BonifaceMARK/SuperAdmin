@@ -161,11 +161,11 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
     Route::POST('/recompute',                      [App\Http\Controllers\RecomputeAssetController::class, 'recdepreciation'])          ->name('recompute');
     Route::POST('/cmpassetdepreciation',           [App\Http\Controllers\SuperadminController::class, 'cmpassetdepreciation'])         ->name('cmpassetdepreciation');
 
+        
+    Route::POST('/report',                         [App\Http\Controllers\SuperadminController::class, 'generateReport'])                ->name('report');
 
-    Route::POST('/report',                         [App\Http\Controllers\SuperadminController::class, 'generateReport'])                       ->name('report');
 
-
-
+    
 
     Route::get('/employees', [EmployeeController::class, 'index'])->name('getEmployees');
 
@@ -264,12 +264,12 @@ Route::group(['prefix' => 'user','middleware'=>['web','isUser']],function(){
 
 
     // Process
-    Route::GET('/getdepreciation',                 [App\Http\Controllers\SuperadminController::class, 'getdepreciation'])              ->name('mgetdepreciation');
-    Route::POST('/recompute',                      [App\Http\Controllers\RecomputeAssetController::class, 'recdepreciation'])          ->name('mrecompute');
+    Route::GET('/getdepreciation',                 [App\Http\Controllers\SuperadminController::class, 'getdepreciation'])           ->name('mgetdepreciation');
+    Route::POST('/recompute',                      [App\Http\Controllers\RecomputeAssetController::class, 'recdepreciation'])       ->name('mrecompute');
 
 
-    Route::GET('/generate-report',       [App\Http\Controllers\ReportAccessController::class, 'generateReport'])          ->name('ugenerateReport');
-    Route::POST('/notice',               [App\Http\Controllers\UniversalProcess::class, 'isNotice'])                      ->name('unotice');
+    Route::GET('/generate-report',                 [App\Http\Controllers\ReportAccessController::class, 'generateReport'])          ->name('ugenerateReport');
+    Route::POST('/notice',                         [App\Http\Controllers\UniversalProcess::class, 'isNotice'])                      ->name('unotice');
 
 
     // view blade
@@ -282,6 +282,18 @@ Route::group(['prefix' => 'user','middleware'=>['web','isUser']],function(){
     Route::GET('/profile',               [App\Http\Controllers\UniversalController::class, 'profile'])                    ->name('uprofile');
     Route::GET('/help',                  [App\Http\Controllers\UniversalController::class, 'customerservice'])            ->name('uhelp');
 });
+
+
+Route::middleware(['auth','isEmployee'])->prefix('employee')->group(function(){
+        
+
+    Route::GET('/home',                  [App\Http\Controllers\UniversalController::class, 'index'])                      ->name('ehome');
+    Route::GET('/profile',               [App\Http\Controllers\UniversalController::class, 'profile'])                    ->name('eprofile');
+    Route::GET('/help',                  [App\Http\Controllers\UniversalController::class, 'customerservice'])            ->name('ehelp');
+
+
+});
+
 
 
 
