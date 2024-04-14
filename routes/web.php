@@ -11,7 +11,7 @@ USE App\Http\Controllers\F3ClientController;
 USE App\Http\Controllers\F3Reports;
 use App\Http\Controllers\fms5Controller;
 use App\Http\Controllers\fms1Controller;
-
+use App\Http\Controllers\fms2Controller;
 use App\Http\Controllers\G10Controller;
 
 
@@ -83,6 +83,8 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
     Route::post('/financial-planning', [fms1Controller::class, 'storeBudgetPlan'])->name('BudgetPlan.store');
     Route::get('/fms1index', [fms1Controller::class, 'fms1index'])->name('fms1.index');
 
+    // EXPENSE BUDGETING & FORECAST COST ALLOCATION MANAGEMENT
+    Route::get('/fms2index', [fms2Controller::class, 'fms2index'])->name('fms2.index');
 
 
 

@@ -187,7 +187,7 @@
                         @csrf
                         <div class="input-group">
                             <input type="text" class="form-control chat-input" placeholder="Type your message..." id="messageInput" name="message">
-                            <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i></button>
+                            <button type="submit" class="btn btn-primary"><i class="bi bi-send"></i>Send</button>
                         </div>
                     </form>
                 </div>
@@ -195,20 +195,39 @@
         </div>
         <div class="col-md-4">
             <div class="card">
-                <div class="card-body"style="background-image: url('{{ asset("assets/img/calculate.jpg") }}');">
-                    <button type="button" class="btn btn-primary btn-block mb-3" data-bs-toggle="modal" data-bs-target="#adminPaymentsModal">
+      <!-- Button to trigger the modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#rightSidebarModal" style="background-image: url('{{ asset("assets/img/pay.jpg") }}'); background-size: cover; background-position: center; color: white; padding: 135px 20px;">
+    Pay Here !
+</button>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="rightSidebarModal" tabindex="-1" aria-labelledby="rightSidebarModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-custom">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="rightSidebarModalLabel">Payment Options</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="list-group">
+                    <button type="button" class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#adminPaymentsModal">
                         Pay Administrative Expenses
                     </button>
-                    <button type="button" class="btn btn-primary btn-block mb-3" data-bs-toggle="modal" data-bs-target="#taxPaymentsModal">
+                    <button type="button" class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#taxPaymentsModal">
                         Pay Tax
                     </button>
-                    <button type="button" class="btn btn-primary btn-block mb-3" data-bs-toggle="modal" data-bs-target="#fixedAssetPaymentModal">
+                    <button type="button" class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#fixedAssetPaymentModal">
                         Pay Fixed Asset
                     </button>
-                    <button type="button" class="btn btn-primary btn-block mb-3" data-bs-toggle="modal" data-bs-target="#freightServicesModal">
+                    <button type="button" class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#freightServicesModal">
                         Freight Services
                     </button>
-                    <button type="button" class="btn btn-primary btn-block" data-bs-toggle="modal" data-bs-target="#servicesModal">
+                    <button type="button" class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#servicesModal">
                         Hotel & Restaurants
                     </button>
                 </div>
@@ -216,6 +235,7 @@
         </div>
     </div>
 </div>
+
 
 
 

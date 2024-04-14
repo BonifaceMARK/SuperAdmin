@@ -157,9 +157,11 @@
     </div>
 @endif
 
+
+
 <!-- Button to trigger the modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#financialPlanningModal">
-    Create Financial Planning
+    Budget Plan
 </button>
 
 <!-- Modal -->

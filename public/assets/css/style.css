@@ -1321,3 +1321,35 @@
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
+/* Custom CSS */
+.modal-dialog-custom {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 300px; /* Adjust the width as needed */
+    margin: 0;
+    z-index: 1050; /* Ensure it appears above other elements */
+    transform: translateX(100%);
+}
+/* Custom CSS for Payment Options modal */
+.modal-dialog-custom {
+    max-width: 350px;
+}
+/* 
+.modal-dialog {
+    margin-right: auto;
+    margin-left: 0;
+}*/
+
+.payment-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.payment-options .btn {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
