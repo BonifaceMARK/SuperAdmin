@@ -65,6 +65,7 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
     Route::get('/bank',                     [F3Reports::class, 'bank'])->name('bank');
 
 
+
     // PAYMENT GATEWAYS COMMUNICATION & COLLABORATION ACCOUNTING STANDARDS
     Route::get('/fms5index', [fms5Controller::class, 'fms5index'])->name('fms5.index');
 
