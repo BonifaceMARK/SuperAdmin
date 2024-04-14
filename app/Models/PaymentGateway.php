@@ -14,7 +14,7 @@ class PaymentGateway extends Model
      *
      * @var string
      */
-    protected $table = 'fms_g5paymentgateways';
+    protected $table = 'fms_g5hotel_payments';
 
     /**
      * The attributes that are mass assignable.

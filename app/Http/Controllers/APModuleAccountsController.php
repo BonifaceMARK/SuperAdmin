@@ -45,7 +45,7 @@ class APModuleAccountsController extends Controller
      /** incoice overdue page*/
      public function ApInvoiceOverdue()
      {
- 
+
          //All AP Invoice Sum
          $aptotalAmount = fees::sum('amount');
          $aptotalRowsInvoice = fees::count();
@@ -74,7 +74,7 @@ class APModuleAccountsController extends Controller
              $value->days_overdue = $daysOverdue > 0 ? $daysOverdue : 0; // Set to 0 if not overdue
              return $value;
          });
-         
+
          return view('apmoduleaccounts.tab.overdue_ap_invoices', compact('invoiceList',
          'aptotalAmount',
          'aptotalRowsInvoice',
@@ -84,10 +84,10 @@ class APModuleAccountsController extends Controller
          'aptotalRowsInvoiceUnpaid',
          'aptotalAmountCancelled',
          'aptotalRowsInvoiceCancelled'));
-         
 
- 
-        
+
+
+
      }
 
 

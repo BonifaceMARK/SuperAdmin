@@ -167,8 +167,119 @@
 
         <div class="card">
             <div class="card-body">
-                <h1 class="card-title"><i class="bi bi-grid-1x2-fill"></i> Introduction <!-- Button to trigger modal -->
+
+                <h1 class="card-title"><i class="bi bi-grid-1x2-fill"></i> Introduction
+                      <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pieChartModal">
+        Open Expenses Pie Chart
+    </button>
+<!-- Button to trigger the modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createCostAllocationModal">
+    Create Cost Allocation
+</button>
+    <!-- Modal -->
+    <div class="modal fade" id="pieChartModal" tabindex="-1" aria-labelledby="pieChartModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pieChartModalLabel">Expenses Overview Pie Chart</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <canvas id="pieChart" width="200" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", () => {
+                            new Chart(document.querySelector('#pieChart'), {
+                                type: 'pie',
+                                data: {
+                                    labels: [
+                                        'Tax Expenses',
+                                        'HRMS Expenses',
+                                        'Freight Expenses',
+                                        'Fixed Asset Expenses',
+                                        'Admin Expenses',
+                                    ],
+                                    datasets: [{
+                                        label: 'Payment Data',
+                                        data: [
+                                            {{ $taxPaymentsTotal }},
+                                            {{ $paymentGatewayTotal }},
+                                            {{ $freightPaymentsTotal }},
+                                            {{ $fixedAssetPaymentsTotal }},
+                                            {{ $adminPaymentsTotal }},
+                                        ],
+                                        backgroundColor: [
+                                            'rgb(255, 99, 132)',
+                                            'rgb(54, 162, 235)',
+                                            'rgb(255, 205, 86)',
+                                            'rgb(75, 192, 192)',
+                                            'rgb(153, 102, 255)',
+                                        ],
+                                        hoverOffset: 4
+                                    }]
+                                }
+                            });
+                        });
+                    </script><!-- Button to trigger modal -->
                    </h1>
+
+<!-- Modal for creating a new cost allocation -->
+<div class="modal fade" id="createCostAllocationModal" tabindex="-1" aria-labelledby="createCostAllocationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createCostAllocationModalLabel">Create Cost Allocation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('cost-allocations.store') }}" method="POST">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="reference_no" class="form-label">Reference No:</label>
+                        <input type="text" class="form-control" id="reference_no" name="reference_no" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cost" class="form-label">Cost:</label>
+                        <input type="text" class="form-control" id="cost" name="cost" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cost_type" class="form-label">Cost Type:</label>
+                        <input type="text" class="form-control" id="cost_type" name="cost_type" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description:</label>
+                        <textarea class="form-control" id="description" name="description"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="budget" class="form-label">Budget:</label>
+                        <input type="number" class="form-control" id="budget" name="budget" step="0.01">
+                    </div>
+                    <div class="mb-3">
+                        <label for="start_date" class="form-label">Start Date:</label>
+                        <input type="date" class="form-control" id="start_date" name="start_date">
+                    </div>
+                    <div class="mb-3">
+                        <label for="end_date" class="form-label">End Date:</label>
+                        <input type="date" class="form-control" id="end_date" name="end_date">
+                    </div>
+                    <div class="mb-3">
+                        <label for="created_by" class="form-label">Created By:</label>
+                        <input type="text" class="form-control" id="created_by" name="created_by" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
                 <!-- Integration of Expense, Budget, Cost, & Forecasting -->
                 <div class="card mb-3">

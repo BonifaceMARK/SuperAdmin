@@ -100,6 +100,8 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
 
     // EXPENSE BUDGETING & FORECAST COST ALLOCATION MANAGEMENT
     Route::get('/fms2index', [fms2Controller::class, 'fms2index'])->name('fms2.index');
+    Route::post('/cost-allocations',[fms2Controller::class, 'storeCostAllocation'])->name('cost-allocations.store');
+    Route::get('/expenses', [fms2Controller::class, 'index']);
 
     // GENERAL LEDGER AUDIT & COMPLIANCE
     Route::get('/fms4index', [fms4Controller::class, 'fms4index'])->name('fms4.index');

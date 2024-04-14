@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('fms_g2expenses', function (Blueprint $table) {
             $table->id();
-            $table->uuid('reference_no');
+            $table->uuid('reference_no')->nullable();
             $table->string('expense_type'); // Changed from user_id to expense_type
             $table->string('title');
             $table->text('description')->nullable();

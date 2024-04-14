@@ -274,42 +274,44 @@
         <i class="bi bi-graph-up"></i><span style="font-size: 0.8rem;">Expense Budgeting & Forecasting Cost Allocation Management</span>
     </a>
   </li><!-- End Components Nav -->
+
+  <li class="nav-heading">Finance 3</li>
+  <li class="nav-heading">Workflow Approval</li>
+<li class="nav-item">
+  <a  class="nav-link collapsed" href="tax-management-reports">
+    <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Tax and Financial Reports</span>
+  </a>
+</li>
+<hr>
+<li class="nav-item">
+  <a class="nav-link collapsed" href="fix-asset-reports">
+    <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Fixed Assets</span>
+  </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link collapsed" href="ap-ar-reports">
+    <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Account Payable and Account  Receivable (APAR)</span>
+  </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link collapsed" href="bank">
+    <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Credit Management - Bank Reconcilation</span>
+  </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link collapsed" class="nav-link " data-bs-target="#forms-nav"  href="clients">
+    <i class="bi bi-journal-text"></i><span style="font-size: 0.8rem;">Clients</span>
+  </a>
+</li>
       <hr>
-      <li class="nav-heading">Finance 3</li>
+      <li class="nav-heading">Finance 4</li>
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav"   href="{{route('fms4.index')}}">
             <i class="bi bi-list-check"></i><span style="font-size: 0.8rem;">General Ledger Audit & Compliance</span>
         </a>
       </li><!-- End Components Nav -->
       <hr>
-      <li class="nav-heading">Finance 4</li>
-      <li class="nav-heading">Workflow Approval</li>
-    <li class="nav-item">
-      <a  class="nav-link collapsed" href="tax-management-reports">
-        <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Tax and Financial Reports</span>
-      </a>
-    </li>
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="fix-asset-reports">
-        <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Fixed Assets</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="ap-ar-reports">
-        <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Account Payable and Account  Receivable (APAR)</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="bank">
-        <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Credit Management - Bank Reconcilation</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link collapsed" class="nav-link " data-bs-target="#forms-nav"  href="clients">
-        <i class="bi bi-journal-text"></i><span style="font-size: 0.8rem;">Clients</span>
-      </a>
-    </li>
 
     <hr>
     <li class="nav-heading">Finance 5</li>
