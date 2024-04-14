@@ -74,7 +74,7 @@
 
   {{-- @if(Auth::user()->usertype == '3') --}}
    <!-- Brief Description of the Module -->
-   <div class="alert alert-primary alert-dismissible fade show" role="alert">
+  <div class="alert alert-primary alert-dismissible fade show" role="alert">
     <h4 class="alert-heading" style="font-size: 1rem;">Depreciation Calculation Overview</h4>
     <p style="font-size: 0.8rem; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">This module force-Allow to recompute relevant data such as acquisition date, initial cost, useful life, and salvage value. The module can calculates depreciation expenses based on the chosen method, presenting results clearly. It also provides functionality to efficiently view and manage assets, including editing or deleting entries. This module enhances decision-making processes by offering accurate depreciation insights, contributing to better financial planning and asset optimization strategies.</p>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

@@ -1,7 +1,7 @@
 <?php
     
-    // $accessibleFilter = new App\Classes\AccessibleFilterClass;
-    // $position = $accessibleFilter->positionDesc(Auth::user()->usertype);
+    $accessibleFilter = new App\Classes\AccessibleFilterClass;
+    $position = $accessibleFilter->positionDesc(Auth::user()->role);
     
 
 ?>
@@ -27,7 +27,7 @@
         @elseif( Auth::user()->role == '2' )
         <a href="{{ route('uhome')}}"class="logo d-flex align-items-center">
           @else
-          <a href="{{ route('chome')}}"class="logo d-flex align-items-center">
+          <a href="{{ route('ehome')}}"class="logo d-flex align-items-center">
             @endif
            
         <img src="/assets/img/subhead.png" alt="">
@@ -147,7 +147,7 @@
   
             <li class="message-item">
               <a href="#">
-                <img src="https://www.kindpng.com/picc/m/80-807524_no-profile-hd-png-download.png"  style="width: 40px; height:40px;"class="rounded-circle" alt="Profile">
+                <img src="{{ URL::asset('/assets/img/subhead.png')}}"  style="width: 40px; height:40px;"class="rounded-circle" alt="Profile">
                 {{-- <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle"> --}}
                 <div>
                   <h4>Maria Hudson</h4>
@@ -162,7 +162,7 @@
   
             <li class="message-item">
               <a href="#">
-                <img src="https://www.kindpng.com/picc/m/80-807524_no-profile-hd-png-download.png"  style="width: 40px; height:40px;"class="rounded-circle" alt="Profile">
+                <img src="{{ URL::asset('/assets/img/subhead.png')}}" style="width: 40px; height:40px;"class="rounded-circle" alt="Profile">
                 {{-- <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle"> --}}
                 <div>
                   <h4>Anna Nelson</h4>
@@ -177,7 +177,7 @@
   
             <li class="message-item">
               <a href="#">
-                <img src="https://www.kindpng.com/picc/m/80-807524_no-profile-hd-png-download.png"  style="width: 40px; height:40px;"class="rounded-circle" alt="Profile">
+                <img src="{{ URL::asset('/assets/img/subhead.png')}}"  style="width: 40px; height:40px;"class="rounded-circle" alt="Profile">
                 {{-- <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle"> --}}
                 <div>
                   <h4>David Muldon</h4>
@@ -206,7 +206,7 @@
             @if(Auth::user()->role == '0'  || Auth::user()->role == '0') 
               <img src="/assets/img/subhead.png" alt="Profile" class="rounded-circle" style="width: 50px; height:50px;">
             @else
-              <img src="https://www.kindpng.com/picc/m/80-807524_no-profile-hd-png-download.png"  style="width: 40px; height:40px;"class="rounded-circle" alt="Profile">
+              <img src="{{ URL::asset('/assets/img/subhead.png')}}" style="width: 40px; height:40px;"class="rounded-circle" alt="Profile">
             @endif
             <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
           </a><!-- End Profile Iamge Icon -->
@@ -214,9 +214,9 @@
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               @if(Auth::user()->role == '0'  || Auth::user()->role == '0') 
-                <img src="/assets/img/subhead.png" alt="Profile" class="rounded-circle" style="width: 50px; height:50px;">
+                <img src="{{ URL::asset('/assets/img/subhead.png')}}"alt="Profile" class="rounded-circle" style="width: 50px; height:50px;">
               @else
-                <img src="https://www.kindpng.com/picc/m/80-807524_no-profile-hd-png-download.png"  style="width: 100px; height:100px;"class="rounded-circle" alt="Profile">
+                <img src="{{ URL::asset('/assets/img/subhead.png')}}"  style="width: 100px; height:100px;"class="rounded-circle" alt="Profile">
               @endif
               <h5 class="card-title">{{ Auth::user()->name }}</h5>
               {{-- <span class="appheader">{{ $position }}</span> --}}

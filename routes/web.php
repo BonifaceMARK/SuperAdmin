@@ -271,12 +271,12 @@ Route::group(['prefix' => 'user','middleware'=>['web','isUser']],function(){
 
 
     // Process
-    Route::GET('/getdepreciation',                 [App\Http\Controllers\SuperadminController::class, 'getdepreciation'])              ->name('mgetdepreciation');
-    Route::POST('/recompute',                      [App\Http\Controllers\RecomputeAssetController::class, 'recdepreciation'])          ->name('mrecompute');
+    Route::GET('/getdepreciation',                 [App\Http\Controllers\SuperadminController::class, 'getdepreciation'])           ->name('mgetdepreciation');
+    Route::POST('/recompute',                      [App\Http\Controllers\RecomputeAssetController::class, 'recdepreciation'])       ->name('mrecompute');
 
 
-    Route::GET('/generate-report',       [App\Http\Controllers\ReportAccessController::class, 'generateReport'])          ->name('ugenerateReport');
-    Route::POST('/notice',               [App\Http\Controllers\UniversalProcess::class, 'isNotice'])                      ->name('unotice');
+    Route::GET('/generate-report',                 [App\Http\Controllers\ReportAccessController::class, 'generateReport'])          ->name('ugenerateReport');
+    Route::POST('/notice',                         [App\Http\Controllers\UniversalProcess::class, 'isNotice'])                      ->name('unotice');
 
 
     // view blade

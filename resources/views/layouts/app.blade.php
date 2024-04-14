@@ -58,8 +58,6 @@
     <script src="{{ asset('js/main.js') }}"></script>
   </body>
 </html> --}}
-
-
 <!DOCTYPE html>
 <html>
 <head>
