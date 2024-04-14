@@ -175,7 +175,7 @@
 
 
 
-@extends('layout.layout')
+@extends('layouts.app')
 @section('content')
 <div class="container">
 
@@ -257,7 +257,7 @@
 </div>
 <br/>
 <div class="col-lg-4 col-md-6 d-none d-md-block d-flex flex-column align-items-center justify-content-center">
-  @include('layout.svg') 
+  @include('layouts.svg') 
 </div>
 
 

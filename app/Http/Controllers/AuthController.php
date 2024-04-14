@@ -17,6 +17,7 @@ use App\Mail\mailotp;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Closure;
 
+
 class AuthController extends Controller
 {
     //
@@ -89,10 +90,15 @@ class AuthController extends Controller
 
         $userCredential = $request->only('email','password');
         //
+        // e{
+            // dd($request->all());
         if(Auth::attempt($userCredential)){
-            // dd(Auth::attempt($userCredential));
-            if(auth::user()->role == '1' || auth::user()->role == '0') 
+            // dd(Auth::user()->role);
+            if( Auth::user()->role == '0' || Auth::user()->role == '0') 
             {
+                $route = $this->redirectDash();
+                // // return redirect($route);
+                //     return response()->json(['redirect' => $route, 'message' => 'Login successful']);
                 return response()->json(['redirect' => route('home'), 'message' => 'Login successful']);
             } 
         }
@@ -144,10 +150,14 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
+        // audit trail
+        // dd($request->all());
         $request->session()->flush();
         Auth::logout();
         return redirect('/');
     }
+
+    
    /* public function changePassword(Request $request)
     {
         // Validate the request
