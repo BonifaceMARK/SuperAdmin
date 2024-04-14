@@ -11,9 +11,6 @@ USE App\Http\Controllers\F3ClientController;
 USE App\Http\Controllers\F3Reports;
 use App\Http\Controllers\fms5Controller;
 use App\Http\Controllers\fms1Controller;
-<<<<<<< Updated upstream
-use App\Http\Controllers\fms2Controller;
-=======
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\CostAllocationController;
@@ -22,7 +19,6 @@ use App\Http\Controllers\ForecastController;
 use App\Http\Controllers\RequestBudgetController;
 
 
->>>>>>> Stashed changes
 use App\Http\Controllers\fms6Controller;
 use App\Http\Controllers\fms8Controller;
 use App\Http\Controllers\G10Controller;
