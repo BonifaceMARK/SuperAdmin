@@ -97,20 +97,16 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
     // EXPENSE BUDGETING & FORECAST COST ALLOCATION MANAGEMENT
     Route::get('/fms2index', [fms2Controller::class, 'fms2index'])->name('fms2.index');
 
+    // GENERAL LEDGER AUDIT & COMPLIANCE
+    Route::get('/fms4index', [fms4Controller::class, 'fms4index'])->name('fms4.index');
 
 
 
 
 
 
-    // PAYMENT GATEWAYS COMMUNICATION & COLLABORATION ACCOUNTING STANDARDS
-    Route::get('/fms5pay', [fms5Controller::class, 'fms5payment'])->name('payment');
-    Route::get('/fms5com', [fms5Controller::class, 'fms5communication'])->name('communication');
-    Route::get('/fms5stan', [fms5Controller::class, 'fms5standards'])->name('standards');
 
-    Route::post('/paymentgateways', [fms5Controller::class, 'storeHotel'])->name('paymentgateways.store');
-    Route::post('/freight-payments', [fms5Controller::class, 'storeFreight'])->name('freightpayments.store');
-    Route::post('/admin-payments', [fms5Controller::class, 'store'])->name('adminpayments.store');
+
 
 
     // Route::get('/dashboard',        [SuperAdminController::class,'dashboard'])  ->name('home');

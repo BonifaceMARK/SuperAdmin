@@ -271,7 +271,18 @@
             <i class="bi bi-file-text"></i><span style="font-size: 0.8rem;">Financial Planning Financial Reporting & Cash Management</span>
         </a>
       </li><!-- End Components Nav -->
-        
+      <hr>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#components-nav"   href="{{route('fms2.index')}}">
+            <i class="bi bi-graph-up"></i><span style="font-size: 0.8rem;">Expense Budgeting & Forecasting Cost Allocation Management</span>
+        </a>
+      </li><!-- End Components Nav -->
+      <hr>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#components-nav"   href="{{route('fms4.index')}}">
+            <i class="bi bi-list-check"></i><span style="font-size: 0.8rem;">General Ledger Audit & Compliance</span>
+        </a>
+      </li><!-- End Components Nav -->
     {{-- <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#components-superadmin" data-bs-toggle="collapse" href="#">
         <i class="bi bi-menu-button-wide"></i><span>Super Admin</span><i class="bi bi-chevron-down ms-auto"></i>

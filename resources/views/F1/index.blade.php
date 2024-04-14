@@ -158,18 +158,32 @@
 @endif
 
 
-
-<!-- Button to trigger the modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#financialPlanningModal">
-    Budget Plan
+<div class="row">
+    <div class="col-12">
+        <button type="button" class="btn btn-primary btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#financialPlanningModal" style="background-image: url('{{ asset('assets/img/budget.jpg') }}'); background-size: cover; height: 110px; width: 1000px;">
+       <strong>Budget Plan</strong>
+        </button>
+        <!-- Button to trigger the modal -->
+<button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#fixedAssetReportsModal"style="background-image: url('{{ asset('assets/img/data.jpg') }}'); background-size: cover; height: 150px; width: 500px;">
+    <strong>Open Fixed Asset Reports</strong>
+</button><!-- Button to trigger the modal -->
+<button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#InvestmentsReportModal"style="background-image: url('{{ asset('assets/img/allocated.jpg') }}'); background-size: cover;height: 150px; width: 500px;">
+   <strong>Open Investments Report</strong>
 </button>
+
+    </div>
+</div>
+
+
+
+
 
 <!-- Modal -->
 <div class="modal fade" id="financialPlanningModal" tabindex="-1" aria-labelledby="financialPlanningModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="financialPlanningModalLabel">Create Financial Planning</h5>
+                <h5 class="modal-title" id="financialPlanningModalLabel">Create Budget Plan</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -181,7 +195,7 @@
                         <input type="text" class="form-control" id="name" name="name">
                     </div>
                     <div class="mb-3">
-                        <label for="description" class="form-label">Description</label>
+                        <label for="description" class="form-label">Purpose</label>
                         <textarea class="form-control" id="description" name="description" rows="3"></textarea>
                     </div>
                     <div class="mb-3">
@@ -207,6 +221,155 @@
     </div>
 </div>
 
+
+<!-- Include html2pdf library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+<!-- Include csv-export library -->
+<script src="https://cdn.jsdelivr.net/npm/csv-export@3.1.1/dist/csv-export.bundle.js"></script>
+
+<!-- Modal -->
+<div class="modal fade" id="fixedAssetReportsModal" tabindex="-1" aria-labelledby="fixedAssetReportsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-right">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Fixed Asset Reports <span>/Today</span></h5>
+                        <!-- Line Chart -->
+                        <div id="reportsChart" style="min-height: 365px;"></div>
+                        <p id="trendStatement" class="mt-3">Trend: <span id="trendText"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="InvestmentsReportModal" tabindex="-1" aria-labelledby="fixedAssetReportsModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-left">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Investments Report <span>/Today</span></h5>
+                        <!-- Line Chart -->
+                        <div id="investmentsChart" style="min-height: 365px;"></div>
+                        <p id="trendStatement" class="mt-3">Trend: <span id="trendText"></span></p>
+<p id="trendReport"></p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        new ApexCharts(document.querySelector("#investmentsChart"), {
+            series: [{
+                name: 'Investments',
+                data: {!! json_encode($investments->pluck('amount')) !!}
+            }],
+            chart: {
+                height: 350,
+                type: 'line',
+                toolbar: {
+                    show: false
+                }
+            },
+            xaxis: {
+                categories: {!! json_encode($investments->pluck('investment_date')) !!}
+            }
+        }).render();
+
+        // Calculate trend
+        const data = {!! json_encode($investments->pluck('amount')) !!};
+        const trend = calculateTrend(data);
+        document.getElementById('trendText').innerText = trend;
+
+        // Show trend report
+        const trendReport = document.getElementById('trendReport');
+        trendReport.innerText = `The trend in investments is ${trend.toLowerCase()}.`;
+    });
+
+    function calculateTrend(data) {
+        const len = data.length;
+        if (len < 2) return "not available";
+
+        const current = data[len - 1];
+        const previous = data[len - 2];
+
+        if (current > previous) return "Going up Your Financial Company is doing Great Keep it up.!";
+        if (current < previous) return "Going Down We should implement Strategy in order to make the trend Up";
+        return "Stable";
+    }
+</script>
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const payments = {!! json_encode($payments->pluck('amount')) !!};
+        const chartDates = {!! json_encode($payments->pluck('payment_date')) !!};
+        const seriesData = payments.map((amount, index) => [new Date(chartDates[index]).getTime(), amount]);
+
+        const chart = new ApexCharts(document.querySelector("#reportsChart"), {
+            series: [{
+                name: 'Amount',
+                data: seriesData
+            }],
+            chart: {
+                height: 350,
+                type: 'line',
+                toolbar: {
+                    show: false
+                }
+            },
+            xaxis: {
+                type: 'datetime',
+                categories: chartDates
+            }
+        });
+
+        chart.render();
+
+        // Analyze trend and update trend statement
+        const trendText = document.getElementById('trendText');
+        const trendStatement = document.getElementById('trendStatement');
+
+        const analyzeTrend = () => {
+            const trend = payments.reduce((acc, val, index) => {
+                if (index > 0) {
+                    if (val > payments[index - 1]) {
+                        acc.push('Up');
+                    } else if (val < payments[index - 1]) {
+                        acc.push('Down');
+                    } else {
+                        acc.push('Stable');
+                    }
+                }
+                return acc;
+            }, []);
+
+            const uniqueTrends = [...new Set(trend)]; // Get unique trends
+            const trendStatementText = uniqueTrends.length === 1 ? uniqueTrends[0] : 'Stable'; // Determine overall trend
+
+            trendText.textContent = trendStatementText;
+
+            // Add additional statement based on trend
+            if (trendStatementText === 'Going Up') {
+                trendStatement.innerHTML += '<br>The Fixed assets payments are going up.';
+            } else if (trendStatementText === 'Going Down') {
+                trendStatement.innerHTML += '<br>Fixed Assets  is decreasing We should implement a Strategy in order to fix it.';
+            } else if (trendStatementText === 'Stable') {
+                trendStatement.innerHTML += '<br>Your Fixed Assets Data are stable. We should implement strategy to boost its Growth.';
+            }
+        };
+
+        analyzeTrend();
+    });
+</script>
 
 
 

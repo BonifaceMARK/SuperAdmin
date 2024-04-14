@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('ap_fees', function (Blueprint $table) {
+        Schema::create('fms_g7ap_fees', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('invoice_id');
             $table->unsignedBigInteger('vendor_id');
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ap_fees');
+        Schema::dropIfExists('fms_g7ap_fees');
     }
 };
