@@ -28,7 +28,7 @@ class fms5Controller extends Controller
        return view ('F5.index', compact('messages', 'name', 'department'));
     }
 
-  
+
 
     public function storeHotel(Request $request)
     {
@@ -89,7 +89,7 @@ class fms5Controller extends Controller
 
         return redirect()->back()->with('success', 'Freight payment created successfully');
     }
-  
+
 
     public function storeMessage(Request $request)
     {
@@ -138,7 +138,7 @@ class fms5Controller extends Controller
         $taxPayment->save();
 
         // Redirect back or return a response
-        return redirect()->back()->with('success', 'Tax payment has been successfully added.');
+        return redirect()->back()->with('success', 'Payment created successfully.');
     }
     public function storeFixedAsset(Request $request)
     {
@@ -157,6 +157,6 @@ class fms5Controller extends Controller
         $fixedAssetPayment = FixedAssetPayment::create($validatedData);
 
         // Redirect back or return a response
-        return redirect()->back()->with('success', 'Fixed asset payment has been successfully added.');
+        return redirect()->back()->with('success', 'Payment created successfully.');
     }
 }

@@ -156,19 +156,121 @@
         </ul>
     </div>
 @endif
-
-
 <div class="row">
-    <div class="col-12">
-        <button type="button" class="btn btn-primary btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#financialPlanningModal" style="background-image: url('{{ asset('assets/img/budget.jpg') }}'); background-size: cover; height: 110px; width: 1000px;">
-       <strong>Budget Plan</strong>
-        </button>
-        <!-- Button to trigger the modal -->
+    <!-- Sales Card -->
+    <div class="col-xxl-3 col-md-6">
+        <div class="card info-card sales-card">
+            <!-- Card body -->
+            <div class="card-body">
+                <h5 class="card-title">Admin <span>| Expenses</span></h5>
+                <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi bi-cart"></i>
+                    </div>
+                    <div class="ps-3">
+                        <h6>{{ $salesCount }}</h6>
+                        <span class="text-success small pt-1 fw-bold">{{ $salesPercentage }}</span> <span class="text-muted small pt-2 ps-1">increase</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- End Sales Card -->
 
-    </div>
-</div>
+    <!-- Revenue Card -->
+    <div class="col-xxl-3 col-md-6">
+        <div class="card info-card revenue-card">
+            <!-- Card body -->
+            <div class="card-body">
+                <h5 class="card-title">Fixed Assets <span> | Expenses</span></h5>
+                <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi bi-currency-dollar"></i>
+                    </div>
+                    <div class="ps-3">
+                        <h6>{{ $revenueAmount }}</h6>
+                        <span class="text-success small pt-1 fw-bold">{{ $revenuePercentage }}</span> <span class="text-muted small pt-2 ps-1">increase</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- End Revenue Card -->
 
-<!-- Modal -->
+    <!-- Customers Card -->
+    <div class="col-xxl-3 col-md-6">
+        <div class="card info-card customers-card">
+            <!-- Card body -->
+            <div class="card-body">
+                <h5 class="card-title">HRMS <span></span></h5>
+                <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi bi-people"></i>
+                    </div>
+                    <div class="ps-3">
+                        <h6>{{ $customersCount }}</h6>
+                        <span class="text-danger small pt-1 fw-bold">{{ $customersPercentage }}</span> <span class="text-muted small pt-2 ps-1">decrease</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- End Customers Card -->
+
+    <!-- Freight Payments Card -->
+    <div class="col-xxl-3 col-md-6">
+        <div class="card info-card freight-card">
+            <!-- Card body -->
+            <div class="card-body">
+                <h5 class="card-title">Freight Payments</h5>
+                <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi bi-truck"></i>
+                    </div>
+                    <div class="ps-3">
+                        <h6>{{ $freightPayments->count() }}</h6>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- End Freight Payments Card -->
+</div><!-- End First Row -->
+
+<div class="row mt-3">
+    <!-- Tax Payments Card -->
+    <div class="col-xxl-6 col-md-12">
+        <div class="card info-card customers-card">
+            <!-- Card body -->
+            <div class="card-body">
+                <h5 class="card-title">Tax Payments</h5>
+                <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi bi-people"></i>
+                    </div>
+                    <div class="ps-3">
+                        <h6>{{ $taxPayments->count() }}</h6>
+                        <!-- Display other tax payment details as needed -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- End Tax Payments Card -->
+
+    <!-- Budget Plan Button -->
+    <div class="col-xxl-6 col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <button type="button" class="btn btn-primary btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#financialPlanningModal" style="background-image: url('{{ asset('assets/img/budget.jpg') }}'); background-size: cover; height: 110px;">
+                    <strong>Budget Plan</strong>
+                </button>
+            </div>
+        </div>
+    </div><!-- End Budget Plan Button -->
+</div><!-- End Second Row -->
+
+
+
+
+
+<!-- Modal for creating a budget plan -->
 <div class="modal fade" id="financialPlanningModal" tabindex="-1" aria-labelledby="financialPlanningModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -178,7 +280,7 @@
             </div>
             <div class="modal-body">
                 <!-- Form for adding financial planning -->
-                <form action="{{ route('BudgetPlan.store') }}" method="POST">
+                <form action="{{ route('budget-plans.store') }}" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
@@ -210,6 +312,7 @@
         </div>
     </div>
 </div>
+
 <div class="card">
     <div class="card-body">
         <h5 class="card-title">Investments Report <span>/ Today</span></h5>
@@ -235,6 +338,10 @@
         // Render Investments Chart
         const investmentsData = {!! json_encode($investments->pluck('amount')) !!};
         const investmentsDates = {!! json_encode($investments->pluck('investment_date')) !!};
+        const investmentsTrendText = document.getElementById('trendText');
+        const investmentsTrend = calculateTrend(investmentsData);
+        investmentsTrendText.textContent = investmentsTrend;
+
         new ApexCharts(document.querySelector("#investmentsChart"), {
             series: [{ name: 'Investments', data: investmentsData }],
             chart: { height: 350, type: 'line', toolbar: { show: false } },
@@ -252,15 +359,18 @@
         });
         reportsChart.render();
 
-        // Calculate and display trend for Investments
-        const investmentsTrendText = document.getElementById('trendText');
-        const investmentsTrend = calculateTrend(investmentsData);
-        investmentsTrendText.textContent = investmentsTrend;
-
         // Calculate and display trend for Fixed Asset Reports
         const fixedAssetTrendText = document.getElementById('fixedAssetTrendText');
         const fixedAssetTrend = calculateTrend(paymentsData);
         fixedAssetTrendText.textContent = fixedAssetTrend;
+
+        // Update description input field based on chart trend
+        const descriptionInput = document.getElementById('description');
+        if (fixedAssetTrend === "Going Down") {
+            descriptionInput.value = "Chart trend is going down";
+        } else {
+            descriptionInput.value = "";
+        }
     });
 
     function calculateTrend(data) {
@@ -277,7 +387,7 @@
 </script>
 
 <style>
-    .trend-info { margin-top: 10px; }
+    .trend-info { margin-top: 50px; }
 </style>
 
 

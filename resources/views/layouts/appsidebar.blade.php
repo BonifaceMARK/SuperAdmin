@@ -239,7 +239,7 @@
       </a>
     </li>
     <hr>
-    <li class="nav-heading"></li>
+    <li class="nav-heading">Finance 1</li>
 
       {{-- <li class="nav-item">
       <a class="nav-link collapsed" href="{{url('/superadmin/dashboard')}}">
@@ -260,37 +260,82 @@
       </li><!-- End Components Nav --> --}}
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#components-nav"   href="{{route('fms5.index')}}">
-            <i class="bi bi-credit-card"></i><span style="font-size: 0.8rem;">Payment Gateways Communication & Collaboration Accounting Standards</span>
-        </a>
-      </li><!-- End Components Nav -->
-
-<hr>
-      <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav"   href="{{route('fms1.index')}}">
             <i class="bi bi-file-text"></i><span style="font-size: 0.8rem;">Financial Planning Financial Reporting & Cash Management</span>
         </a>
       </li><!-- End Components Nav -->
+
+
+<hr>
+<li class="nav-heading">Finance 2</li>
+
+  <li class="nav-item">
+    <a class="nav-link collapsed" data-bs-target="#components-nav"   href="{{route('fms2.index')}}">
+        <i class="bi bi-graph-up"></i><span style="font-size: 0.8rem;">Expense Budgeting & Forecasting Cost Allocation Management</span>
+    </a>
+  </li><!-- End Components Nav -->
       <hr>
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#components-nav"   href="{{route('fms2.index')}}">
-            <i class="bi bi-graph-up"></i><span style="font-size: 0.8rem;">Expense Budgeting & Forecasting Cost Allocation Management</span>
-        </a>
-      </li><!-- End Components Nav -->
-      <hr>
+      <li class="nav-heading">Finance 3</li>
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav"   href="{{route('fms4.index')}}">
             <i class="bi bi-list-check"></i><span style="font-size: 0.8rem;">General Ledger Audit & Compliance</span>
         </a>
       </li><!-- End Components Nav -->
-
       <hr>
+      <li class="nav-heading">Finance 4</li>
+      <li class="nav-heading">Workflow Approval</li>
+    <li class="nav-item">
+      <a  class="nav-link collapsed" href="tax-management-reports">
+        <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Tax and Financial Reports</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="fix-asset-reports">
+        <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Fixed Assets</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="ap-ar-reports">
+        <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Account Payable and Account  Receivable (APAR)</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="bank">
+        <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Credit Management - Bank Reconcilation</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link collapsed" class="nav-link " data-bs-target="#forms-nav"  href="clients">
+        <i class="bi bi-journal-text"></i><span style="font-size: 0.8rem;">Clients</span>
+      </a>
+    </li>
+
+    <hr>
+    <li class="nav-heading">Finance 5</li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#components-nav"   href="{{route('fms5.index')}}">
+            <i class="bi bi-credit-card"></i><span style="font-size: 0.8rem;">Payment Gateways Communication & Collaboration Accounting Standards</span>
+        </a>
+      </li><!-- End Components Nav -->
+      <hr>
+      <li class="nav-heading">Finance 6</li>
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav"   href="{{route('fms6.index')}}">
             <i class="bi bi-bar-chart"></i><span style="font-size: 0.8rem;">Financial Analytics Business Intelligence & Risk Management</span>
         </a>
       </li><!-- End Components Nav -->
       <hr>
+
+      <li class="nav-heading">Finance 7</li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#components-nav"   href="{{route('fms7.index')}}">
+            <i class="bi bi-bar-chart"></i><span style="font-size: 0.8rem;">Accounts Payable & Receivable</span>
+        </a>
+      </li><!-- End Components Nav -->
+      <hr>
+
+      <li class="nav-heading">Finance 8</li>
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav"   href="{{route('fms8.index')}}">
             <i class="bi bi-bank"></i><span style="font-size: 0.8rem;">Credit Management & Bank Reconciliation</span>
@@ -340,34 +385,14 @@
         </ul>
       </li> --}}
 
+
+
+
+
+
     <hr>
     {{-- @include('f3.inc.navbar') --}}
-    <li class="nav-heading">Workflow Approval</li>
-    <li class="nav-item">
-      <a  class="nav-link collapsed" href="tax-management-reports">
-        <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Tax and Financial Reports</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="fix-asset-reports">
-        <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Fixed Assets</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="ap-ar-reports">
-        <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Account Payable and Account  Receivable (APAR)</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="bank">
-        <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Credit Management - Bank Reconcilation</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link collapsed" class="nav-link " data-bs-target="#forms-nav"  href="clients">
-        <i class="bi bi-journal-text"></i><span style="font-size: 0.8rem;">Clients</span>
-      </a>
-    </li>
+
     {{-- <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#components-reports" data-bs-toggle="collapse" href="#">
         <i class="bi bi-menu-button-wide"></i><span>Workflow Approval</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -402,298 +427,296 @@
       </ul>
     </li> --}}
 
-    <hr>
+
+     {{-- set condition for finance --}}
+     @if(Auth::user()->role == '2'|| Auth::user()->role == '1' || Auth::user()->role == '0' )
+     <hr>
+     <li class="nav-heading">Finance 9</li>
+     <li class="nav-item">
 
 
-    <li class="nav-heading">Vendor & Investment</li>
-    {{-- @include('f10.inc.navbar') --}}
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="{{ route('home') }}">
-        {{-- <a href="{{ route('index.dashboard') }}"> --}}
-        <i class="bi bi-grid-fill fs-5"></i></i><span style="font-size: 0.8rem;">Dashboard</span>
-      </a>
-    </li>
+       {{-- @dd(!Auth::user()->usertype == '3' && Auth::user()->isSuper == '1' ); --}}
+       {{-- {{ dd(Auth::user()) }} --}}
+         @if(!Auth::user()->role == '3' || Auth::user()->role == '0' )
+         <a class="nav-link collapsed" href="{{ route('user-depreciation') }}">
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="{{ route('vendor.dashboard') }}">
-        <i class="bi bi-person-lines-fill fs-5"></i><span style="font-size: 0.8rem;">Vendor Management</span>
-      </a>
-    </li>
-
-
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="{{ route('investment.dashboard') }}">
-        <i class="bi bi-person-vcard-fill fs-5"></i><span style="font-size: 0.8rem;">Investment Management</span>
-      </a>
-    </li>
-
- 
-    {{-- set condition for finance --}}
-    @if(Auth::user()->role == '2'|| Auth::user()->role == '1' || Auth::user()->role == '0' )
-    <hr>
-    <li class="nav-heading">Financial Management</li>
-    <li class="nav-item">
-      
-
-      {{-- @dd(!Auth::user()->usertype == '3' && Auth::user()->isSuper == '1' ); --}}
-      {{-- {{ dd(Auth::user()) }} --}}
-        @if(!Auth::user()->role == '3' || Auth::user()->role == '0' )
-        <a class="nav-link collapsed" href="{{ route('user-depreciation') }}">
-         
-        @else
-        {{-- {{ dd(Auth::user()) }} --}}
-        <a class="nav-link collapsed" href="{{ route('mdepreciation') }}">
-        @endif
-        <i class="bi bi-calculator"></i>
-        <span style="font-size: 0.8rem;">Appreciation Calculation</span>
-      </a>
-    </li>
-    <li class="nav-item">
+         @else
+         {{-- {{ dd(Auth::user()) }} --}}
+         <a class="nav-link collapsed" href="{{ route('mdepreciation') }}">
+         @endif
+         <i class="bi bi-calculator"></i>
+         <span style="font-size: 0.8rem;">Appreciation Calculation</span>
+       </a>
+     </li>
+     <li class="nav-item">
 
 
-      {{-- @dd(!Auth::user()->usertype == '3' && Auth::user()->isSuper == '1' ); --}}
-      {{-- {{ dd(Auth::user()) }} --}}
-        @if(!Auth::user()->role == '3' || Auth::user()->role == '0' )
-        <a class="nav-link collapsed" href="{{ route('user-depreciation') }}">
+       {{-- @dd(!Auth::user()->usertype == '3' && Auth::user()->isSuper == '1' ); --}}
+       {{-- {{ dd(Auth::user()) }} --}}
+         @if(!Auth::user()->role == '3' || Auth::user()->role == '0' )
+         <a class="nav-link collapsed" href="{{ route('user-depreciation') }}">
 
-        @else
-        {{-- {{ dd(Auth::user()) }} --}}
-        <a class="nav-link collapsed" href="{{ route('mdepreciation') }}">
-        @endif
-        <i class="bi bi-calculator"></i>
-        <span style="font-size: 0.8rem;">Depreciation Calculation</span>
-      </a>
-    </li>
-   
-    <li class="nav-item">
-      @if(!Auth::user()->role == '3' || !Auth::user()->role == '0' )
-      <a class="nav-link collapsed" href="{{ route('tracking') }}">
-        
-      @else
-      <a class="nav-link collapsed" href="{{ route('mtracking') }}">
-        {{-- <a class="nav-link collapsed" href="{{ route('tracking') }}"> --}}
-      @endif
-        <i class="bi bi-tag"></i><span style="font-size: 0.8rem;">Asset Tracking Management</span>
-      </a>
-    </li>
+         @else
+         {{-- {{ dd(Auth::user()) }} --}}
+         <a class="nav-link collapsed" href="{{ route('mdepreciation') }}">
+         @endif
+         <i class="bi bi-calculator"></i>
+         <span style="font-size: 0.8rem;">Depreciation Calculation</span>
+       </a>
+     </li>
 
-    {{-- <li class="nav-item">
-      <a class="nav-link collapsed">
-        <i class="bi bi-files"></i><span style="font-size: 0.8rem;">Reports and Analytics</span>
-      </a>
-    </li> --}}
+     <li class="nav-item">
+       @if(!Auth::user()->role == '3' || !Auth::user()->role == '0' )
+       <a class="nav-link collapsed" href="{{ route('tracking') }}">
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="" data-bs-toggle="modal" data-bs-target="#ExtralargeModalReport">
-        <i class="bi bi-files"></i>
-        <span style="font-size: 0.8rem;">Reports and Analytics</span>
-      </a>
-    </li>
+       @else
+       <a class="nav-link collapsed" href="{{ route('mtracking') }}">
+         {{-- <a class="nav-link collapsed" href="{{ route('tracking') }}"> --}}
+       @endif
+         <i class="bi bi-tag"></i><span style="font-size: 0.8rem;">Asset Tracking Management</span>
+       </a>
+     </li>
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#components-tax" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-bar-chart"></i></i><span style="font-size: 0.8rem;">Tax Management</span><i class="bi bi-chevron-down ms-auto"></i>
-      </a>
-      <ul id="components-tax" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-        <li>
-          <a  href="{{ route('taxrate') }}">
-            <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Tax Rate</span>
-          </a>
-        </li>
-        <li>
-          <a href="{{ route('taxcalculation') }}">
-            <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Tax Calculation</span>
-          </a>
-        </li>
-      </ul>
-    </li>
-    @endif
+     {{-- <li class="nav-item">
+       <a class="nav-link collapsed">
+         <i class="bi bi-files"></i><span style="font-size: 0.8rem;">Reports and Analytics</span>
+       </a>
+     </li> --}}
 
-    {{-- @if(Auth::user()->role == '3' || Auth::user()->role == '0' || Auth::user()->role == '0')
-    <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-gear"></i><span style="font-size: 0.8rem;">Services</span><i class="bi bi-chevron-down ms-auto"></i>
-      </a>
-      @if(!Auth::user()->role == '3' || !Auth::user()->role == '0' )
-      <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-        <li>
-          <a href="">
-            <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Messaging</span>
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Company File</span>
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Employee Information</span>
-          </a>
-        </li>
-      </ul>
-      @else
-      <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-        <li>
-          <a href="{{ route('announcement') }}">
-            <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Announcement</span>
-          </a>
-        </li>
-        <li>
-          <a href="{{ route('messaging') }}">
-            <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Messaging</span>
-          </a>
-        </li>
-        <li>
-          <a href="{{ route('company') }}">
-            <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Company File</span>
-          </a>
-        </li>
+     <li class="nav-item">
+       <a class="nav-link collapsed" href="" data-bs-toggle="modal" data-bs-target="#ExtralargeModalReport">
+         <i class="bi bi-files"></i>
+         <span style="font-size: 0.8rem;">Reports and Analytics</span>
+       </a>
+     </li>
 
-        <li>
-          <a href="{{ route('employee') }}">
-            <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Employee Information</span>
-          </a>
-        </li>
+     <li class="nav-item">
+       <a class="nav-link collapsed" data-bs-target="#components-tax" data-bs-toggle="collapse" href="#">
+         <i class="bi bi-bar-chart"></i></i><span style="font-size: 0.8rem;">Tax Management</span><i class="bi bi-chevron-down ms-auto"></i>
+       </a>
+       <ul id="components-tax" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+         <li>
+           <a  href="{{ route('taxrate') }}">
+             <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Tax Rate</span>
+           </a>
+         </li>
+         <li>
+           <a href="{{ route('taxcalculation') }}">
+             <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Tax Calculation</span>
+           </a>
+         </li>
+       </ul>
+     </li>
+     @endif
 
-        <li>
-          <a href="{{ route('user-management') }}">
-            <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">User Accounts</span>
-          </a>
-        </li>
-        <li>
-          <a href="{{ route('user-management') }}">
-            <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Reset / Create Account</span>
-          </a>
-        </li>
-      </ul>
-      @endif
-    </li><!-- End Components Nav -->
-    @endif --}}
-    <hr>
-    @if(Auth::user()->role == '0' || Auth::user()->role == '0')
-    <li class="nav-heading">Services</li>
+     {{-- @if(Auth::user()->role == '3' || Auth::user()->role == '0' || Auth::user()->role == '0')
+     <li class="nav-item">
+       <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+         <i class="bi bi-gear"></i><span style="font-size: 0.8rem;">Services</span><i class="bi bi-chevron-down ms-auto"></i>
+       </a>
+       @if(!Auth::user()->role == '3' || !Auth::user()->role == '0' )
+       <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+         <li>
+           <a href="">
+             <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Messaging</span>
+           </a>
+         </li>
+         <li>
+           <a href="">
+             <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Company File</span>
+           </a>
+         </li>
+         <li>
+           <a href="">
+             <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Employee Information</span>
+           </a>
+         </li>
+       </ul>
+       @else
+       <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+         <li>
+           <a href="{{ route('announcement') }}">
+             <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Announcement</span>
+           </a>
+         </li>
+         <li>
+           <a href="{{ route('messaging') }}">
+             <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Messaging</span>
+           </a>
+         </li>
+         <li>
+           <a href="{{ route('company') }}">
+             <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Company File</span>
+           </a>
+         </li>
+
+         <li>
+           <a href="{{ route('employee') }}">
+             <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Employee Information</span>
+           </a>
+         </li>
+
+         <li>
+           <a href="{{ route('user-management') }}">
+             <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">User Accounts</span>
+           </a>
+         </li>
+         <li>
+           <a href="{{ route('user-management') }}">
+             <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Reset / Create Account</span>
+           </a>
+         </li>
+       </ul>
+       @endif
+     </li><!-- End Components Nav -->
+     @endif --}}
+     <hr>
+     @if(Auth::user()->role == '0' || Auth::user()->role == '0')
+     <li class="nav-heading">Services</li>
 
 
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="{{ route('announcement') }}">
-        <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Announcement</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="{{ route('messaging') }}">
-        <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Messaging</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="{{ route('company') }}">
-        <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Company File</span>
-      </a>
-    </li>
+     <li class="nav-item">
+       <a class="nav-link collapsed" href="{{ route('announcement') }}">
+         <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Announcement</span>
+       </a>
+     </li>
+     <li class="nav-item">
+       <a class="nav-link collapsed" href="{{ route('messaging') }}">
+         <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Messaging</span>
+       </a>
+     </li>
+     <li class="nav-item">
+       <a class="nav-link collapsed" href="{{ route('company') }}">
+         <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Company File</span>
+       </a>
+     </li>
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="{{ route('employee') }}">
-        <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Employee Information</span>
-      </a>
-    </li>
+     <li class="nav-item">
+       <a class="nav-link collapsed" href="{{ route('employee') }}">
+         <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Employee Information</span>
+       </a>
+     </li>
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="{{ route('user-management') }}">
-        <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">User Accounts</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="{{ route('user-management') }}">
-        <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Reset / Create Account</span>
-      </a>
-    </li>
+     <li class="nav-item">
+       <a class="nav-link collapsed" href="{{ route('user-management') }}">
+         <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">User Accounts</span>
+       </a>
+     </li>
+     <li class="nav-item">
+       <a class="nav-link collapsed" href="{{ route('user-management') }}">
+         <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Reset / Create Account</span>
+       </a>
+     </li>
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="">
-        <i class="bi bi-archive"></i>
-        <span style="font-size: 0.8rem;">Audit Trail</span>
-      </a>
-    </li>
+     <li class="nav-item">
+       <a class="nav-link collapsed" href="">
+         <i class="bi bi-archive"></i>
+         <span style="font-size: 0.8rem;">Audit Trail</span>
+       </a>
+     </li>
 
-    {{-- <li class="nav-item">
-      <a class="nav-link collapsed" href="">
-        <i class="bi bi-archive"></i>
-        <span style="font-size: 0.8rem;">Audit Trail</span>
-      </a>
-    </li> --}}
+     {{-- <li class="nav-item">
+       <a class="nav-link collapsed" href="">
+         <i class="bi bi-archive"></i>
+         <span style="font-size: 0.8rem;">Audit Trail</span>
+       </a>
+     </li> --}}
 
 
 
 
 
 
-    {{-- <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-gear"></i><span style="font-size: 0.8rem;">Services</span><i class="bi bi-chevron-down ms-auto"></i>
-      </a>
-      @if(!Auth::user()->role == '3' || !Auth::user()->role == '0' )
-      <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-        <li>
-          <a href="">
-            <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Messaging</span>
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Company File</span>
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Employee Information</span>
-          </a>
-        </li>
-      </ul>
-      @else
-      <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-        <li>
-          <a class="nav-link collapsed" href="">
-            <i class="bi bi-archive"></i>
-            <span style="font-size: 0.8rem;">Audit Trail</span>
-          </a>
-        </li>
-        <li>
-          <a href="{{ route('announcement') }}">
-            <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Announcement</span>
-          </a>
-        </li>
-        <li>
-          <a href="{{ route('messaging') }}">
-            <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Messaging</span>
-          </a>
-        </li>
-        <li>
-          <a href="{{ route('company') }}">
-            <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Company File</span>
-          </a>
-        </li>
+     {{-- <li class="nav-item">
+       <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+         <i class="bi bi-gear"></i><span style="font-size: 0.8rem;">Services</span><i class="bi bi-chevron-down ms-auto"></i>
+       </a>
+       @if(!Auth::user()->role == '3' || !Auth::user()->role == '0' )
+       <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+         <li>
+           <a href="">
+             <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Messaging</span>
+           </a>
+         </li>
+         <li>
+           <a href="">
+             <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Company File</span>
+           </a>
+         </li>
+         <li>
+           <a href="">
+             <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Employee Information</span>
+           </a>
+         </li>
+       </ul>
+       @else
+       <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+         <li>
+           <a class="nav-link collapsed" href="">
+             <i class="bi bi-archive"></i>
+             <span style="font-size: 0.8rem;">Audit Trail</span>
+           </a>
+         </li>
+         <li>
+           <a href="{{ route('announcement') }}">
+             <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Announcement</span>
+           </a>
+         </li>
+         <li>
+           <a href="{{ route('messaging') }}">
+             <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Messaging</span>
+           </a>
+         </li>
+         <li>
+           <a href="{{ route('company') }}">
+             <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Company File</span>
+           </a>
+         </li>
 
-        <li>
-          <a href="{{ route('employee') }}">
-            <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Employee Information</span>
-          </a>
-        </li>
+         <li>
+           <a href="{{ route('employee') }}">
+             <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Employee Information</span>
+           </a>
+         </li>
 
-        <li>
-          <a href="{{ route('user-management') }}">
-            <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">User Accounts</span>
-          </a>
-        </li>
-        <li>
-          <a href="{{ route('user-management') }}">
-            <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Reset / Create Account</span>
-          </a>
-        </li>
-      </ul>
-      @endif
-    </li><!-- End Components Nav --> --}}
-    @endif
+         <li>
+           <a href="{{ route('user-management') }}">
+             <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">User Accounts</span>
+           </a>
+         </li>
+         <li>
+           <a href="{{ route('user-management') }}">
+             <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Reset / Create Account</span>
+           </a>
+         </li>
+       </ul>
+       @endif
+     </li><!-- End Components Nav --> --}}
+     @endif
+ <hr>
+     <li class="nav-heading">Finance 10</li>
+     {{-- @include('f10.inc.navbar') --}}
+     <li class="nav-item">
+       <a class="nav-link collapsed" href="{{ route('home') }}">
+         {{-- <a href="{{ route('index.dashboard') }}"> --}}
+         <i class="bi bi-grid-fill fs-5"></i></i><span style="font-size: 0.8rem;">Vendor & Investment</span>
+       </a>
+     </li>
+
+     <li class="nav-item">
+       <a class="nav-link collapsed" href="{{ route('vendor.dashboard') }}">
+         <i class="bi bi-person-lines-fill fs-5"></i><span style="font-size: 0.8rem;">Vendor Management</span>
+       </a>
+     </li>
+
+
+     <li class="nav-item">
+       <a class="nav-link collapsed" href="{{ route('investment.dashboard') }}">
+         <i class="bi bi-person-vcard-fill fs-5"></i><span style="font-size: 0.8rem;">Investment Management</span>
+       </a>
+     </li>
+
 
 
 

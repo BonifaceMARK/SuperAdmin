@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('fms_g1financial_planning', function (Blueprint $table) {
+        Schema::create('fms_g1budget_plan', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fms_g1financial_planning');
+        Schema::dropIfExists('fms_g1budget_plan');
     }
 };

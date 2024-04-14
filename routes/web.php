@@ -13,6 +13,7 @@ use App\Http\Controllers\fms5Controller;
 use App\Http\Controllers\fms1Controller;
 use App\Http\Controllers\fms2Controller;
 use App\Http\Controllers\fms4Controller;
+
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\CostAllocationController;
@@ -22,6 +23,8 @@ use App\Http\Controllers\RequestBudgetController;
 
 
 use App\Http\Controllers\fms6Controller;
+use App\Http\Controllers\fms7Controller;
+
 use App\Http\Controllers\fms8Controller;
 use App\Http\Controllers\G10Controller;
 
@@ -91,8 +94,9 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
     Route::post('/taxpayments', [fms5Controller::class, 'storeTax'])->name('taxpayments.store');
 
     // FINANCIAL PLANNING FINANCIAL REPORTING CASH MANAGEMENT
-    Route::post('/financial-planning', [fms1Controller::class, 'storeBudgetPlan'])->name('BudgetPlan.store');
+    Route::post('/financial-planning', [fms1Controller::class, 'storeBudgetPlan'])->name('budget-plans.store');
     Route::get('/fms1index', [fms1Controller::class, 'fms1index'])->name('fms1.index');
+
 
     // EXPENSE BUDGETING & FORECAST COST ALLOCATION MANAGEMENT
     Route::get('/fms2index', [fms2Controller::class, 'fms2index'])->name('fms2.index');
@@ -102,6 +106,12 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
 
     // FINANCIAL ANALYTICS & BUSINESS INTELLIGENCE RISK MANAGEMENT
     Route::get('/fms6index', [fms6Controller::class, 'fms6index'])->name('fms6.index');
+
+
+    // ACCOUNTS PAYABLE & RECEIVABLE
+    Route::get('/fms7index', [fms7Controller::class, 'fms7index'])->name('fms7.index');
+    Route::post('/generate-pdf', [fms7Controller::class, 'generatePDF']);
+
 
     // CREDIT MANAGEMENT & BANK RECONCILIATION
     Route::get('/fms8index', [fms8Controller::class, 'fms8index'])->name('fms8.index');
