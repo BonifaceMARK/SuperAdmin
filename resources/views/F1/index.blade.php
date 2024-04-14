@@ -164,19 +164,9 @@
        <strong>Budget Plan</strong>
         </button>
         <!-- Button to trigger the modal -->
-<button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#fixedAssetReportsModal"style="background-image: url('{{ asset('assets/img/data.jpg') }}'); background-size: cover; height: 150px; width: 500px;">
-    <strong>Open Fixed Asset Reports</strong>
-</button><!-- Button to trigger the modal -->
-<button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#InvestmentsReportModal"style="background-image: url('{{ asset('assets/img/allocated.jpg') }}'); background-size: cover;height: 150px; width: 500px;">
-   <strong>Open Investments Report</strong>
-</button>
 
     </div>
 </div>
-
-
-
-
 
 <!-- Modal -->
 <div class="modal fade" id="financialPlanningModal" tabindex="-1" aria-labelledby="financialPlanningModalLabel" aria-hidden="true">
@@ -220,77 +210,57 @@
         </div>
     </div>
 </div>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Investments Report <span>/ Today</span></h5>
+        <div id="investmentsChart" style="min-height: 365px;"></div>
+        <p class="trend-info">Trend: <span id="trendText"></span></p>
+    </div>
+</div>
 
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Fixed Asset Reports <span>/ Today</span></h5>
+        <div id="reportsChart" style="min-height: 365px;"></div>
+        <p class="trend-info">Trend: <span id="fixedAssetTrendText"></span></p>
+    </div>
+</div>
 
-<!-- Include html2pdf library -->
+<!-- Include libraries -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
-<!-- Include csv-export library -->
 <script src="https://cdn.jsdelivr.net/npm/csv-export@3.1.1/dist/csv-export.bundle.js"></script>
-
-<!-- Modal -->
-<div class="modal fade" id="fixedAssetReportsModal" tabindex="-1" aria-labelledby="fixedAssetReportsModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-right">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Fixed Asset Reports <span>/Today</span></h5>
-                        <!-- Line Chart -->
-                        <div id="reportsChart" style="min-height: 365px;"></div>
-                        <p id="trendStatement" class="mt-3">Trend: <span id="trendText"></span></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Modal -->
-<div class="modal fade" id="InvestmentsReportModal" tabindex="-1" aria-labelledby="fixedAssetReportsModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-left">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Investments Report <span>/Today</span></h5>
-                        <!-- Line Chart -->
-                        <div id="investmentsChart" style="min-height: 365px;"></div>
-                        <p id="trendStatement" class="mt-3">Trend: <span id="trendText"></span></p>
-<p id="trendReport"></p>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
+        // Render Investments Chart
+        const investmentsData = {!! json_encode($investments->pluck('amount')) !!};
+        const investmentsDates = {!! json_encode($investments->pluck('investment_date')) !!};
         new ApexCharts(document.querySelector("#investmentsChart"), {
-            series: [{
-                name: 'Investments',
-                data: {!! json_encode($investments->pluck('amount')) !!}
-            }],
-            chart: {
-                height: 350,
-                type: 'line',
-                toolbar: {
-                    show: false
-                }
-            },
-            xaxis: {
-                categories: {!! json_encode($investments->pluck('investment_date')) !!}
-            }
+            series: [{ name: 'Investments', data: investmentsData }],
+            chart: { height: 350, type: 'line', toolbar: { show: false } },
+            xaxis: { categories: investmentsDates }
         }).render();
 
-        // Calculate trend
-        const data = {!! json_encode($investments->pluck('amount')) !!};
-        const trend = calculateTrend(data);
-        document.getElementById('trendText').innerText = trend;
+        // Render Reports Chart
+        const paymentsData = {!! json_encode($payments->pluck('amount')) !!};
+        const paymentsDates = {!! json_encode($payments->pluck('payment_date')) !!};
+        const seriesData = paymentsData.map((amount, index) => [new Date(paymentsDates[index]).getTime(), amount]);
+        const reportsChart = new ApexCharts(document.querySelector("#reportsChart"), {
+            series: [{ name: 'Amount', data: seriesData }],
+            chart: { height: 350, type: 'line', toolbar: { show: false } },
+            xaxis: { type: 'datetime', categories: paymentsDates }
+        });
+        reportsChart.render();
 
-        // Show trend report
-        const trendReport = document.getElementById('trendReport');
-        trendReport.innerText = `The trend in investments is ${trend.toLowerCase()}.`;
+        // Calculate and display trend for Investments
+        const investmentsTrendText = document.getElementById('trendText');
+        const investmentsTrend = calculateTrend(investmentsData);
+        investmentsTrendText.textContent = investmentsTrend;
+
+        // Calculate and display trend for Fixed Asset Reports
+        const fixedAssetTrendText = document.getElementById('fixedAssetTrendText');
+        const fixedAssetTrend = calculateTrend(paymentsData);
+        fixedAssetTrendText.textContent = fixedAssetTrend;
     });
 
     function calculateTrend(data) {
@@ -300,76 +270,27 @@
         const current = data[len - 1];
         const previous = data[len - 2];
 
-        if (current > previous) return "Going up Your Financial Company is doing Great Keep it up.!";
-        if (current < previous) return "Going Down We should implement Strategy in order to make the trend Up";
+        if (current > previous) return "Going Up";
+        if (current < previous) return "Going Down";
         return "Stable";
     }
 </script>
 
+<style>
+    .trend-info { margin-top: 10px; }
+</style>
 
 
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const payments = {!! json_encode($payments->pluck('amount')) !!};
-        const chartDates = {!! json_encode($payments->pluck('payment_date')) !!};
-        const seriesData = payments.map((amount, index) => [new Date(chartDates[index]).getTime(), amount]);
 
-        const chart = new ApexCharts(document.querySelector("#reportsChart"), {
-            series: [{
-                name: 'Amount',
-                data: seriesData
-            }],
-            chart: {
-                height: 350,
-                type: 'line',
-                toolbar: {
-                    show: false
-                }
-            },
-            xaxis: {
-                type: 'datetime',
-                categories: chartDates
-            }
-        });
+<!-- Include html2pdf library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+<!-- Include csv-export library -->
+<script src="https://cdn.jsdelivr.net/npm/csv-export@3.1.1/dist/csv-export.bundle.js"></script>
 
-        chart.render();
 
-        // Analyze trend and update trend statement
-        const trendText = document.getElementById('trendText');
-        const trendStatement = document.getElementById('trendStatement');
 
-        const analyzeTrend = () => {
-            const trend = payments.reduce((acc, val, index) => {
-                if (index > 0) {
-                    if (val > payments[index - 1]) {
-                        acc.push('Up');
-                    } else if (val < payments[index - 1]) {
-                        acc.push('Down');
-                    } else {
-                        acc.push('Stable');
-                    }
-                }
-                return acc;
-            }, []);
 
-            const uniqueTrends = [...new Set(trend)]; // Get unique trends
-            const trendStatementText = uniqueTrends.length === 1 ? uniqueTrends[0] : 'Stable'; // Determine overall trend
 
-            trendText.textContent = trendStatementText;
-
-            // Add additional statement based on trend
-            if (trendStatementText === 'Going Up') {
-                trendStatement.innerHTML += '<br>The Fixed assets payments are going up.';
-            } else if (trendStatementText === 'Going Down') {
-                trendStatement.innerHTML += '<br>Fixed Assets  is decreasing We should implement a Strategy in order to fix it.';
-            } else if (trendStatementText === 'Stable') {
-                trendStatement.innerHTML += '<br>Your Fixed Assets Data are stable. We should implement strategy to boost its Growth.';
-            }
-        };
-
-        analyzeTrend();
-    });
-</script>
 
 
 

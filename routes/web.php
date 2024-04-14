@@ -11,9 +11,8 @@ USE App\Http\Controllers\F3ClientController;
 USE App\Http\Controllers\F3Reports;
 use App\Http\Controllers\fms5Controller;
 use App\Http\Controllers\fms1Controller;
-<<<<<<< Updated upstream
 use App\Http\Controllers\fms2Controller;
-=======
+use App\Http\Controllers\fms4Controller;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\CostAllocationController;
@@ -22,7 +21,6 @@ use App\Http\Controllers\ForecastController;
 use App\Http\Controllers\RequestBudgetController;
 
 
->>>>>>> Stashed changes
 use App\Http\Controllers\fms6Controller;
 use App\Http\Controllers\fms8Controller;
 use App\Http\Controllers\G10Controller;
@@ -104,6 +102,11 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
 
     // FINANCIAL ANALYTICS & BUSINESS INTELLIGENCE RISK MANAGEMENT
     Route::get('/fms6index', [fms6Controller::class, 'fms6index'])->name('fms6.index');
+
+    // CREDIT MANAGEMENT & BANK RECONCILIATION
+    Route::get('/fms8index', [fms8Controller::class, 'fms8index'])->name('fms8.index');
+
+
 
 
 
