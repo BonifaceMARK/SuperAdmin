@@ -9,7 +9,7 @@ class Pendingdocu extends Model
 {
     use HasFactory;
 
-    protected $table ="pendingdocus";
+    protected $table ="f3pendingdocus";
     /**
      * The attributes that are mass assignable.
      *

@@ -6,11 +6,9 @@ use App\Http\Controllers\SubAdminController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
-
-
-USE App\Http\Controllers\PendingController;
-USE App\Http\Controllers\ClientController;
-USE App\Http\Controllers\Reports;
+USE App\Http\Controllers\F3PendingController;
+USE App\Http\Controllers\F3ClientController;
+USE App\Http\Controllers\F3Reports;
 use App\Http\Controllers\fms5Controller;
 
 use App\Http\Controllers\G10Controller;
@@ -44,7 +42,7 @@ Route::get('/logout',           [AuthController::class,'logout'])->name('logout'
 // ********** Super Admin Routes *********
 Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],function(){
 
-
+    Route::get('/',[SuperAdminController::class,'dashboard']);
     Route::get('/dashboard',[SuperAdminController::class,'dashboard'])->name('home');
 
 
@@ -52,12 +50,18 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
     Route::get('/manage-role',[SuperAdminController::class,'manageRole'])->name('manageRole');
     Route::post('/update-role',[SuperAdminController::class,'updateRole'])->name('updateRole');
     Route::get('/users/{id}/edit', [SuperAdminController::class, 'edit'])->name('users.edit');
-
-
     Route::put('/users/{id}', [SuperAdminController::class, 'updateRole'])->name('users.update');
     Route::delete('/users/{id}', [SuperAdminController::class, 'destroy'])->name('users.destroy');
 
-
+    // ********** F3 Routes *********
+    Route::post('/clients/s{id}',           [F3ClientController::class, 'update'])->name('update');
+    // Route::get('/dashboard',                [PendingController::class, 'indexp'])->name('dashboard');
+    Route::get('/clients',                  [F3PendingController::class, 'indexpage'])->name('Clients');
+    Route::get('/ap-ar-fetch-chart-data',   [F3Reports::class, 'fetchChartData'])->name('fetchChartData');
+    Route::get('/ap-ar-reports',            [F3Reports::class, 'apar'])->name('apar');
+    Route::get('/fix-asset-reports',        [F3Reports::class, 'fixass'])->name('fixass');
+    Route::get('/tax-management-reports',   [F3Reports::class, 'taxfin'])->name('taxfin');
+    Route::get('/bank',                     [F3Reports::class, 'bank'])->name('bank');
 
 
     // PAYMENT GATEWAYS COMMUNICATION & COLLABORATION ACCOUNTING STANDARDS
@@ -229,13 +233,4 @@ Route::group(['prefix' => 'user','middleware'=>['web','isUser']],function(){
 
 
 
-// ********** F3 Routes *********
-Route::post('/f3/clients/s{id}',           [ClientController::class, 'update'])->name('update');
-// Route::get('/dashboard',                [PendingController::class, 'indexp'])->name('dashboard')->middleware(['auth']);
-Route::get('/f3/clients',                  [PendingController::class, 'indexpage'])->name('Clients')->middleware(['auth']);
-Route::get('/ap-ar-fetch-chart-data',   [Reports::class, 'fetchChartData'])->name('fetchChartData');
-Route::get('/f3/ap-ar-reports',            [Reports::class, 'apar'])->name('apar')->middleware(['auth']);
-Route::get('/fix-asset-reports',        [Reports::class, 'fixass'])->name('fixass')->middleware(['auth']);
-Route::get('/f3/tax-management-reports',   [Reports::class, 'taxfin'])->name('taxfin')->middleware(['auth']);
 
-Route::get('/f3/bank',                     [Reports::class, 'bank'])->name('bank')->middleware(['auth']);
