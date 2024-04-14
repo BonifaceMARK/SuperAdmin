@@ -108,7 +108,7 @@ class AuthController extends Controller
                 
             } else if ( Auth::user()->role == '1' ) {
                 return response()->json(['redirect' => route('manager.home'), 'message' => 'Login successful']);
-            } else if ( Auth::user()->role == '3' ){
+            } else if ( Auth::user()->role == '11' ){
                 return response()->json(['redirect' => route('ehome'), 'message' => 'Login successful']);
             }
             

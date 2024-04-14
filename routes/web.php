@@ -101,6 +101,8 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
     // FINANCIAL ANALYTICS & BUSINESS INTELLIGENCE RISK MANAGEMENT
     Route::get('/fms6index', [fms6Controller::class, 'fms6index'])->name('fms6.index');
 
+    Route::get('/fms8index', [fms6Controller::class, 'fms8index'])->name('fms8.index');
+
 
 
 
@@ -287,7 +289,7 @@ Route::group(['prefix' => 'user','middleware'=>['web','isUser']],function(){
 Route::middleware(['auth','isEmployee'])->prefix('employee')->group(function(){
         
 
-    Route::GET('/home',                  [App\Http\Controllers\UniversalController::class, 'index'])                      ->name('ehome');
+    Route::GET('/home',[App\Http\Controllers\UniversalController::class, 'index'])->name('ehome');
     Route::GET('/profile',               [App\Http\Controllers\UniversalController::class, 'profile'])                    ->name('eprofile');
     Route::GET('/help',                  [App\Http\Controllers\UniversalController::class, 'customerservice'])            ->name('ehelp');
 

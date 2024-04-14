@@ -201,7 +201,7 @@
 
       {{-- <form class="row g-3 needs-validation" novalidate> --}}
       {{-- <form method="POST" action="{{ route('login') }}" class="row g-3 needs-validation" novalidate> --}}
-        <form id="loginform" class="row g-3 needs-validation" novalidate>
+        <form id="loginform" action="{{ route('login') }}" class="row g-3 needs-validation" novalidate>
       @csrf
       @if(session('success'))
       <div class="alert alert-success">
