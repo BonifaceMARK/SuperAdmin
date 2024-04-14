@@ -20,6 +20,6 @@ return new class extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('sales');
+        Schema::dropIfExists('fms_g6sales');
     }
 };

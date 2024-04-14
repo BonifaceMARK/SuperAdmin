@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('fms_g2forecasts', function (Blueprint $table) {
             $table->id();
+            $table->uuid('reference_no');
             $table->string('name');
             $table->text('description')->nullable();
             $table->decimal('amount', 15, 2);

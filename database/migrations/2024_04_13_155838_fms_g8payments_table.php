@@ -16,6 +16,7 @@ return new class extends Migration
     {
         Schema::create('fms_g8payments', function (Blueprint $table) {
             $table->id();
+            $table->uuid('reference_no');
             $table->unsignedBigInteger('loan_id');
             $table->unsignedBigInteger('payee');
             $table->float('amount')->default(0);
@@ -39,6 +40,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payments');
+        Schema::dropIfExists('fms_g8payments');
     }
 };

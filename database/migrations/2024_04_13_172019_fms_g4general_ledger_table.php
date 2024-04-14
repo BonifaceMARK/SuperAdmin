@@ -24,6 +24,6 @@ return new class extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('general_ledger');
+        Schema::dropIfExists('fms_g4general_ledger');
     }
 };

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('vendor_id');
             $table->unsignedBigInteger('purchase_order_id');
+            $table->uuid('reference_no');
             $table->decimal('amount', 10, 2);
             $table->date('date_created')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->date('date_due')->default(DB::raw('CURRENT_TIMESTAMP'));
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ap_invoice');
+        Schema::dropIfExists('fms_g7ap_invoice');
     }
 };

@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fee_status');
+        Schema::dropIfExists('fms_g7fee_status');
     }
 };

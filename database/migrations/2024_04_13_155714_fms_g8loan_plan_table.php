@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('loan_plan');
+        Schema::dropIfExists('fms_g8loan_plan');
     }
 };

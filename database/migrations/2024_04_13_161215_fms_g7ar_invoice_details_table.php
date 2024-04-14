@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ar_invoice_details');
+        Schema::dropIfExists('fms_g7ar_invoice_details');
     }
 };

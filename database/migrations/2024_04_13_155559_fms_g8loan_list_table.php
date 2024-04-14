@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('fms_g8loan_list', function (Blueprint $table) {
             $table->id();
-            $table->string('ref_no', 50);
+            $table->uuid('reference_no');
             $table->unsignedBigInteger('loan_type_id');
             $table->unsignedBigInteger('borrower_id');
             $table->text('purpose');

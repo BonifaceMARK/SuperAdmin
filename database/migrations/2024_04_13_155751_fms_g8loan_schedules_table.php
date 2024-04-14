@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('loan_schedules');
+        Schema::dropIfExists('fms_g8loan_schedules');
     }
 };

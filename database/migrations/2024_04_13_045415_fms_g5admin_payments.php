@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('fms_g5admin_payments', function (Blueprint $table) {
             $table->id();
+            $table->uuid('reference_no');
             $table->string('paymentType');
             $table->decimal('amount', 10, 2);
             $table->dateTime('paymentDate');
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admin_payments');
+        Schema::dropIfExists('fms_g5admin_payments');
     }
 };

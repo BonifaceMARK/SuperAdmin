@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('fms_g7ap_pending_invoice_approval', function (Blueprint $table) {
             $table->id();
+            $table->uuid('reference_no');
             $table->unsignedBigInteger('approval_id');
             $table->unsignedBigInteger('invoice_id');
             $table->string('company_name', 255);
@@ -35,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ap_pending_invoice_approval');
+        Schema::dropIfExists('fms_g7ap_pending_invoice_approval');
     }
 };

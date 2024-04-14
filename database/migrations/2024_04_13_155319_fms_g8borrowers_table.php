@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('contact_no', 30);
             $table->text('address');
             $table->string('email', 50);
+            $table->uuid('reference_no');
             $table->string('tax_id', 50);
             $table->unsignedBigInteger('valid_ids')->nullable();
             $table->integer('crdt_limit');
@@ -41,6 +42,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('borrowers');
+        Schema::dropIfExists('fms_g8borrowers');
     }
 };

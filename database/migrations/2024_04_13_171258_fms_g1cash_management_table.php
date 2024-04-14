@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('fms_g1cash_management', function (Blueprint $table) {
             $table->id();
             $table->decimal('amount', 10, 2);
+            $table->uuid('reference_no');
             $table->string('transaction_type', 100);
             $table->text('description')->nullable();
             $table->decimal('revenue', 10, 2)->default(0);
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cash_management');
+        Schema::dropIfExists('fms_g1cash_management');
     }
 };
