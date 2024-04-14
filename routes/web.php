@@ -100,6 +100,7 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
     Route::get('/fms2index', [fms2Controller::class, 'fms2index'])->name('fms2.index');
     Route::post('/cost-allocations',[fms2Controller::class, 'storeCostAllocation'])->name('cost-allocations.store');
     Route::get('/expenses', [fms2Controller::class, 'index']);
+    Route::get('/tax-payment-data', [fms2Controller::class, 'getTaxPaymentData']);
 
 
     // GENERAL LEDGER AUDIT & COMPLIANCE

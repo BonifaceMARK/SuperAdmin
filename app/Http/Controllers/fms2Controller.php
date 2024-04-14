@@ -74,6 +74,46 @@ class fms2Controller extends Controller
         'taxPayments' // Make sure to pass $taxPayments to the view
     ));
 }
+public function getTaxPaymentData()
+{
+    // Retrieve historical tax payment data
+    $historicalData = TaxPayment::select('payment_date', 'amount')->orderBy('payment_date')->get();
+
+    // Apply exponential smoothing
+    $smoothedData = $this->applyExponentialSmoothing($historicalData);
+
+    // Return the smoothed data as JSON
+    return response()->json($smoothedData);
+}
+
+// Function to apply exponential smoothing
+private function applyExponentialSmoothing($historicalData, $alpha = 0.2) {
+    $smoothedData = [];
+
+    $previousSmoothedValue = null;
+    foreach ($historicalData as $entry) {
+        $amount = $entry->amount;
+
+        if ($previousSmoothedValue === null) {
+            // For the first data point, use the actual amount
+            $smoothedValue = $amount;
+        } else {
+            // Apply exponential smoothing
+            $smoothedValue = $alpha * $amount + (1 - $alpha) * $previousSmoothedValue;
+        }
+
+        // Store the smoothed value for this data point
+        $smoothedData[] = [
+            'payment_date' => $entry->payment_date,
+            'smoothed_amount' => $smoothedValue,
+        ];
+
+        // Update the previous smoothed value for the next iteration
+        $previousSmoothedValue = $smoothedValue;
+    }
+
+    return $smoothedData;
+}
     public function storeCostAllocation(Request $request)
 {
     $request->validate([

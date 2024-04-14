@@ -206,6 +206,98 @@
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#paymentModal">
     Expenses
 </button>
+<!-- Button to trigger the modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#areaChartModal">
+    Predict Tax
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="areaChartModal" tabindex="-1" role="dialog" aria-labelledby="areaChartModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="areaChartModalLabel">Exponential Smoothing Tax Prediction</h5>
+            </div>
+            <div class="modal-body">
+                <!-- Area Chart Container -->
+                <div id="areaChart"></div>
+                <span>Todays |</span><h4>Prediction</h4>
+                <p id="predictionText"></p> <!-- Prediction text -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        fetch('/superadmin/tax-payment-data')
+            .then(response => response.json())
+            .then(data => {
+                // Extract dates and smoothed amounts from the fetched data
+                const dates = data.map(entry => entry.payment_date);
+                const smoothedAmounts = data.map(entry => entry.smoothed_amount);
+
+                // Calculate average of smoothed amounts
+                const average = smoothedAmounts.reduce((total, amount) => total + amount, 0) / smoothedAmounts.length;
+
+                // Generate prediction text based on average
+                let predictionText;
+                if (average < 1000) {
+                    predictionText = "Based on Calculation of Exponential Smoothing your Tax payment amount will soon be stable";
+                } else if (average >= 1000 && average < 5000) {
+                    predictionText = "Based on Calculation of Exponential Smoothing your Tax payment amount will soon be stable";
+                } else {
+                    predictionText = "Based on Calculation of Exponential Smoothing your Tax payment amount will soon be Higher";
+                }
+
+                // Display prediction text
+                document.getElementById('predictionText').innerText = predictionText;
+
+                // Render the chart using ApexCharts
+                new ApexCharts(document.querySelector("#areaChart"), {
+                    series: [{
+                        name: "Smoothed Amounts",
+                        data: smoothedAmounts
+                    }],
+                    chart: {
+                        type: 'area',
+                        height: 350,
+                        zoom: {
+                            enabled: false
+                        }
+                    },
+                    dataLabels: {
+                        enabled: false
+                    },
+                    stroke: {
+                        curve: 'straight'
+                    },
+                    subtitle: {
+                        text: 'Smoothed Tax Payment Amounts Over Time',
+                        align: 'left'
+                    },
+                    labels: dates,
+                    xaxis: {
+                        type: 'datetime'
+                    },
+                    yaxis: {
+                        opposite: true
+                    },
+                    legend: {
+                        horizontalAlign: 'left'
+                    }
+                }).render();
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    });
+</script>
+
+
 
 
 <!-- Modal -->

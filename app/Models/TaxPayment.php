@@ -2,11 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class TaxPayment extends Model
 {
+    use HasFactory; // Ensure this line is present
+
     protected $table = 'fms_g5tax_payments';
+
 
     protected $fillable = [
         'taxpayer_name', 'tax_type', 'amount', 'payment_date', 'payment_method', 'status'
@@ -16,6 +20,7 @@ class TaxPayment extends Model
         'amount' => 'decimal:2',
         'payment_date' => 'datetime',
     ];
+
     protected static function boot()
     {
         parent::boot();
