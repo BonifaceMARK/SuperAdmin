@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 use App\Models\FinancialPlanning;
 use Illuminate\Http\Request;
-
+use App\Models\FixedAssetPayment;
+use App\Models\Investments;
 class fms1Controller extends Controller
 {
 
     public function fms1index()
     {
-
-
-       return view ('F1.index');
+        $payments = FixedAssetPayment::all(); 
+        $investments = Investments::all(); 
+       return view ('F1.index', compact('payments','investments'));
     }
     public function storeBudgetPlan(Request $request)
     {

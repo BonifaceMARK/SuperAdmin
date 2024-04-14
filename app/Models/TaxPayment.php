@@ -13,7 +13,7 @@ class TaxPayment extends Model
     ];
 
     protected $casts = [
-        'amount' => 'decimal:2', // To ensure amount is always formatted as decimal with 2 decimal places
-        'payment_date' => 'datetime', // To ensure payment_date is cast to a DateTime object
+        'amount' => 'decimal:2',
+        'payment_date' => 'datetime',
     ];
 }

@@ -1336,11 +1336,15 @@
 .modal-dialog-custom {
     max-width: 350px;
 }
-/* 
-.modal-dialog {
+
+.modal-dialog-left{
     margin-right: auto;
     margin-left: 0;
-}*/
+}
+.modal-dialog-right{
+    margin-right: 0;
+    margin-left: auto;
+}
 
 .payment-options {
     display: flex;
@@ -1352,4 +1356,33 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+#trendStatement {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  #trendText {
+    color: #007bff; /* Blue color for positive trend */
+  }
+  
+  #trendText.negative {
+    color: #dc3545; /* Red color for negative trend */
+  }
+  
+  #trendText.stable {
+    color: #02070c; /* Gray color for stable trend */
+  }
+  /* Custom CSS for positioning modal to the right */
+.modal-dialog.modal-dialog-right {
+    margin-right: auto;
+    margin-left: auto;
+    transform: translateX(25%);
+}
+/* Custom CSS for positioning modal to the left */
+.modal-dialog.modal-dialog-left {
+    margin-left: auto;
+    margin-right: auto;
+    transform: translateX(-25%);
 }
