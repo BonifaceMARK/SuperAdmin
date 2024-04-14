@@ -408,7 +408,7 @@
       </a>
     </li>
     <hr>
-    <li class="nav-heading">Finance</li>
+    <li class="nav-heading">Financial Management</li>
     {{-- set condition for finance --}}
     @if(Auth::user()->role == '3'|| Auth::user()->role == '1' || Auth::user()->role == '0' )
     <li class="nav-item">
