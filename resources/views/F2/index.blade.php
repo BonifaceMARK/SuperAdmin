@@ -171,12 +171,78 @@
                 <h1 class="card-title"><i class="bi bi-grid-1x2-fill"></i> Introduction
                       <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pieChartModal">
-        Open Expenses Pie Chart
+        Expenses Pie Chart
     </button>
 <!-- Button to trigger the modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createCostAllocationModal">
-    Create Cost Allocation
+    Cost Allocation
 </button>
+<!-- Button to trigger the modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#investmentModal">
+    Investment Report
+</button>
+
+<!-- Investment Report Modal -->
+<div class="modal fade" id="investmentModal" tabindex="-1" aria-labelledby="investmentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="investmentModalLabel">Investments Report / Today</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="investmentsChart" style="min-height: 365px;"></div>
+                <p class="trend-info">Trend: <span id="trendText"></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Button to trigger the modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#fixedAssetModal">
+    Fixed Asset Report
+</button>
+<!-- Button to trigger the modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#paymentModal">
+    Expenses
+</button>
+
+
+<!-- Modal -->
+<div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="paymentModalLabel">Expenses Visualization Per Category</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Container for the chart -->
+                <div id="chartContainer" style="height: 400px;"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Fixed Asset Report Modal -->
+<div class="modal fade" id="fixedAssetModal" tabindex="-1" aria-labelledby="fixedAssetModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="fixedAssetModalLabel">Fixed Asset Reports / Today</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="reportsChart" style="min-height: 365px;"></div>
+                <p class="trend-info">Trend: <span id="fixedAssetTrendText"></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+
     <!-- Modal -->
     <div class="modal fade" id="pieChartModal" tabindex="-1" aria-labelledby="pieChartModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -227,6 +293,62 @@
                         });
                     </script><!-- Button to trigger modal -->
                    </h1>
+                   <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                        // Render Investments Chart
+                        const investmentsData = {!! json_encode($investments->pluck('amount')) !!};
+                        const investmentsDates = {!! json_encode($investments->pluck('investment_date')) !!};
+                        const investmentsTrendText = document.getElementById('trendText');
+                        const investmentsTrend = calculateTrend(investmentsData);
+                        investmentsTrendText.textContent = investmentsTrend;
+
+                        new ApexCharts(document.querySelector("#investmentsChart"), {
+                            series: [{ name: 'Investments', data: investmentsData }],
+                            chart: { height: 350, type: 'line', toolbar: { show: false } },
+                            xaxis: { categories: investmentsDates }
+                        }).render();
+
+                        // Render Reports Chart
+                        const paymentsData = {!! json_encode($payments->pluck('amount')) !!};
+                        const paymentsDates = {!! json_encode($payments->pluck('payment_date')) !!};
+                        const seriesData = paymentsData.map((amount, index) => [new Date(paymentsDates[index]).getTime(), amount]);
+                        const reportsChart = new ApexCharts(document.querySelector("#reportsChart"), {
+                            series: [{ name: 'Amount', data: seriesData }],
+                            chart: { height: 350, type: 'line', toolbar: { show: false } },
+                            xaxis: { type: 'datetime', categories: paymentsDates }
+                        });
+                        reportsChart.render();
+
+                        // Calculate and display trend for Fixed Asset Reports
+                        const fixedAssetTrendText = document.getElementById('fixedAssetTrendText');
+                        const fixedAssetTrend = calculateTrend(paymentsData);
+                        fixedAssetTrendText.textContent = fixedAssetTrend;
+
+                        // Update description input field based on chart trend
+                        const descriptionInput = document.getElementById('description');
+                        if (fixedAssetTrend === "Going Down") {
+                            descriptionInput.value = "Chart trend is going down";
+                        } else {
+                            descriptionInput.value = "";
+                        }
+                    });
+
+                    function calculateTrend(data) {
+                        const len = data.length;
+                        if (len < 2) return "not available";
+
+                        const current = data[len - 1];
+                        const previous = data[len - 2];
+
+                        if (current > previous) return "Your Fixed Assets revenue are Doing Great keep it up";
+                        if (current < previous) return "Your Fixed Assets revenue is Going Down We should implement strategy in order to boost its economic growth.!";
+                        return "Stable";
+                    }
+                </script>
+
+                <style>
+                    .trend-info { margin-top: 50px; }
+                </style>
 
 <!-- Modal for creating a new cost allocation -->
 <div class="modal fade" id="createCostAllocationModal" tabindex="-1" aria-labelledby="createCostAllocationModalLabel" aria-hidden="true">
@@ -281,6 +403,53 @@
     </div>
 </div>
 
+    <script>
+        // Prepare data for the chart
+        const taxData = <?php echo json_encode($taxData); ?>;
+        const paymentGatewayData = <?php echo json_encode($paymentGatewayData); ?>;
+        const freightData = <?php echo json_encode($freightData); ?>;
+        const fixedAssetData = <?php echo json_encode($fixedAssetData); ?>;
+        const adminData = <?php echo json_encode($adminData); ?>;
+
+        // Create a chart instance
+        const chart = new ApexCharts(document.querySelector("#chartContainer"), {
+            // Chart configuration
+            chart: {
+                type: 'bar'
+            },
+            // Data series
+            series: [{
+                name: 'Tax Payments',
+                data: taxData
+            }, {
+                name: 'HRMS Transactions',
+                data: paymentGatewayData
+            }, {
+                name: 'Freight Payments',
+                data: freightData
+            }, {
+                name: 'Fixed Asset Payments',
+                data: fixedAssetData
+            }, {
+                name: 'Admin Payments',
+                data: adminData
+            }],
+            // X-axis labels
+            xaxis: {
+                categories: ['Tax Payments', 'HRMS Transactions', 'Freight Payments', 'Fixed Asset Payments', 'Admin Payments']
+            },
+
+
+            labels: {
+                formatter: function(val) {
+                    return "$" + val; // Format labels as currency
+                }
+            }
+        });
+
+        // Render the chart
+        chart.render();
+    </script>
                 <!-- Integration of Expense, Budget, Cost, & Forecasting -->
                 <div class="card mb-3">
                     <div class="row g-0">
@@ -386,11 +555,6 @@
                 </div>
             </div>
         </div>
-
-
-
-
-
 
 
 

@@ -103,6 +103,7 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
     Route::post('/cost-allocations',[fms2Controller::class, 'storeCostAllocation'])->name('cost-allocations.store');
     Route::get('/expenses', [fms2Controller::class, 'index']);
 
+
     // GENERAL LEDGER AUDIT & COMPLIANCE
     Route::get('/fms4index', [fms4Controller::class, 'fms4index'])->name('fms4.index');
 

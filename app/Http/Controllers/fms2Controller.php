@@ -9,25 +9,71 @@ use App\Models\PaymentGateway;
 use App\Models\FreightPayment;
 use App\Models\FixedAssetPayment;
 use App\Models\AdminPayment;
+use App\Models\Investments;
 
 class fms2Controller extends Controller
 {
     public function fms2index()
-    {
-        $taxPaymentsTotal = TaxPayment::sum('amount');
-        $paymentGatewayTotal = PaymentGateway::sum('transactionAmount');
-        $freightPaymentsTotal = FreightPayment::sum('freightAmount');
-        $fixedAssetPaymentsTotal = FixedAssetPayment::sum('amount');
-        $adminPaymentsTotal = AdminPayment::sum('amount');
+{
+    // Fetch investments data
+    $investments = Investments::all();
+    $payments = FixedAssetPayment::all();
+    // Fetch payments data
+    $taxPayments = TaxPayment::all();
+    $paymentGateways = PaymentGateway::all();
+    $freightPayments = FreightPayment::all();
+    $fixedAssetPayments = FixedAssetPayment::all();
+    $adminPayments = AdminPayment::all();
 
-        return view('F2.index', compact(
-            'taxPaymentsTotal',
-            'paymentGatewayTotal',
-            'freightPaymentsTotal',
-            'fixedAssetPaymentsTotal',
-            'adminPaymentsTotal'
-        ));
-    }
+    // Calculate totals
+    $taxPaymentsTotal = $taxPayments->sum('amount');
+    $paymentGatewayTotal = $paymentGateways->sum('transactionAmount');
+    $freightPaymentsTotal = $freightPayments->sum('freightAmount');
+    $fixedAssetPaymentsTotal = $fixedAssetPayments->sum('amount');
+    $adminPaymentsTotal = $adminPayments->sum('amount');
+
+    // Format data for ApexCharts
+    $taxData = $taxPayments->pluck('amount')->toArray();
+    $paymentGatewayData = $paymentGateways->pluck('transactionAmount')->toArray();
+    $freightData = $freightPayments->pluck('freightAmount')->toArray();
+    $fixedAssetData = $fixedAssetPayments->pluck('amount')->toArray();
+    $adminData = $adminPayments->pluck('amount')->toArray();
+
+    // Merge data from all models into a single dataset
+    $allPayments = collect([
+        'Tax Payments' => $taxPayments,
+        'Payment Gateways' => $paymentGateways,
+        'Freight Payments' => $freightPayments,
+        'Fixed Asset Payments' => $fixedAssetPayments,
+        'Admin Payments' => $adminPayments
+    ]);
+    $adminPayments = AdminPayment::all();
+    $fixedAssetPayments = FixedAssetPayment::all();
+    $freightPayments = FreightPayment::all();
+    $paymentGateways = PaymentGateway::all();
+    $taxPayments = TaxPayment::all();
+
+    // Combine data from all models into a single dataset
+
+
+
+    return view('F2.index', compact(
+        'taxPaymentsTotal',
+        'paymentGatewayTotal',
+        'freightPaymentsTotal',
+        'fixedAssetPaymentsTotal',
+        'adminPaymentsTotal',
+        'payments',
+        'investments',
+        'taxData',
+        'paymentGatewayData',
+
+        'freightData',
+        'fixedAssetData',
+        'adminData',
+        'taxPayments' // Make sure to pass $taxPayments to the view
+    ));
+}
     public function storeCostAllocation(Request $request)
 {
     $request->validate([

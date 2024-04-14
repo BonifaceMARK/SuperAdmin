@@ -195,468 +195,110 @@
         </div>
         <div class="col-md-4">
             <div class="card">
-      <!-- Button to trigger the modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#rightSidebarModal" style="background-image: url('{{ asset("assets/img/pay.jpg") }}'); background-size: cover; background-position: center; color: white; padding: 135px 20px;">
-    Pay Here !
-</button>
-
-
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Modal -->
-<div class="modal fade" id="rightSidebarModal" tabindex="-1" aria-labelledby="rightSidebarModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-custom">
-        <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="rightSidebarModalLabel">Payment Options</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="list-group">
-                    <button type="button" class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#adminPaymentsModal">
-                        Pay Administrative Expenses
-                    </button>
-                    <button type="button" class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#taxPaymentsModal">
-                        Pay Tax
-                    </button>
-                    <button type="button" class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#fixedAssetPaymentModal">
-                        Pay Fixed Asset
-                    </button>
-                    <button type="button" class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#freightServicesModal">
-                        Freight Services
-                    </button>
-                    <button type="button" class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#servicesModal">
-                        Hotel & Restaurants
-                    </button>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">All Payments</h5>
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#allPaymentsModal">
+                                        Open Modal
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="modal fade" id="allPaymentsModal" tabindex="-1" aria-labelledby="allPaymentsModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="allPaymentsModalLabel">All Payments</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <table id="allPaymentsTable" class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Payment Type</th>
+                                            <th>Amount</th>
+                                            <th>Payment Date</th>
+                                            <th>Description</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($adminPayments as $adminPayment)
+                                        <tr>
+                                            <td>{{ $adminPayment->paymentType }}</td>
+                                            <td>{{ $adminPayment->amount }}</td>
+                                            <td>{{ $adminPayment->paymentDate }}</td>
+                                            <td>{{ $adminPayment->description }}</td>
+                                            <td>{{ $adminPayment->status }}</td>
+                                        </tr>
+                                        @endforeach
+                                        @foreach ($fixedAssetPayments as $fixedAssetPayment)
+                                        <tr>
+                                            <td>{{ $fixedAssetPayment->asset_name }}</td>
+                                            <td>{{ $fixedAssetPayment->amount }}</td>
+                                            <td>{{ $fixedAssetPayment->payment_date }}</td>
+                                            <td>{{ $fixedAssetPayment->asset_description }}</td>
+                                            <td>{{ $fixedAssetPayment->status }}</td>
+                                        </tr>
+                                        @endforeach
+                                        @foreach ($freightPayments as $freightPayment)
+                                        <tr>
+                                            <td>{{ $freightPayment->freightService }}</td>
+                                            <td>{{ $freightPayment->freightAmount }}</td>
+                                            <td>{{ $freightPayment->freightDate }}</td>
+                                            <td>{{ $freightPayment->freightDescription }}</td>
+                                            <td>{{ $freightPayment->freightStatus }}</td>
+                                        </tr>
+                                        @endforeach
+                                        @foreach ($paymentGateways as $paymentGateway)
+                                        <tr>
+                                            <td>{{ $paymentGateway->productName }}</td>
+                                            <td>{{ $paymentGateway->transactionAmount }}</td>
+                                            <td>{{ $paymentGateway->transactionDate }}</td>
+                                            <td>{{ $paymentGateway->description }}</td>
+                                            <td>{{ $paymentGateway->transactionStatus }}</td>
+                                        </tr>
+                                        @endforeach
+                                        @foreach ($taxPayments as $taxPayment)
+                                        <tr>
+                                            <td>{{ $taxPayment->taxpayer_name }}</td>
+                                            <td>{{ $taxPayment->amount }}</td>
+                                            <td>{{ $taxPayment->payment_date }}</td>
+                                            <td>{{ $taxPayment->tax_type }}</td>
+                                            <td>{{ $taxPayment->status }}</td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
 </div>
-
-
-
-
-<!-- Modal -->
-<div  class="modal fade" id="servicesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content ">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Services</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPaymentGatewayModal" onclick="setService('Accommodation')">Accommodation</button>
-                    </li>
-                    <li class="list-group-item">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPaymentGatewayModal" onclick="setService('Meals')">Meals</button>
-                    </li>
-                    <li class="list-group-item">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPaymentGatewayModal" onclick="setService('Beverages')">Beverages</button>
-                    </li>
-                    <li class="list-group-item">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPaymentGatewayModal" onclick="setService('Service Charges')">Service Charges</button>
-                    </li>
-                    <li class="list-group-item">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPaymentGatewayModal" onclick="setService('Room Service')">Room Service</button>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal for adding payment gateway -->
-<div class="modal fade" id="addPaymentGatewayModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Payment Form</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Form for adding payment gateway -->
-                <form id="paymentGatewayForm" action="{{ route('paymentgateways.store') }}" method="POST">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="service" class="form-label">Service</label>
-                        <input type="text" class="form-control" id="service" name="service" readonly>
-                    </div>
-                    <div class="mb-3">
-                        <label for="productName" class="form-label">Product Name</label>
-                        <input type="text" class="form-control" id="productName" name="productName">
-                    </div>
-                    <div class="mb-3">
-                        <label for="transactionName" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="transactionName" name="transactionName">
-                    </div>
-                    <div class="mb-3">
-                        <label for="paymentMethod" class="form-label">Payment Method</label>
-                        <input type="text" class="form-control" id="paymentMethod" name="paymentMethod">
-                    </div>
-                    <div class="mb-3">
-                        <label for="cardType" class="form-label">Card Type</label>
-                        <input type="text" class="form-control" id="cardType" name="cardType">
-                    </div>
-                    <div class="mb-3">
-                        <label for="transactionType" class="form-label">Transaction Type</label>
-                        <input type="text" class="form-control" id="transactionType" name="transactionType">
-                    </div>
-                    <div class="mb-3">
-                        <label for="transactionAmount" class="form-label">Transaction Amount</label>
-                        <input type="number" step="0.01" class="form-control" id="transactionAmount" name="transactionAmount">
-                    </div>
-                    <div class="mb-3">
-                        <label for="transactionDate" class="form-label">Transaction Date</label>
-                        <input type="datetime-local" class="form-control" id="transactionDate" name="transactionDate">
-                    </div>
-                    <div class="mb-3">
-                        <label for="description" class="form-label">Description</label>
-                        <textarea class="form-control" id="description" name="description"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="transactionStatus" class="form-label">Transaction Status</label>
-                        <input type="text" class="form-control" id="transactionStatus" name="transactionStatus">
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Pay now</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- Freight Services Modal -->
-<div class="modal fade" id="freightServicesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Freight Services</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addFreightModal" onclick="setFreightService('Freight Charges')">Freight Charges</button>
-                    </li>
-                    <li class="list-group-item">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addFreightModal" onclick="setFreightService('Customs Duties and Taxes')">Customs Duties and Taxes</button>
-                    </li>
-                    <li class="list-group-item">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addFreightModal" onclick="setFreightService('Insurance Premiums')">Insurance Premiums</button>
-                    </li>
-                    <li class="list-group-item">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addFreightModal" onclick="setFreightService('Handling and Storage Fees')">Handling and Storage Fees</button>
-                    </li>
-                    <li class="list-group-item">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addFreightModal" onclick="setFreightService('Documentation Fees')">Documentation Fees</button>
-                    </li>
-                    <li class="list-group-item">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addFreightModal" onclick="setFreightService('Surcharge Fees')">Surcharge Fees</button>
-                    </li>
-                    <li class="list-group-item">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addFreightModal" onclick="setFreightService('Ancillary Services')">Ancillary Services</button>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Modal for adding freight payments -->
-<div class="modal fade" id="addFreightModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Payment Form</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Form for adding freight payments -->
-                <form id="freightPaymentForm" action="{{ route('freightpayments.store') }}" method="POST">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="freightService" class="form-label"> Service</label>
-                        <input type="text" class="form-control" id="freightService" name="freightService" readonly>
-                    </div>
-                    <div class="mb-3">
-                        <label for="freightAmount" class="form-label"> Amount</label>
-                        <input type="number" step="0.01" class="form-control" id="freightAmount" name="freightAmount">
-                    </div>
-                    <div class="mb-3">
-                        <label for="freightDate" class="form-label"> Date</label>
-                        <input type="datetime-local" class="form-control" id="freightDate" name="freightDate">
-                    </div>
-                    <div class="mb-3">
-                        <label for="freightDescription" class="form-label">Description</label>
-                        <textarea class="form-control" id="freightDescription" name="freightDescription"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="freightStatus" class="form-label">Status</label>
-                        <input type="text" class="form-control" id="freightStatus" name="freightStatus">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Pay now</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="modal fade" id="fixedAssetPaymentModal" tabindex="-1" aria-labelledby="fixedAssetPaymentModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="fixedAssetPaymentModalLabel">Add Fixed Asset Payment</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Form for adding fixed asset payments -->
-                <form id="fixedAssetPaymentForm" action="{{ route('fixedassetpayments.store') }}" method="POST">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="assetName" class="form-label">Asset Name</label>
-                        <input type="text" class="form-control" id="assetName" name="asset_name">
-                    </div>
-                    <div class="mb-3">
-                        <label for="assetDescription" class="form-label">Asset Description</label>
-                        <textarea class="form-control" id="assetDescription" name="asset_description"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="amount" class="form-label">Amount</label>
-                        <input type="number" step="0.01" class="form-control" id="amount" name="amount">
-                    </div>
-                    <div class="mb-3">
-                        <label for="paymentDate" class="form-label">Payment Date</label>
-                        <input type="datetime-local" class="form-control" id="paymentDate" name="payment_date">
-                    </div>
-                    <div class="mb-3">
-                        <label for="paymentMethod" class="form-label">Payment Method</label>
-                        <input type="text" class="form-control" id="paymentMethod" name="payment_method">
-                    </div>
-                    <div class="mb-3">
-                        <label for="paymentReference" class="form-label">Payment Reference</label>
-                        <input type="text" class="form-control" id="paymentReference" name="payment_reference">
-                    </div>
-                    <div class="mb-3">
-                        <label for="status" class="form-label">Status</label>
-                        <input type="text" class="form-control" id="status" name="status">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Add Payment</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="taxPaymentsModal" tabindex="-1" aria-labelledby="taxPaymentsModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="taxPaymentsModalLabel">Tax Payments</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Form for adding tax payments -->
-                <form id="taxPaymentForm" action="{{ route('taxpayments.store') }}" method="POST">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="taxpayerName" class="form-label">Taxpayer Name</label>
-                        <input type="text" class="form-control" id="taxpayerName" name="taxpayer_name">
-                    </div>
-                    <div class="mb-3">
-                        <label for="taxType" class="form-label">Tax Type</label>
-                        <input type="text" class="form-control" id="taxType" name="tax_type">
-                    </div>
-                    <div class="mb-3">
-                        <label for="paymentAmount" class="form-label">Payment Amount</label>
-                        <input type="number" step="0.01" class="form-control" id="paymentAmount" name="amount">
-                    </div>
-                    <div class="mb-3">
-                        <label for="paymentDate" class="form-label">Payment Date</label>
-                        <input type="datetime-local" class="form-control" id="paymentDate" name="payment_date">
-                    </div>
-                    <div class="mb-3">
-                        <label for="paymentMethod" class="form-label">Payment Method</label>
-                        <input type="text" class="form-control" id="paymentMethod" name="payment_method">
-                    </div>
-                    <div class="mb-3">
-                        <label for="status" class="form-label">Status</label>
-                        <input type="text" class="form-control" id="status" name="status">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Pay Now</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-<!-- Administrative Payments Modal -->
-<div class="modal fade" id="adminPaymentsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Administrative Payments</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAdminPaymentModal" onclick="setAdminPaymentType('Freight Charges')">Freight Charges</button>
-                    </li>
-                    <li class="list-group-item">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAdminPaymentModal" onclick="setAdminPaymentType('Customs Duties and Taxes')">Customs Duties and Taxes</button>
-                    </li>
-                    <li class="list-group-item">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAdminPaymentModal" onclick="setAdminPaymentType('Insurance Premiums')">Insurance Premiums</button>
-                    </li>
-                    <li class="list-group-item">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAdminPaymentModal" onclick="setAdminPaymentType('Handling and Storage Fees')">Handling and Storage Fees</button>
-                    </li>
-                    <li class="list-group-item">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAdminPaymentModal" onclick="setAdminPaymentType('Documentation Fees')">Documentation Fees</button>
-                    </li>
-                    <li class="list-group-item">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAdminPaymentModal" onclick="setAdminPaymentType('Surcharge Fees')">Surcharge Fees</button>
-                    </li>
-                    <li class="list-group-item">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAdminPaymentModal" onclick="setAdminPaymentType('Ancillary Services')">Ancillary Services</button>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal for adding administrative payments -->
-<div class="modal fade" id="addAdminPaymentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Administrative Payment Form</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Form for adding administrative payments -->
-                <form id="adminPaymentForm" action="{{ route('adminpayments.store') }}" method="POST">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="adminPaymentType" class="form-label">Payment Type</label>
-                        <input type="text" class="form-control" id="adminPaymentType" name="paymentType" readonly>
-                    </div>
-                    <div class="mb-3">
-                        <label for="adminPaymentAmount" class="form-label">Payment Amount</label>
-                        <input type="number" step="0.01" class="form-control" id="adminPaymentAmount" name="amount">
-                    </div>
-                    <div class="mb-3">
-                        <label for="adminPaymentDate" class="form-label">Payment Date</label>
-                        <input type="datetime-local" class="form-control" id="adminPaymentDate" name="paymentDate">
-                    </div>
-                    <div class="mb-3">
-                        <label for="adminPaymentDescription" class="form-label">Description</label>
-                        <textarea class="form-control" id="adminPaymentDescription" name="description"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="adminPaymentStatus" class="form-label">Status</label>
-                        <input type="text" class="form-control" id="adminPaymentStatus" name="status">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Pay now</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<script>
-    function setAdminPaymentType(paymentType) {
-        document.getElementById('adminPaymentType').value = paymentType;
-    }
-</script>
 
 <script>
-    // Function to set the freight service dynamically
-    function setFreightService(service) {
-        document.getElementById('freightService').value = service;
-    }
-
-    // Reset the form when the modal is closed
-    $('#addFreightModal').on('hidden.bs.modal', function () {
-        $(this).find('form').trigger('reset');
+    $(document).ready(function() {
+        $('#allPaymentsTable').DataTable();
     });
 </script>
 
-<script>
-    function setService(service) {
-        document.getElementById('service').value = service;
 
-        // Automatically fill corresponding fields based on the selected service
-        switch (service) {
-            case 'Accommodation':
-                document.getElementById('productName').value = '';
-                document.getElementById('transactionName').value = '';
-                document.getElementById('paymentMethod').value = '';
-                document.getElementById('cardType').value = '';
-                document.getElementById('transactionType').value = '';
-                document.getElementById('transactionAmount').value = '';
-                document.getElementById('transactionDate').value = '';
-                document.getElementById('description').value = '';
-                document.getElementById('transactionStatus').value = '';
-                break;
-            case 'Meals':
-                document.getElementById('productName').value = '';
-                document.getElementById('transactionName').value = '';
-                document.getElementById('paymentMethod').value = '';
-                document.getElementById('cardType').value = '';
-                document.getElementById('transactionType').value = '';
-                document.getElementById('transactionAmount').value = '';
-                document.getElementById('transactionDate').value = '';
-                document.getElementById('description').value = '';
-                document.getElementById('transactionStatus').value = '';
-                break;
-            case 'Beverages':
-                document.getElementById('productName').value = '';
-                document.getElementById('transactionName').value = '';
-                document.getElementById('paymentMethod').value = '';
-                document.getElementById('cardType').value = '';
-                document.getElementById('transactionType').value = '';
-                document.getElementById('transactionAmount').value = '';
-                document.getElementById('transactionDate').value = '';
-                document.getElementById('description').value = '';
-                document.getElementById('transactionStatus').value = '';
-                break;
-            case 'Service Charges':
-                document.getElementById('productName').value = '';
-                document.getElementById('transactionName').value = '';
-                document.getElementById('paymentMethod').value = '';
-                document.getElementById('cardType').value = '';
-                document.getElementById('transactionType').value = '';
-                document.getElementById('transactionAmount').value = '';
-                document.getElementById('transactionDate').value = '';
-                document.getElementById('description').value = '';
-                document.getElementById('transactionStatus').value = '';
-                break;
-            case 'Room Service':
-                document.getElementById('productName').value = '';
-                document.getElementById('transactionName').value = '';
-                document.getElementById('paymentMethod').value = '';
-                document.getElementById('cardType').value = '';
-                document.getElementById('transactionType').value = '';
-                document.getElementById('transactionAmount').value = '';
-                document.getElementById('transactionDate').value = '';
-                document.getElementById('description').value = '';
-                document.getElementById('transactionStatus').value = '';
-                break;
-            default:
-                // Default case
-                break;
-        }
-    }
-</script>
+
+
+
 <section class="section dashboard">
     <div class="container">
       <div class="row">

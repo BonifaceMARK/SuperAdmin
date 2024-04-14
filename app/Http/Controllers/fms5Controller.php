@@ -18,14 +18,18 @@ class fms5Controller extends Controller
 
     public function fms5index()
     {
-
+        $adminPayments = AdminPayment::all();
+        $fixedAssetPayments = FixedAssetPayment::all();
+        $freightPayments = FreightPayment::all();
+        $paymentGateways = PaymentGateway::all();
+        $taxPayments = TaxPayment::all();
      $messages = ChatMessage::latest()->with('user')->limit(10)->get();
 
 
         $user = Auth::user();
         $name = $user->name;
         $department = $user->department;
-       return view ('F5.index', compact('messages', 'name', 'department'));
+       return view ('F5.index', compact('messages', 'name', 'department','adminPayments', 'fixedAssetPayments', 'freightPayments', 'paymentGateways', 'taxPayments'));
     }
 
 
