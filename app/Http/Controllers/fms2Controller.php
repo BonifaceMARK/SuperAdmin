@@ -25,38 +25,6 @@ class fms2Controller extends Controller
     $fixedAssetPayments = FixedAssetPayment::all();
     $adminPayments = AdminPayment::all();
 
-    // Calculate totals
-    $taxPaymentsTotal = $taxPayments->sum('amount');
-    $paymentGatewayTotal = $paymentGateways->sum('transactionAmount');
-    $freightPaymentsTotal = $freightPayments->sum('freightAmount');
-    $fixedAssetPaymentsTotal = $fixedAssetPayments->sum('amount');
-    $adminPaymentsTotal = $adminPayments->sum('amount');
-
-    // Format data for ApexCharts
-    $taxData = $taxPayments->pluck('amount')->toArray();
-    $paymentGatewayData = $paymentGateways->pluck('transactionAmount')->toArray();
-    $freightData = $freightPayments->pluck('freightAmount')->toArray();
-    $fixedAssetData = $fixedAssetPayments->pluck('amount')->toArray();
-    $adminData = $adminPayments->pluck('amount')->toArray();
-
-    // Merge data from all models into a single dataset
-    $allPayments = collect([
-        'Tax Payments' => $taxPayments,
-        'Payment Gateways' => $paymentGateways,
-        'Freight Payments' => $freightPayments,
-        'Fixed Asset Payments' => $fixedAssetPayments,
-        'Admin Payments' => $adminPayments
-    ]);
-    $adminPayments = AdminPayment::all();
-    $fixedAssetPayments = FixedAssetPayment::all();
-    $freightPayments = FreightPayment::all();
-    $paymentGateways = PaymentGateway::all();
-    $taxPayments = TaxPayment::all();
-
-    // Combine data from all models into a single dataset
-
-
-
     return view('F2.index', compact(
         'taxPaymentsTotal',
         'paymentGatewayTotal',
@@ -126,8 +94,9 @@ private function applyExponentialSmoothing($historicalData, $alpha = 0.2) {
         'end_date' => 'nullable|date',
     ]);
 
+    $randomString = $this->generateRandomString(10);
     FmsG2CostAllocation::create([
-        'reference_no' => $request->input('reference_no'),
+        'reference_no' => $randomString,
         'cost' => $request->input('cost'),
         'cost_type' => $request->input('cost_type'),
         'description' => $request->input('description'),
