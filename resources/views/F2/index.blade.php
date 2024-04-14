@@ -362,10 +362,6 @@
                 <form action="{{ route('cost-allocations.store') }}" method="POST">
                     @csrf
                     <div class="mb-3">
-                        <label for="reference_no" class="form-label">Reference No:</label>
-                        <input type="text" class="form-control" id="reference_no" name="reference_no" required>
-                    </div>
-                    <div class="mb-3">
                         <label for="cost" class="form-label">Cost:</label>
                         <input type="text" class="form-control" id="cost" name="cost" required>
                     </div>

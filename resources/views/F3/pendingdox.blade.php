@@ -1,6 +1,6 @@
 @include('f3.inc.head')
 @include('f3.inc.head2')
-@include('f3.inc.navbar')
+@include('layouts.appsidebar');
 <style>
     /* Add your styles here */
 .reply-input {
