@@ -7,6 +7,7 @@ use App\Models\InvoicePaymentDetail;
 use App\Models\InvoiceDetail;
 use App\Models\InvoiceCustomerName;
 use App\Models\ArInvoiceTotalAmount;
+use App\Models\TaxPayment;
 class fms4Controller extends Controller
 {
     public function fms4index()
@@ -15,7 +16,8 @@ class fms4Controller extends Controller
         $invoiceCustomerNames = InvoiceCustomerName::all();
         $invoicePaymentDetails = InvoicePaymentDetail::all();
         $invoiceDetails = InvoiceDetail::all();
-        return view('F4.index', compact('invoicePaymentDetails','arInvoiceTotalAmounts','invoiceDetails','invoiceCustomerNames'));
+        $taxPayments = TaxPayment::all();
+        return view('F4.index', compact('taxPayments','invoicePaymentDetails','arInvoiceTotalAmounts','invoiceDetails','invoiceCustomerNames'));
     }
 
 }

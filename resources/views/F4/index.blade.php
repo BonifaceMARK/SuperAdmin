@@ -158,6 +158,35 @@
 @endif
 
 
+@foreach($taxPayments as $taxPayment)
+<div class="col-xxl-4 col-xl-12">
+    <div class="card info-card customers-card">
+        <div class="filter">
+            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                <li class="dropdown-header text-start">
+                    <h6>Filter</h6>
+                </li>
+                <li><a class="dropdown-item" href="#">Today</a></li>
+                <li><a class="dropdown-item" href="#">This Month</a></li>
+                <li><a class="dropdown-item" href="#">This Year</a></li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{ $taxPayment->taxpayer_name }} | {{ $taxPayment->payment_date->format('M d, Y') }}</h5>
+            <div class="d-flex align-items-center">
+                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="bi bi-people"></i>
+                </div>
+                <div class="ps-3">
+                    <h6>{{ $taxPayment->amount }}</h6>
+                    <!-- Display other tax payment details as needed -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- End Customers Card -->
+@endforeach
 
 
 <section class="section">
