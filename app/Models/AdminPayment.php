@@ -11,5 +11,17 @@ class AdminPayment extends Model
     protected $fillable = [
         'paymentType', 'amount', 'paymentDate', 'description', 'status'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($AdminPayment) {
+            $fmsG1CashManagement = FmsG1CashManagement::first();
+            if ($fmsG1CashManagement) {
+                $fmsG1CashManagement->updateRevenue($AdminPayment->amount);
+            }
+        });
+    }
 }
 

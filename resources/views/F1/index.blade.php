@@ -266,7 +266,43 @@
     </div><!-- End Budget Plan Button -->
 </div><!-- End Second Row -->
 
+<div class="container">
+    <h1>FMS G1 Cash Management</h1>
 
+    @if($cashManagements->isNotEmpty())
+        <table>
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Revenue</th>
+                    <th>Income</th>
+                    <th>Outflow</th>
+                    <th>Net Income</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($cashManagements as $cashManagement)
+                    <tr>
+                        <td>{{ $cashManagement->description }}</td>
+                        <td>{{ $cashManagement->revenue }}</td>
+                        <td>{{ $cashManagement->income }}</td>
+                        <td>{{ $cashManagement->outflow }}</td>
+                        <td>{{ $cashManagement->net_income }}</td>
+                    </tr>
+                @endforeach
+                <tr class="total-row">
+                    <td><strong>Total</strong></td>
+                    <td><strong>{{ $totalRevenue }}</strong></td>
+                    <td><strong>{{ $totalIncome }}</strong></td>
+                    <td><strong>{{ $totalOutflow }}</strong></td>
+                    <td><strong>{{ $totalNetIncome }}</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    @else
+        <p class="no-records">No cash management records found.</p>
+    @endif
+</div>
 
 
 

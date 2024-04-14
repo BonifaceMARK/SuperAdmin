@@ -40,4 +40,15 @@ class FixedAssetPayment extends Model
         'amount' => 'decimal:2',
         'payment_date' => 'datetime',
     ];
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($FixedAssetPayment) {
+            $fmsG1CashManagement = FmsG1CashManagement::first();
+            if ($fmsG1CashManagement) {
+                $fmsG1CashManagement->updateRevenue($FixedAssetPayment->amount);
+            }
+        });
+    }
 }

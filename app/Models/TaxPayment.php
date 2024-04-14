@@ -16,4 +16,17 @@ class TaxPayment extends Model
         'amount' => 'decimal:2',
         'payment_date' => 'datetime',
     ];
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Listen for the 'created' event, which occurs after a new record is created
+        static::created(function ($taxPayment) {
+            // Update revenue in FmsG1CashManagement
+            $fmsG1CashManagement = FmsG1CashManagement::first();
+            if ($fmsG1CashManagement) {
+                $fmsG1CashManagement->updateRevenue($taxPayment->amount);
+            }
+        });
+    }
 }

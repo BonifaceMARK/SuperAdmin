@@ -45,4 +45,15 @@ class PaymentGateway extends Model
     protected $casts = [
         'transactionDate' => 'datetime',
     ];
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($paymentGateway) {
+            $fmsG1CashManagement = FmsG1CashManagement::first();
+            if ($fmsG1CashManagement) {
+                $fmsG1CashManagement->updateRevenue($paymentGateway->transactionAmount);
+            }
+        });
+    }
 }

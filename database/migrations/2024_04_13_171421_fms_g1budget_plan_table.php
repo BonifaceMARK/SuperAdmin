@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -21,6 +20,7 @@ return new class extends Migration
             $table->decimal('target_expense', 10, 2)->default(0);
             $table->date('start_date');
             $table->date('end_date');
+            $table->string('status')->default('pending'); // Adding status column with default value 'pending'
             $table->timestamps();
         });
     }

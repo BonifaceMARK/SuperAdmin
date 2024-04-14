@@ -10,31 +10,38 @@ use App\Models\FixedAssetPayment;
 use App\Models\AdminPayment;
 use App\Models\Investments;
 use App\Models\BudgetPlan;
+use App\Models\FmsG1CashManagement;
 class fms1Controller extends Controller
 {
 
     public function fms1index()
     {
-          // Fetch data for sales card (e.g., count of admin payments)
+
+        $cashManagements = FmsG1CashManagement::all(); // Retrieve all records
+        $totalRevenue = $cashManagements->sum('revenue');
+        $totalIncome = $cashManagements->sum('income');
+        $totalOutflow = $cashManagements->sum('outflow');
+        $totalNetIncome = $cashManagements->sum('net_income');
+
           $salesCount = AdminPayment::count();
-          // Calculate sales percentage
+
           $lastMonthSalesCount = AdminPayment::whereMonth('created_at', now()->subMonth()->month)->count();
           $salesPercentage = $lastMonthSalesCount ? (($salesCount - $lastMonthSalesCount) / $lastMonthSalesCount) * 100 : 0;
           $taxPayments = TaxPayment::all();
-          // Fetch data for revenue card (e.g., total amount of fixed asset payments)
+
           $revenueAmount = FixedAssetPayment::sum('amount');
-          // Calculate revenue percentage
+
           $lastMonthRevenueAmount = FixedAssetPayment::whereMonth('created_at', now()->subMonth()->month)->sum('amount');
           $revenuePercentage = $lastMonthRevenueAmount ? (($revenueAmount - $lastMonthRevenueAmount) / $lastMonthRevenueAmount) * 100 : 0;
           $freightPayments = FreightPayment::all();
-          // Fetch data for customers card (e.g., count of payment gateways)
+
           $customersCount = PaymentGateway::count();
-          // Calculate customers percentage
+
           $lastYearCustomersCount = PaymentGateway::whereYear('created_at', now()->subYear()->year)->count();
           $customersPercentage = $lastYearCustomersCount ? (($customersCount - $lastYearCustomersCount) / $lastYearCustomersCount) * 100 : 0;
         $payments = FixedAssetPayment::all();
         $investments = Investments::all();
-       return view ('F1.index', compact('freightPayments','taxPayments','payments','investments','salesCount', 'salesPercentage', 'revenueAmount', 'revenuePercentage', 'customersCount', 'customersPercentage'));
+       return view ('F1.index', compact('cashManagements', 'totalRevenue', 'totalIncome', 'totalOutflow', 'totalNetIncome','freightPayments','taxPayments','payments','investments','salesCount', 'salesPercentage', 'revenueAmount', 'revenuePercentage', 'customersCount', 'customersPercentage'));
     }
 
     public function storeBudgetPlan(Request $request)
