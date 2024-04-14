@@ -25,17 +25,30 @@ class fms2Controller extends Controller
     $fixedAssetPayments = FixedAssetPayment::all();
     $adminPayments = AdminPayment::all();
 
-    return view('F2.index', compact(
-        'taxPaymentsTotal',
-        'paymentGatewayTotal',
-        'freightPaymentsTotal',
-        'fixedAssetPaymentsTotal',
-        'adminPaymentsTotal',
-        'payments',
-        'investments',
-        'taxData',
-        'paymentGatewayData',
+        return view('F2.index', compact(
+            'taxPaymentsTotal',
+            'paymentGatewayTotal',
+            'freightPaymentsTotal',
+            'fixedAssetPaymentsTotal',
+            'adminPaymentsTotal'
+        ));
+    }
 
+
+// Example usage:
+    function generateRandomString($length) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $randomString = '';
+
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, strlen($characters) - 1)];
+    }
+
+    return $randomString;
+    }
+
+
+<<<<<<< HEAD
         'freightData',
         'fixedAssetData',
         'adminData',
@@ -82,6 +95,8 @@ private function applyExponentialSmoothing($historicalData, $alpha = 0.2) {
 
     return $smoothedData;
 }
+=======
+>>>>>>> 4dc4774e1c33773aa91de417466b50207428de1e
     public function storeCostAllocation(Request $request)
 {
     $request->validate([
