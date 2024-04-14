@@ -13,6 +13,8 @@ use App\Http\Controllers\fms5Controller;
 use App\Http\Controllers\fms1Controller;
 use App\Http\Controllers\fms2Controller;
 use App\Http\Controllers\fms4Controller;
+use App\Http\Controllers\fms6Controller;
+use App\Http\Controllers\fms8Controller;
 use App\Http\Controllers\G10Controller;
 
 
@@ -80,7 +82,7 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
     Route::post('/fixedassetpayments', [fms5Controller::class, 'storeFixedAsset'])->name('fixedassetpayments.store');
     Route::post('/taxpayments', [fms5Controller::class, 'storeTax'])->name('taxpayments.store');
 
-    // FINANCIAL PLANNING FINANCIAL REPORTING CASH MANAGEMENT 
+    // FINANCIAL PLANNING FINANCIAL REPORTING CASH MANAGEMENT
     Route::post('/financial-planning', [fms1Controller::class, 'storeBudgetPlan'])->name('BudgetPlan.store');
     Route::get('/fms1index', [fms1Controller::class, 'fms1index'])->name('fms1.index');
 
@@ -90,10 +92,12 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
     // GENERAL LEDGER AUDIT & COMPLIANCE
     Route::get('/fms4index', [fms4Controller::class, 'fms4index'])->name('fms4.index');
 
+    // FINANCIAL ANALYTICS & BUSINESS INTELLIGENCE RISK MANAGEMENT
+    Route::get('/fms6index', [fms6Controller::class, 'fms6index'])->name('fms6.index');
 
+    // CREDIT MANAGEMENT & BANK RECONCILIATION
+    Route::get('/fms8index', [fms8Controller::class, 'fms8index'])->name('fms8.index');
 
-
- 
 
 
 

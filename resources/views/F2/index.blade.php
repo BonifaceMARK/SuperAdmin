@@ -162,6 +162,135 @@
 
 
 
+<section class="section dashboard">
+    <div class="row">
+
+        <div class="card">
+            <div class="card-body">
+                <h1 class="card-title"><i class="bi bi-grid-1x2-fill"></i> Introduction <!-- Button to trigger modal -->
+                   </h1>
+
+                <!-- Integration of Expense, Budget, Cost, & Forecasting -->
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="{{ asset('assets/img/unsplash4.jpg') }}" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Integration of Expense, Budget, Cost, & Forecasting</h5>
+                                <p class="card-text">In expense budgeting and forecasting, "forecast" refers to the estimation or prediction of future expenses based on historical data, trends, and other relevant factors. This process involves analyzing past expenditure patterns, economic conditions, industry trends, and any other relevant factors to make informed projections about future expenses.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Expense Forecasting Process -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+
+
+                            <!-- Step 1: Historical Data Analysis -->
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><strong><i class="bi bi-clock-history"></i> 1. Historical Data Analysis:</strong></h5>
+                                            <p> The first step in expense forecasting is to analyze historical expenditure data. This involves examining past expenses over a specific period, such as monthly, quarterly, or annually. By analyzing historical data, organizations can identify patterns, trends, and seasonal variations in expenses.</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <img src="{{ asset('assets/img/data.jpg') }}" class="img-fluid rounded-start" alt="...">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 2: Identification of Key Drivers -->
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                        <img src="{{ asset('assets/img/key.jpg') }}" class="img-fluid rounded-start" alt="...">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><strong><i class="bi bi-search"></i> 2. Identification of Key Drivers:</strong></h5>
+                                            <p> After analyzing historical data, the next step is to identify the key drivers that influence expenses. This may include factors such as inflation rates, changes in market conditions, business expansion or contraction, regulatory changes, and other variables that impact expenses.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 3: Forecasting Methods -->
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><strong><i class="bi bi-clipboard2-data-fill"></i> 3. Forecasting Methods:</strong></h5>
+                                            <p> There are various methods and techniques used for expense forecasting, including quantitative methods (e.g., time series analysis, regression analysis) and qualitative methods (e.g., expert judgment, market research). The choice of forecasting method depends on factors such as the availability of data, the complexity of the expense patterns, and the level of accuracy required.</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <img src="{{ asset('assets/img/forecast.jpg') }}" class="img-fluid rounded-start" alt="...">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 4: Budgeting Process -->
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                        <img src="{{ asset('assets/img/calculate.jpg') }}" class="img-fluid rounded-start" alt="...">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><strong><i class="bi bi-calculator"></i> 4. Budgeting Process:</strong></h5>
+                                            <p> Once the forecasted expenses are determined, they are incorporated into the budgeting process. Budgeting involves allocating financial resources to different expense categories based on the forecasted amounts. This helps organizations plan and allocate resources effectively to meet their financial goals and objectives.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 5: Monitoring and Adjustments -->
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><strong><i class="bi bi-eye-fill"></i> 5. Monitoring and Adjustments:</strong></h5>
+                                            <p> Expense forecasting is an ongoing process that requires regular monitoring and adjustments. As actual expenses are incurred, they are compared to the forecasted amounts, and any significant variances are investigated. Adjustments may be made to the forecast based on new information, changes in business conditions, or other factors that impact expenses.</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <img src="{{ asset('assets/img/monitor.jpg') }}" class="img-fluid rounded-start" alt="...">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+      </div><!-- End Right side columns -->
+
+    </div>
+  </section>
 
 
 

@@ -137,7 +137,7 @@
   </header><!-- End Header -->
 
   <!-- ======= Sidebar ======= -->
-  @include('F5.sidebar')
+  @include('layouts.appsidebar');
 
   <main id="main" class="main">
 
@@ -156,6 +156,9 @@
         </ul>
     </div>
 @endif
+
+
+
 
 
 
