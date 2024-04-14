@@ -22,12 +22,29 @@ use PDF;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
+
+use App\Models\Account;
+use App\Models\Payouts;
+use App\Models\Investments;
+use App\Models\DepositRequest;
+use App\Models\InvestmentRequest;
+use Illuminate\Support\Facades\Hash;
+
 class SuperAdminController extends Controller
 {
     //
     public function dashboard()
     {
-        return view('superadmin.dashboard');
+
+        $userCount = User::where('role', '=', 0)->count();
+
+        $investment = DB::table('fms10_investments')->sum(DB::raw('CAST(amount AS DECIMAL(10, 2))'));
+
+        $countBalance = DB::table('fms10_accounts')->sum(DB::raw('CAST(balance AS DECIMAL(10, 2))'));
+
+        $data = Payouts::whereNotNull('amount')->sum('amount');
+
+        return view('superadmin.dashboard', compact('countBalance','investment','data','userCount'));
     }
 
     public function users()
