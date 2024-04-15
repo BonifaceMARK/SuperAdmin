@@ -163,47 +163,54 @@
 
 
 
-<div class="row">
-    <div class="col-lg-3 col-md-6">
-        <!-- Button to trigger the modal -->
-        <button type="button" class="btn btn-primary gallery-item v-100" data-bs-toggle="modal" data-bs-target="#taxPayersModal" style="background-image: url('{{ asset('assets/img/RE.jpg') }}'); background-size: cover; height: 200px;">
-            Tax Payers
-        </button>
-    </div>
-    <div class="col-lg-3 col-md-6">
-        <!-- Button to trigger the modal -->
-        <button type="button" class="btn btn-primary gallery-item v-100" data-bs-toggle="modal" data-bs-target="#paymentGatewaysModal" style="background-image: url('{{ asset('assets/img/REST.jpg') }}'); background-size: cover; height: 200px;">
-            Hotel & Restaurant
-        </button>
-    </div>
-    <div class="col-lg-3 col-md-6">
-        <!-- Button to trigger the modal -->
-        <button type="button" class="btn btn-primary gallery-item v-100" data-bs-toggle="modal" data-bs-target="#freightPaymentsModal" style="background-image: url('{{ asset('assets/img/finance_1.jpg') }}'); background-size: cover; height: 200px;">
-            Freight Payments
-        </button>
-    </div>
-    <div class="col-lg-3 col-md-6">
-        <!-- Button to trigger the modal -->
-        <button type="button" class="btn btn-primary gallery-item v-100" data-bs-toggle="modal" data-bs-target="#fixedAssetPaymentsModal" style="background-image: url('{{ asset('assets/img/account.jpg') }}'); background-size: cover; height: 200px;">
-            Fixed Asset Payments
-        </button>
-    </div>
-</div>
-<div class="row mt-3">
-    <div class="col-lg-6 col-md-6">
-        <!-- Button to trigger the modal -->
-        <button type="button" class="btn btn-primary gallery-item v-100" data-bs-toggle="modal" data-bs-target="#paymentModal" style="background-image: url('{{ asset('assets/img/allocated.jpg') }}'); background-size: cover; height: 200px;">
-            Audit Tax Payments
-        </button>
-    </div>
-    <div class="col-lg-6 col-md-6">
-        <!-- Button to trigger the modal -->
-        <button type="button" class="btn btn-primary gallery-item v-100" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-image: url('{{ asset('assets/img/check.jpg') }}'); background-size: cover; height: 200px;">
-            General ledger
-        </button>
-    </div>
-    <!-- Add more buttons as needed -->
-</div>
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="gallery-item">
+                    <button type="button" class="btn btn-primary v-100" data-bs-toggle="modal" data-bs-target="#taxPayersModal" style="background-image: url('{{ asset('assets/img/RE.jpg') }}'); background-size: cover;">
+                        Tax Payers
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="gallery-item">
+                    <button type="button" class="btn btn-primary v-100" data-bs-toggle="modal" data-bs-target="#paymentGatewaysModal" style="background-image: url('{{ asset('assets/img/REST.jpg') }}'); background-size: cover;">
+                        Hotel & Restaurant
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="gallery-item">
+                    <button type="button" class="btn btn-primary v-100" data-bs-toggle="modal" data-bs-target="#freightPaymentsModal" style="background-image: url('{{ asset('assets/img/finance_1.jpg') }}'); background-size: cover;">
+                        Freight Payments
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="gallery-item">
+                    <button type="button" class="btn btn-primary v-100" data-bs-toggle="modal" data-bs-target="#fixedAssetPaymentsModal" style="background-image: url('{{ asset('assets/img/account.jpg') }}'); background-size: cover;">
+                        Fixed Asset Payments
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-6">
+            <div class="col-lg-6 col-md-6">
+                <div class="gallery-item">
+                    <button type="button" class="btn btn-primary v-100" data-bs-toggle="modal" data-bs-target="#paymentModal" style="background-image: url('{{ asset('assets/img/allocated.jpg') }}'); background-size: cover;">
+                        Audit Tax Payments
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="gallery-item">
+                    <button type="button" class="btn btn-primary v-100" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-image: url('{{ asset('assets/img/check.jpg') }}'); background-size: cover;">
+                        General ledger
+                    </button>
+                </div>
+            </div>
+            <!-- Add more buttons as needed -->
+        </div>
+        
 
 
 
@@ -256,7 +263,7 @@
             <div class="modal-dialog modal-dialog-custom " role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="paymentModalLabel">Payments</h5>
+                        <h2 class="modal-title" id="paymentModalLabel">Payments and Investment</h2>
                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -265,7 +272,7 @@
 
                         <div class="card">
                             <div class="card-body">
-                                <h5>Payment Gateways</h5>
+                    
                                 <table class="table table-responsive">
                                     <thead>
                                         <tr>
@@ -281,26 +288,21 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($payments as $payment)
+                                        @foreach ($payments->merge($f10) as $payment)
                                             <tr>
                                                 <td>{{ $payment->id }}</td>
-                                                <td>{{ isset($payment->tax_type) ? 'Tax Payment' : 'Fixed Asset Payment' }}
-                                                </td>
-                                                <td>{{ isset($payment->tax_type) ? $payment->taxpayer_name : $payment->asset_name }}
-                                                </td>
+                                                <td>{{ isset($payment->tax_type) ? 'Tax Payment' : 'Fixed Asset Payment' }}</td>
+                                                <td>{{ isset($payment->tax_type) ? $payment->taxpayer_name : $payment->asset_name }}</td>
                                                 <td>{{ $payment->amount }}</td>
                                                 <td>{{ $payment->payment_date }}</td>
                                                 <td>{{ $payment->payment_method }}</td>
-                                                <td>{{ isset($payment->payment_reference) ? $payment->payment_reference : 'N/A' }}
-                                                </td>
+                                                <td>{{ isset($payment->payment_reference) ? $payment->payment_reference : 'N/A' }}</td>
                                                 <td id="paymentStatus{{ $payment->id }}">{{ $payment->status }}</td>
                                                 <td>
-                                                    @if (isset($payment->tax_type) && $payment->status == 'Paid')
-                                                        <form action="{{ route('add.revenue', $payment->id) }}"
-                                                            method="POST">
+                                                    @if ($payment->status == 'Paid')
+                                                        <form action="{{ route('add.revenue', $payment->id) }}" method="POST">
                                                             @csrf
-                                                            <button type="submit" class="btn btn-primary">Add to
-                                                                Revenue</button>
+                                                            <button type="submit" class="btn btn-primary addToRevenueBtn" data-payment-id="{{ $payment->id }}">Add to Revenue</button>
                                                         </form>
                                                     @else
                                                         <span class="text-muted">Not Paid</span>
@@ -310,50 +312,9 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <h5>Investment</h5>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Type</th>
-                                            <th>Name/Description</th>
-                                            <th>Amount</th>
-                                            <th>Payment Date</th>
-                                            <th>Payment Method</th>
-                                            <th>Payment Reference</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($f10 as $data)
-                                        <tr>
-                                            <td>{{ $data->id }}</td>
-                                            <td>{{ $data->type }}</td>
-                                            <td>{{ $data->firstname }} {{ $data->lastname }}</td>
-                                            <td>{{ $data->amount }}</td>
-                                            <td>{{ $data->created_at }}</td>
-                                            <td>{{ $data->type }}</td>
-                                            <td>{{ $data->user_id }}</td>
-                                            <td>Paid</td>
-                                            <td>
-                                                @if ($data->status == 'Paid')
-                                                    <form action="{{ route('add.revenue', $data->id) }}"
-                                                        method="POST">
-                                                        @csrf
-                                                        <button type="submit" class="btn btn-primary">Add to
-                                                            Revenue</button>
-                                                    </form>
-                                                @else
-                                                    <span class="text-muted">Not Paid</span>
-                                                @endif
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>

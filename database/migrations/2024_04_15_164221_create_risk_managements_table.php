@@ -13,12 +13,15 @@ class CreateRiskManagementsTable extends Migration
      */
     public function up()
     {
-        Schema::create('fms_g6risk_managements', function (Blueprint $table) {
+        Schema::create('fms_g5risk_managements', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('description');
-            $table->int('severity');
-            $table->enum('status', ['Open', 'Closed'])->default('Open');
+            $table->string('risk_name');
+            $table->text('description')->nullable();
+            $table->string('category');
+            $table->string('status')->default('Pending');
+            $table->integer('probability'); // Corrected method call from int to integer
+            $table->integer('impact');
+            $table->integer('severity');
             $table->timestamps();
         });
     }
@@ -30,6 +33,6 @@ class CreateRiskManagementsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('risk_managements');
+        Schema::dropIfExists('fms_g5risk_managements');
     }
 }

@@ -327,7 +327,7 @@
                             <!-- Modal footer -->
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" id="printButton{{$payment->id}}">Print as image</button>
+                                <button type="button" class="btn btn-primary" id="printButton{{$payment->id}}">Print</button>
                             </div>
                         </div>
                     </div>

@@ -9,8 +9,8 @@ class RiskManagement extends Model
 {
     use HasFactory;
 
+    protected $table = 'fms_g5risk_managements';
 
-    protected $table = 'fms_g6risk_managements';
     /**
      * The attributes that are mass assignable.
      *
@@ -19,7 +19,10 @@ class RiskManagement extends Model
     protected $fillable = [
         'title',
         'description',
-        'severity',
+        'category',
         'status',
+        'probability',
+        'impact',
+        'severity',
     ];
 }

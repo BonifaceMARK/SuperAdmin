@@ -187,11 +187,9 @@
             </p>
         @endforeach
         <div class="card-body">
-            <h1 class="card-title">Risk Management Progress</h1>
+            <h1 class="card-title">Risk Management</h1>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-body">
                                 <table class="table">
                                     <thead>
                                         <tr>
@@ -213,13 +211,14 @@
                                             <td>{{ $budgetPlan->description }}</td>
                                             <td>{{ $budgetPlan->target_revenue }}</td>
                                             <td>{{ $budgetPlan->target_expense }}</td>
-                                            <td>{{ $budgetPlan->start_date }}</td>
-                                            <td>{{ $budgetPlan->end_date }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($budgetPlan->start_date)->format('Y-m-d') }}</td>
+<td>{{ \Carbon\Carbon::parse($budgetPlan->end_date)->format('Y-m-d') }}</td>
+
                                             <td>{{ $budgetPlan->status }}</td>
-                                            <td>{{ $budgetPlan->severity }}</td>
+                                            <td>{{ $budgetPlan->severity }}%</td>
                                             <td>
 
-                                                <button type="button" class="btn btn-sm btn-primary modal-button" data-bs-toggle="modal" data-bs-target="#viewModal{{ $budgetPlan->id }}">View</button>
+                                                <button type="button" class="btn btn-sm btn-primary modal-button" data-bs-toggle="modal" data-bs-target="#viewModal{{ $budgetPlan->id }}">Measure Risk</button>
                                             </td>
                                         </tr>
                                         <!-- View Modal for Budget Plan -->
@@ -227,7 +226,7 @@
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="viewModalLabel{{ $budgetPlan->id }}">View Budget Plan</h5>
+                                                        <h5 class="modal-title" id="viewModalLabel{{ $budgetPlan->id }}">Measure Risk</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
@@ -350,9 +349,9 @@
                     <div class="card">
 
       <div class="card-body">
-        <h5 class="card-title">Reports <span>/Today</span></h5>
+        <h5 class="card-title">Budget Plan  <span></span> | Severity Chart</h5>
         <div class="container">
-            <h1>Budget Plan Severity Chart</h1>
+
             <canvas id="budgetChart" width="400" height="200"></canvas>
         </div>
         <!-- Line Chart -->
@@ -491,18 +490,7 @@
 
           <!-- Website Traffic -->
           <div class="card">
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
 
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-              </ul>
-            </div>
 
             <div class="card-body pb-0">
               <h5 class="card-title">Risk Traffic <span>| Today</span></h5>

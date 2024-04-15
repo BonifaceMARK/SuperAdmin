@@ -96,6 +96,7 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
     Route::get('/fms1index', [fms1Controller::class, 'fms1index'])->name('fms1.index');
     Route::post('/add-to-revenue/{payment}', [fms1Controller::class, 'addToRevenue'])->name('add.revenue');
     Route::post('planrequest', [fms1Controller::class, 'planningrequest'])->name('planrequest');
+    Route::post('/cost-allocations/{id}/allocate', [fms1Controller::class, 'allocate'])->name('cost_allocations.allocate');
 
     // EXPENSE BUDGETING & FORECAST COST ALLOCATION MANAGEMENT
     Route::get('/fms2index', [fms2Controller::class, 'fms2index'])->name('fms2.index');

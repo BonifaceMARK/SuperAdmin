@@ -10,6 +10,7 @@ use App\Models\FixedAssetPayment;
 use App\Models\AdminPayment;
 use App\Models\Investments;
 use App\Models\BudgetPlan;
+use App\Models\FmsG2CostAllocation;
 use App\Models\FmsG1CashManagement;
 use App\Models\Pendingdocu;
 class fms1Controller extends Controller
@@ -29,14 +30,16 @@ class fms1Controller extends Controller
     public function fms1index()
     {
 
+        $costAllocations = FmsG2CostAllocation::all();
+
         $cashManagements = FmsG1CashManagement::all(); // Retrieve all records
         $totalRevenue = $cashManagements->sum('revenue');
         $totalIncome = $cashManagements->sum('income');
         $totalOutflow = $cashManagements->sum('outflow');
         $totalNetIncome = $cashManagements->sum('net_income');
-        
+
         $approve = Pendingdocu::all();
-        
+
 
           $salesCount = AdminPayment::count();
 
@@ -57,7 +60,7 @@ class fms1Controller extends Controller
         $payments = FixedAssetPayment::all();
         $investments = Investments::all();
 
-       return view ('F1.index', compact('cashManagements','approve', 'totalRevenue', 'totalIncome', 'totalOutflow', 'totalNetIncome','freightPayments','taxPayments','payments','investments','salesCount', 'salesPercentage', 'revenueAmount', 'revenuePercentage', 'customersCount', 'customersPercentage'));
+       return view ('F1.index', compact('costAllocations','cashManagements','approve', 'totalRevenue', 'totalIncome', 'totalOutflow', 'totalNetIncome','freightPayments','taxPayments','payments','investments','salesCount', 'salesPercentage', 'revenueAmount', 'revenuePercentage', 'customersCount', 'customersPercentage'));
     }
 
     public function planningrequest(Request $request){
@@ -78,6 +81,44 @@ class fms1Controller extends Controller
         ]);
         return redirect()->back()->with('success', 'Financial planning has been created Waiting For Approval.');
     }
+  public function allocate($id)
+  {
+      // Find the cost allocation record
+      $costAllocation = FmsG2CostAllocation::findOrFail($id);
+
+      // Deduct the cost from revenue
+      $revenueToDeduct = $costAllocation->cost;
+
+      // Check if revenue is sufficient
+      if (!$this->isRevenueSufficient($revenueToDeduct)) {
+          return redirect()->back()->with('error', 'Insufficient funds. Revenue amount is lower than the cost.');
+      }
+
+      // Deduct revenue
+      $this->deductRevenue($revenueToDeduct);
+
+      // Update the status of the cost allocation
+      $costAllocation->status = 'Allocated';
+      $costAllocation->save();
+
+      // Redirect back or return a response as needed
+      return redirect()->back()->with('success', 'Revenue deducted successfully and cost allocation updated.');
+  }
+
+  private function isRevenueSufficient($amount)
+  {
+      // Find or create the cash management record
+      $cashManagement = FmsG1CashManagement::firstOrNew([]);
+
+      // If revenue is null or zero, set it to zero
+      if ($cashManagement->revenue === null || $cashManagement->revenue === 0) {
+          $cashManagement->revenue = 0;
+      }
+
+      // Check if revenue is enough
+      return $cashManagement->revenue >= $amount;
+  }
+
 
     public function storeBudgetPlan(Request $request)
     {

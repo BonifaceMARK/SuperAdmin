@@ -1432,16 +1432,16 @@ tr:nth-child(even) {
 }
 .gallery-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Increased minimum width */
     gap: 20px;
 }
 
 .gallery-item {
-    height: 200px;
+    height: 250px; /* Increased height */
     background-color: transparent;
     border: none;
     color: #fff;
-    font-size: 16px;
+    font-size: 20px; /* Increased font size */
     font-weight: bold;
     text-align: center;
     display: flex;
@@ -1451,9 +1451,18 @@ tr:nth-child(even) {
     transition: transform 0.3s ease;
 }
 
+.gallery-item button {
+    width: 100%; /* Adjusted to fill the grid cell width */
+    height: 100%; /* Adjusted to fill the grid cell height */
+    background-size: cover;
+    background-position: center;
+}
+
 .gallery-item:hover {
     transform: scale(1.05);
 }
+
+
  #chart {
             width: 900px; /* Adjust the width as needed */
             height: 350px; /* Adjust the height as needed */

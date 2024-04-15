@@ -197,6 +197,8 @@
 </div>
 
 
+</div>
+
         <!-- Modal -->
         <div class="modal fade" id="fixedAssetReportsModal" tabindex="-1" aria-labelledby="fixedAssetReportsModalLabel"
             aria-hidden="true">
@@ -269,6 +271,57 @@
                                 No cash management records found.
                             </div>
                         @endif
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-title">
+                                        Cost Allocation
+                                    </div>
+                                    <div class="card-body">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Reference No</th>
+                                                    <th>Cost</th>
+                                                    <th>Cost Type</th>
+                                                    <th>Description</th>
+                                                    <th>Budget</th>
+                                                    <th>Start Date</th>
+                                                    <th>End Date</th>
+                                                    <th>Created By</th>
+                                                    <th>Created At</th>
+                                                    <th>Status</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($costAllocations as $costAllocation)
+                                                    <tr>
+                                                        <td>{{ $costAllocation->reference_no }}</td>
+                                                        <td>{{ $costAllocation->cost }}</td>
+                                                        <td>{{ $costAllocation->cost_type }}</td>
+                                                        <td>{{ $costAllocation->description }}</td>
+                                                        <td>{{ $costAllocation->budget }}</td>
+                                                        <td>{{ \Carbon\Carbon::parse($costAllocation->start_date)->toDateString() }}</td>
+                    <td>{{ \Carbon\Carbon::parse($costAllocation->end_date)->toDateString() }}</td>
+
+                                                        <td>{{ $costAllocation->created_by }}</td>
+                                                        <td>{{ \Carbon\Carbon::parse($costAllocation->created_at)->toDateTimeString() }}</td>
+                                                        <td>{{ $costAllocation->status }}</td>
+                                                        <td>
+                                                            <form action="{{ route('cost_allocations.allocate', $costAllocation->id) }}" method="POST">
+                                                                @csrf
+                                                                <button type="submit" class="btn btn-primary">Allocate</button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -317,7 +370,7 @@
                                     <div class="card info-card revenue-card">
                                         <!-- Card body -->
                                         <div class="card-body">
-                                            <h5 class="card-title">Fixed Assets <span> | Expenses</span></h5>
+                                            <h5 class="card-title">Fixed Assets <span> | Amount</span></h5>
                                             <div class="d-flex align-items-center">
                                                 <div
                                                     class="card-icon rounded-circle d-flex align-items-center justify-content-center">
