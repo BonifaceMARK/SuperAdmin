@@ -12,6 +12,7 @@ use App\Models\FreightPayment;
 use App\Models\PaymentGateway;
 use App\Models\FixedAssetPayment;
 use App\Models\Transactionhistory;
+use App\Models\Transaction;
 class fms4Controller extends Controller
 {
     public function fms4index()
@@ -19,7 +20,7 @@ class fms4Controller extends Controller
         $freightPayments = FreightPayment::all();
         $paymentGateways = PaymentGateway::all();
         $payments = FixedAssetPayment::all();
-        $f10 = Transactionhistory::all();
+        $f10 = Transaction::all();
         
         $arInvoiceTotalAmounts = ArInvoiceTotalAmount::all();
         $invoiceCustomerNames = InvoiceCustomerName::all();

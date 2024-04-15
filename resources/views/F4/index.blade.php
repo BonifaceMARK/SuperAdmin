@@ -277,9 +277,11 @@
 
                         <div class="card">
                             <div class="card-body">
+                                <h5>Payment Gateways</h5>
                                 <table class="table table-responsive">
                                     <thead>
                                         <tr>
+                                            <th>ID</th>
                                             <th>Type</th>
                                             <th>Name/Description</th>
                                             <th>Amount</th>
@@ -293,6 +295,7 @@
                                     <tbody>
                                         @foreach ($payments as $payment)
                                             <tr>
+                                                <td>{{ $payment->id }}</td>
                                                 <td>{{ isset($payment->tax_type) ? 'Tax Payment' : 'Fixed Asset Payment' }}
                                                 </td>
                                                 <td>{{ isset($payment->tax_type) ? $payment->taxpayer_name : $payment->asset_name }}
@@ -317,29 +320,48 @@
                                                 </td>
                                             </tr>
                                         @endforeach
+                                    </tbody>
+                                </table>
+                                <h5>Investment</h5>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Type</th>
+                                            <th>Name/Description</th>
+                                            <th>Amount</th>
+                                            <th>Payment Date</th>
+                                            <th>Payment Method</th>
+                                            <th>Payment Reference</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
                                         @foreach ($f10 as $data)
-                                            <tr>
-                                                <td>{{ $data->type }}</td>
-                                                <td>{{ $data->firstname }} {{ $data->lastname }}</td>
-                                                <td>{{ $data->amount }}</td>
-                                                <td>{{ $data->created_at }}</td>
-                                                <td>{{ $data->description }}</td>
-                                                <td>{{ $data->user_id }}</td>
-                                                <td>Paid</td>
-                                                <td>
-                                                    @if (isset($payment->tax_type) && $payment->status == 'Paid')
-                                                        <form action="{{ route('add.revenue', $payment->id) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            <button type="submit" class="btn btn-primary">Add to
-                                                                Revenue</button>
-                                                        </form>
-                                                    @else
-                                                        <span class="text-muted">Not Paid</span>
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                        @endforeach
+                                        <tr>
+                                            <td>{{ $data->id }}</td>
+                                            <td>{{ $data->type }}</td>
+                                            <td>{{ $data->firstname }} {{ $data->lastname }}</td>
+                                            <td>{{ $data->amount }}</td>
+                                            <td>{{ $data->created_at }}</td>
+                                            <td>{{ $data->type }}</td>
+                                            <td>{{ $data->user_id }}</td>
+                                            <td>Paid</td>
+                                            <td>
+                                                @if ($data->status == 'Paid')
+                                                    <form action="{{ route('add.revenue', $data->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-primary">Add to
+                                                            Revenue</button>
+                                                    </form>
+                                                @else
+                                                    <span class="text-muted">Not Paid</span>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
