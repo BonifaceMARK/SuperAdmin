@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\File;
 use Carbon\Carbon;
-
+use App\Models\FmsG2CostAllocation;
 class F3ClientController extends Controller
 {
     function clipage() {
@@ -88,11 +88,15 @@ class F3ClientController extends Controller
     public function indexpage()
     {
 
+
+
+
     $users = User::orderBy('id', 'asc')->get()->map(function ($item) {
         $item->name = $item->name;
         $item->username = $item->username;
         return $item;
     });
+
     $userCount = User::count();
     $pendingdocuCount = Pendingdocu::count();
     $rejectedDocuments = Pendingdocu::where('status', 'rejected')->get();
@@ -111,6 +115,33 @@ class F3ClientController extends Controller
     return view('f3.pendingdox', compact('pendingdocux', 'pendingdocuCount', 'users'));
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // report
     function apar() {
 
         return view('f3.apar');
