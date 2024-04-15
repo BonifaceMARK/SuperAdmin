@@ -13,6 +13,7 @@ class FmsG2Budget extends Model
 
     protected $fillable = [
         'reference_no',
+        'title',
         'name',
         'description',
         'amount',
@@ -22,6 +23,7 @@ class FmsG2Budget extends Model
         'purpose',
         'status',
         'created_by',
+        'created_at',
     ];
 
     protected $casts = [

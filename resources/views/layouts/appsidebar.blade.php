@@ -299,7 +299,7 @@
   </a>
 </li>
 <li class="nav-item">
-  <a class="nav-link collapsed" class="nav-link " data-bs-target="#forms-nav"  href="clients">
+  <a class="nav-link collapsed" class="nav-link " data-bs-target="#forms-nav"  href="fms3index">
     <i class="bi bi-journal-text"></i><span style="font-size: 0.8rem;">Clients</span>
   </a>
 </li>

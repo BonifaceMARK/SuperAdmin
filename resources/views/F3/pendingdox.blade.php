@@ -99,15 +99,15 @@ background-color: #0056b3;
                                             @endif
                                         ">{{ $docu->status }}</span>
                                     </td>
-<td class="d-flex align-items-center justify-content-start">
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal{{ $docu->id }}">
-        View Details
-    </button>
-</td>
+                    <td class="d-flex align-items-center justify-content-start">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal{{ $docu->id }}">
+                            View Details
+                        </button>
+                    </td>
 
-        </td>
-    </tr>
-@endforeach
+                        </td>
+                    </tr>
+                    @endforeach
                     </tbody>
                   </table>
 
@@ -208,13 +208,13 @@ background-color: #0056b3;
                             </div>
                         </div> <!--  end of model -->
 
-      </td>
-    </tr>
-@endforeach
+                    </td>
+                    </tr>
+                @endforeach
 
-<script>
+                <script>
 
-</script>
+                </script>
 
 
 

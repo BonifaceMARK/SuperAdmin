@@ -20,6 +20,8 @@ class FmsG2CostAllocation extends Model
         'start_date',
         'end_date',
         'created_by',
+        'created_at',
+        'status',
     ];
 
     protected $casts = [

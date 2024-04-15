@@ -69,13 +69,13 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
     // ********** F3 Routes *********
     Route::post('/clients/s{id}',           [F3ClientController::class, 'update'])->name('update');
     // Route::get('/dashboard',                [PendingController::class, 'indexp'])->name('dashboard');
-    Route::get('/clients',                  [F3ClientController::class, 'indexpage'])->name('Clients');
+    // Route::get('/clients',                  [F3ClientController::class, 'indexpage'])->name('Clients');
     Route::get('/ap-ar-fetch-chart-data',   [F3ClientController::class, 'fetchChartData'])->name('fetchChartData');
     Route::get('/ap-ar-reports',            [F3ClientController::class, 'apar'])->name('apar');
     Route::get('/fix-asset-reports',        [F3ClientController::class, 'fixass'])->name('fixass');
     Route::get('/tax-management-reports',   [F3ClientController::class, 'taxfin'])->name('taxfin');
     Route::get('/bank',                     [F3ClientController::class, 'bank'])->name('bank');
-
+    Route::get('/fms3index',                [F3ClientController::class, 'indexpage'])->name('fms3index');
 
 
     // PAYMENT GATEWAYS COMMUNICATION & COLLABORATION ACCOUNTING STANDARDS
@@ -99,6 +99,7 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
     // EXPENSE BUDGETING & FORECAST COST ALLOCATION MANAGEMENT
     Route::get('/fms2index', [fms2Controller::class, 'fms2index'])->name('fms2.index');
     Route::post('/cost-allocations',[fms2Controller::class, 'storeCostAllocation'])->name('cost-allocations.store');
+    Route::post('/request_budgets',[fms2Controller::class, 'store'])->name('request_budgets.store');
     Route::get('/expenses', [fms2Controller::class, 'index']);
     Route::get('/tax-payment-data', [fms2Controller::class, 'getTaxPaymentData']);
 
@@ -210,13 +211,13 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
 
     //////VIEW EDIT
     Route::get('/edit/{id}', [G10Controller::class, 'viewVendor'])->name('edit.vendor');
-    Route::put('/update/{id}', [G10Controller::class, 'updateVendor'])->name('update.vendor');  
-    
+    Route::put('/update/{id}', [G10Controller::class, 'updateVendor'])->name('update.vendor');
+
     Route::get('/vendorview',[G10Controller::class,'vendorView'])->name('view.vendor');
 
 
 
-    
+
 
     // F2 ROUTES
     Route::post('/change-password',                     [AuthController::class, 'changePassword'])->name('change.password');
@@ -235,34 +236,7 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
     // Route::get('/dashboard',                            [UserController::class,'dashboard'])->name('dash');
     // Route::get('/fetch-news',                           [USERController::class, 'fetchNews'])->name('fetch.news');
 
-    Route::get('/fetch-expense-cost-allocation-data', [CostAllocationController::class, 'fetchExpenseCostAllocationData']);
-    Route::get('/fetch-expense-data', [ExpenseController::class, 'fetchExpenseCategory'])->name('fetch.category.data');
-    Route::get('/fetch-expense-chart-data', [ExpenseController::class, 'fetchExpenseChartData'])->name('fetch.expense.chart.data');
-    Route::get('/fetch-expense-season-data', [ExpenseController::class, 'fetchExpenseSeasonData']);
-    Route::get('/fetch-expense-chart-with-moving-average', [ExpenseController::class, 'fetchExpenseChartWithMovingAverage'])->name('fetch.expense.chart.moving.average');
-    Route::get('/expenses/category', [ExpenseController::class, 'getCategoryExpenses'])->name('expenses.category');
-    Route::get('/expenses',                                     [ExpenseController::class, 'index'])->name('expenses.index');
-    Route::get('/expenses/create',                              [ExpenseController::class, 'create'])->name('expenses.create');
-    Route::post('/expenses',                                    [ExpenseController::class, 'store'])->name('expenses.store');
-    Route::get('/expenses/{expense}/edit',                      [ExpenseController::class, 'edit'])->name('expenses.edit');
-    Route::put('/expenses/{expense}',                           [ExpenseController::class, 'update'])->name('expenses.update');
-    Route::get('/expenses/{expense}',                           [ExpenseController::class, 'show'])->name('expenses.show');
-    Route::delete('/expenses/{expense}',                        [ExpenseController::class, 'destroy'])->name('expenses.destroy');
-    Route::get('/cost_allocations',                             [CostAllocationController::class, 'index'])->name('cost_allocations.index');
-    Route::get('/cost_allocations/create',                      [CostAllocationController::class, 'create'])->name('cost_allocations.create');
-    Route::post('/cost_allocations',                            [CostAllocationController::class, 'store'])->name('cost_allocations.store');
-    Route::get('/cost_allocations/{costAllocation}',            [CostAllocationController::class, 'show'])->name('cost_allocations.show');
-    Route::get('/cost_allocations/{costAllocation}/edit',       [CostAllocationController::class, 'edit'])->name('cost_allocations.edit');
-    Route::put('/cost_allocations/{costAllocation}',            [CostAllocationController::class, 'update'])->name('cost_allocations.update');
-    Route::delete('/cost_allocations/{costAllocation}',         [CostAllocationController::class, 'destroy'])->name('cost_allocations.destroy');
-    Route::get('/request_budgets',              [RequestBudgetController::class, 'index'])->name('request_budgets.index');
-    Route::get('/request_budgets/create',       [RequestBudgetController::class, 'create'])->name('request_budgets.create');
-    Route::post('/request_budgets',             [RequestBudgetController::class, 'store'])->name('request_budgets.store');
-    Route::get('/request_budgets/{id}',         [RequestBudgetController::class, 'show'])->name('request_budgets.show');
-    Route::get('/request_budgets/{id}/edit',    [RequestBudgetController::class, 'edit'])->name('request_budgets.edit');
-    Route::put('/request_budgets/{id}',         [RequestBudgetController::class, 'update'])->name('request_budgets.update');
-    Route::delete('/request_budgets/{id}',      [RequestBudgetController::class, 'destroy'])->name('request_budgets.destroy');
-    Route::get('/budget-trends',                [RequestBudgetController::class, 'budgetTrends']);
+
 });
 
 // ********** Sub Admin Routes *********

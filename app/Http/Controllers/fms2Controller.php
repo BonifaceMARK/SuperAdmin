@@ -11,6 +11,7 @@ use App\Models\FixedAssetPayment;
 use App\Models\AdminPayment;
 use App\Models\Investments;
 use App\Models\FmsG1CashManagement;
+use App\Models\FmsG2Budget;
 
 class fms2Controller extends Controller
 {
@@ -186,5 +187,23 @@ class fms2Controller extends Controller
 
     return redirect()->route('fms2.index')->with('success', 'Cost allocation created successfully!');
 }
-
+public function store(Request $request)
+    {
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'amount' => 'required|numeric|max:9999999.99',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after:start_date',
+        ]);
+        $randomString = $this->generateRandomString(10);
+        // Set a default value for the status field
+        $request->merge(['status' => 'pending']);
+        $request->merge(['department' => 'RequestBudget']);
+        $request->merge(['name' => auth()->user()->name]);
+        $request->merge(['reference_no' => $randomString]);
+        FmsG2Budget::create($request->all());
+        return redirect()->route('fms2.index')
+            ->with('success', 'Request budget created successfully.');
+    }
 }

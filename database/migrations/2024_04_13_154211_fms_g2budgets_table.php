@@ -15,16 +15,17 @@ return new class extends Migration
     {
         Schema::create('fms_g2budgets', function (Blueprint $table) {
             $table->id();
+
             $table->uuid('reference_no');
-            $table->string('name');
+            $table->string('title');
+
             $table->text('description')->nullable();
             $table->decimal('amount', 15, 2);
             $table->date('start_date');
             $table->date('end_date');
             $table->string('department');
-            $table->string('purpose');
-            $table->string('status')->default('pending'); // Added 'status' field with a default value of 'pending'
-            $table->string('created_by'); // Changed to string type
+            $table->string('name');
+            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending'); // Added 'status' field with a default value of 'pending'
             $table->timestamps();
         });
     }
@@ -36,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('budgets');
+        Schema::dropIfExists('fms_g2budgets');
     }
 };

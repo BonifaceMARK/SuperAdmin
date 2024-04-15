@@ -15,6 +15,7 @@ class BudgetPlan extends Model
         'target_expense',
         'start_date',
         'end_date',
+        'status',
     ];
 
     protected $casts = [

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->decimal('budget', 15, 2)->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
+            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->string('created_by'); // Assuming creator's name is stored here
             $table->timestamps();
         });
@@ -34,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cost_allocations');
+        Schema::dropIfExists('fms_g2cost_allocations');
     }
 };

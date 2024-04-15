@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('forecasts');
+        Schema::dropIfExists('fms_g2forecasts');
     }
 };

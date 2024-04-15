@@ -19,7 +19,8 @@ return new class extends Migration
         $table->text('description')->nullable();
         $table->timestamp('submitted_at')->default(now());
         $table->string('reference')->nullable();
-        $table->string('submitted_by');
+        $table->string('submitted_by')->nullable();
+        $table->string('comment')->nullable();
         $table->enum('admin_status', ['pending', 'approved', 'rejected'])->default('pending');
         $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
         $table->timestamps();

@@ -13,33 +13,43 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\File;
 use Carbon\Carbon;
 use App\Models\FmsG2CostAllocation;
+use App\Models\BudgetPlan;
+use App\Models\FmsG2Budget;
 class F3ClientController extends Controller
 {
-    function clipage() {
-        return view('cliadd');
-    }
     public function update(Request $request, $id)
     {
+    $comment = $request->input('comment');
+    $status = $request->input('status');
         $item = Pendingdocu::find($id);
-        if (!$item) {
-            return response()->json(['error' => 'Item not found'], 404);
-        }
-        $comment = $request->input('comment');
-        $status = $request->input('status');
-
-
+    if (!$item) {
+        return response()->json(['error' => 'Item not found'], 404);
+    }
         $item->update([
             'status' => $status,
-
         ]);
+        $referenceNo = $item->reference_no;
+        $costs = FmsG2CostAllocation::where('reference_no', $referenceNo)->get(); //cost
+        foreach ($costs as $cost) {
+            $cost->update([
+                'status' => $status,
+            ]);
+        }
 
-
+        $name = $item->title;
+        $costs = BudgetPlan::where('name', $name)->get(); //budgetplan
+        foreach ($costs as $cost) {
+            $cost->update([
+                'status' => $status,
+            ]);
+        }
         Comment::create([
             'pendingdocu_id' => $id,
             'comment' => $comment,
         ]);
 
         return redirect()->back()->with('success', 'Document status updated successfully.');
+
     }
     public function show($id)
     {
@@ -85,35 +95,97 @@ class F3ClientController extends Controller
     return view('f3.dash', compact('pendingdocu', 'pendingdocuCount', 'totalPrice','userCount','users','recentpending'));
     }
 
+
+
+
+    /////////////////////======================================
     public function indexpage()
     {
-
-
-
+        $costs = FmsG2CostAllocation::all();
+        $pending = new Pendingdocu();
+        foreach ($costs as $cost) {
+            $existingPending = Pendingdocu::where('reference', $cost->reference_no)->first();
+            if (!$existingPending) {
+                $pending = new Pendingdocu();
+                $pending->reference = $cost->reference_no;
+                $pending->title = $cost->cost;
+                $pending->description = $cost->description;
+                $pending->budget = $cost->budget;
+                $pending->submitted_by = $cost->created_by;
+                $pending->created_at = $cost->created_at;
+                $pending->save();
+            } else {continue; }}
+            $costs = BudgetPlan::all();
+        foreach ($costs as $cost) {
+            $existingPending = Pendingdocu::where('reference', $cost->reference_no)->first();
+            if (!$existingPending) {
+                $pending = new Pendingdocu();
+                $pending->reference = $cost->reference_no;
+                $pending->title = $cost->name;
+                $pending->description = $cost->description;
+                $pending->budget = $cost->target_expense;
+                $pending->submitted_by = $cost->name;
+                $pending->created_at = $cost->created_at;
+                $pending->save();
+            } else {continue; }}
+            $costs = FmsG2Budget::all();
+        foreach ($costs as $cost) {
+            $existingPending = Pendingdocu::where('reference', $cost->reference_no)->first();
+            if (!$existingPending) {
+                $pending = new Pendingdocu();
+                $pending->reference = $cost->reference_no;
+                $pending->title = $cost->title;
+                $pending->description = $cost->description;
+                $pending->budget = $cost->amount;
+                $pending->submitted_by = $cost->name;
+                $pending->created_at = $cost->created_at;
+                $pending->save();
+            } else {continue; }}
 
     $users = User::orderBy('id', 'asc')->get()->map(function ($item) {
         $item->name = $item->name;
         $item->username = $item->username;
-        return $item;
-    });
+        return $item;});
 
-    $userCount = User::count();
-    $pendingdocuCount = Pendingdocu::count();
+    $userCount = User::count();     $pendingdocuCount = Pendingdocu::count();
     $rejectedDocuments = Pendingdocu::where('status', 'rejected')->get();
     foreach ($rejectedDocuments as $document) {
         $document->admin_status = 'rejected';
-        $document->save();
-    }
+        $document->save();}
+
     $pendingdocux = Pendingdocu::orderBy('id', 'asc')->get()->map(function ($item) {
         $item->title = $item->title;
         $item->description = $item->description;
         $item->budget = $item->budget;
-        return $item;
-    });
+        return $item;});
 
 
-    return view('f3.pendingdox', compact('pendingdocux', 'pendingdocuCount', 'users'));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    return view('f3.index', compact('pendingdocux', 'pendingdocuCount', 'users'));
     }
+
 
 
 
@@ -262,27 +334,6 @@ class F3ClientController extends Controller
     function fixass() {
 
          $random_data = $this->generateRandomData();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         return view('f3.fixedasset', compact('random_data'));
 
     }

@@ -18,6 +18,7 @@ class FmsG2Expense extends Model
         'description',
         'amount',
         'date',
+        'status',
     ];
 
     protected $casts = [
