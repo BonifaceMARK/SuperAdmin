@@ -31,95 +31,6 @@
                             <div class="card">
 
                                 <div class="card-body">
-                                    <div class="card-title">Approval</div>
-                                    <div class="table-responsive">
-                                    <table id="example" class="table display"  width="100%">
-                                        <thead class="text-center">
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Title</th>
-                                                <th>Budget</th>
-                                                <th>Description</th>
-                                                <th>Submit By</th>  
-                                                <th>Status</th>
-                                                <th>Date</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($approve as $row)
-                                                <tr class="text-center">
-                                                    <th>{{ $row->id }}</th> 
-                                                    <td>{{ $row->title }}</td> 
-                                                    <td>{{ number_format($row->amount, 2) }}</td>
-                                                    <td>{{ $row->description }}</td> 
-                                                    <td>{{ $row->submitted_by }}</td>
-                                                    <td>
-                                                        @if ($row->status == 'approved')
-                                                            <span
-                                                                class="badge bg-success">{{ $row->status }}</span>
-                                                        @elseif($row->status == 'Inactive')
-                                                            <span class="badge bg-danger">{{ $row->status }}</span>
-                                                        @elseif($row->status == 'Pending')
-                                                            <span
-                                                                class="badge bg-warning text-dark">{{ $row->status }}</span>
-                                                        @elseif($row->status == 'pending')
-                                                            <span
-                                                                class="badge bg-primary">{{ $row->status }}</span>
-                                                        @elseif($row->status == 'Cancelled')
-                                                            <span
-                                                                class="badge bg-secondary">{{ $row->status }}</span>
-                                                        @elseif($row->status == 'Suspended')
-                                                            <span class="badge bg-info">{{ $row->status }}</span>
-                                                        @elseif($row->status == 'Failed')
-                                                            <span class="badge bg-dark">{{ $row->status }}</span>
-                                                        @elseif($row->status == 'Refunded')
-                                                            <span
-                                                                class="badge bg-light text-dark">{{ $row->status }}</span>
-                                                        @elseif($row->status == 'Approve')
-                                                            <span
-                                                                class="badge bg-primary">{{ $row->status }}</span>
-                                                        @elseif($row->status == 'Cancel')
-                                                            <span
-                                                                class="badge bg-warning text-black">{{ $row->status }}</span>
-                                                        @elseif($row->status == 'Delete')
-                                                            <span
-                                                                class="badge bg-danger text-white">{{ $row->status }}</span>
-                                                        @endif
-                                                    </td>
-                                                    <td>{{ $row->created_at->format('F d, Y') }}</td>                                              
-                                                    <td class="d-flex">
-                                                        <a href="{{ route('receiptinvestment', ['id' => $row->id]) }}" class="btn btn-primary btn-sm mr-3" title="Print Receipt">
-                                                            <i class="bi bi-print"></i> Print Receipt
-                                                        </a>                                                        
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                    </div>
-
-                                    {{-- <button type="button" class="btn btn-success btn-sm mr-2"><i class="bi bi-check2"></i></button>
-                                    <button type="button" class="btn btn-primary btn-sm"><i class="bi bi-x"></i></button>
-                                    <button type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash3-fill"></i></button> --}}
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- End Left side columns -->
-            </div>
-        </section>
-
-        <section class="section dashboard">
-            <div class="row">
-                <!-- Left side columns -->
-                <div class="col-lg-12">
-                    <div class="row justify-content-center">
-                        <div class="col-md-12 col-12">
-                            <div class="card">
-
-                                <div class="card-body">
                                     <div class="card-title">Investment</div>
                                     <div class="table-responsive">
                                     <table id="example" class="table display"  width="100%">
@@ -287,6 +198,7 @@
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
         class="bi bi-arrow-up-short"></i>
     </a>
-    @include('layout.footer')
+    @include('layouts.appfooter')
+    @include('layouts.appscript')
 
 @endsection
