@@ -274,7 +274,7 @@
         <i class="bi bi-graph-up"></i><span style="font-size: 0.8rem;">Expense Budgeting & Forecasting Cost Allocation Management</span>
     </a>
   </li><!-- End Components Nav -->
-
+<hr>
   <li class="nav-heading">Finance 3</li>
   <li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#components-reports" data-bs-toggle="collapse" href="#">
