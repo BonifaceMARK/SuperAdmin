@@ -10,8 +10,9 @@
 
   <header id="header" class="header fixed-top d-flex align-items-center">
 
+
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="{{ route('superadmin') }}" class="logo d-flex align-items-center">
         <img src="{{ asset('assets/img/fmslogo.png')}}" alt="">
         <span class="d-none d-lg-block">Financial Guardians</span>
       </a>
@@ -158,29 +159,45 @@
 @endif
 
 
+<div class="card">
+    <div class="card-body">
 
 
 
-
+<!-- Button to trigger the modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#fixedAssetModal">
+    Fixed Asset Report
+</button>
+<!-- Button to trigger the modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#paymentModal">
+    Expenses
+</button>
+<!-- Button to trigger the modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#areaChartModal">
+    Predict Tax
+</button>
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pieChartModal">
+                    Expenses Pie Chart
+                </button>
+            <!-- Button to trigger the modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createCostAllocationModal">
+                Cost Allocation
+            </button>
+            <!-- Button to trigger the modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#investmentModal">
+                Investment Report
+            </button>
+</div>
+</div>
 <section class="section dashboard">
     <div class="row">
 
         <div class="card">
             <div class="card-body">
 
-                <h1 class="card-title"><i class="bi bi-grid-1x2-fill"></i> Introduction
-                      <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pieChartModal">
-        Expenses Pie Chart
-    </button>
-<!-- Button to trigger the modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createCostAllocationModal">
-    Cost Allocation
-</button>
-<!-- Button to trigger the modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#investmentModal">
-    Investment Report
-</button>
+
+
 
 <!-- Investment Report Modal -->
 <div class="modal fade" id="investmentModal" tabindex="-1" aria-labelledby="investmentModalLabel" aria-hidden="true">
@@ -198,18 +215,6 @@
     </div>
 </div>
 
-<!-- Button to trigger the modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#fixedAssetModal">
-    Fixed Asset Report
-</button>
-<!-- Button to trigger the modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#paymentModal">
-    Expenses
-</button>
-<!-- Button to trigger the modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#areaChartModal">
-    Predict Tax
-</button>
 
 <!-- Modal -->
 <div class="modal fade" id="areaChartModal" tabindex="-1" role="dialog" aria-labelledby="areaChartModalLabel" aria-hidden="true">
@@ -384,7 +389,7 @@
                             });
                         });
                     </script><!-- Button to trigger modal -->
-                   </h1>
+
                    <script>
                     document.addEventListener("DOMContentLoaded", () => {
                         // Render Investments Chart
@@ -539,6 +544,7 @@
         chart.render();
     </script>
                 <!-- Integration of Expense, Budget, Cost, & Forecasting -->
+                <h1 class="card-title"><i class="bi bi-grid-1x2-fill"></i> Introduction </h1>
                 <div class="card mb-3">
                     <div class="row g-0">
                         <div class="col-md-4">

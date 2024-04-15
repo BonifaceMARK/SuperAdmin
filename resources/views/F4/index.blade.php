@@ -11,7 +11,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="{{ route('superadmin') }}" class="logo d-flex align-items-center">
         <img src="{{ asset('assets/img/fmslogo.png')}}" alt="">
         <span class="d-none d-lg-block">Financial Guardians</span>
       </a>
@@ -157,22 +157,46 @@
     </div>
 @endif
 
-<!-- Button to trigger the modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taxPayersModal">
-    Tax Payers
-</button>
-<!-- Button to trigger the modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#paymentGatewaysModal">
-    Hotel & Restaurant
-</button>
-<!-- Button to trigger the modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#freightPaymentsModal">
-    Freight Payments
-</button>
-<!-- Button to trigger the modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#fixedAssetPaymentsModal">
-    Fixed Asset Payments
-</button>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3 col-md-6">
+            <button type="button" class="btn btn-primary btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#taxPayersModal" style="background-image: url('{{ asset('assets/img/RE.jpg') }}'); background-size: cover; height: 200px;">
+                Tax Payers
+            </button>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <button type="button" class="btn btn-primary btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#paymentGatewaysModal" style="background-image: url('{{ asset('assets/img/REST.jpg') }}'); background-size: cover; height: 200px;">
+                Hotel & Restaurant
+            </button>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <button type="button" class="btn btn-primary btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#freightPaymentsModal" style="background-image: url('{{ asset('assets/img/finance_1.jpg') }}'); background-size: cover; height: 200px;">
+                Freight Payments
+            </button>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <button type="button" class="btn btn-primary btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#fixedAssetPaymentsModal" style="background-image: url('{{ asset('assets/img/account.jpg') }}'); background-size: cover; height: 200px;">
+                Fixed Asset Payments
+            </button>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-lg-3 col-md-6">
+            <button type="button" class="btn btn-primary btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#paymentModal" style="background-image: url('{{ asset('assets/img/allocated.jpg') }}'); background-size: cover; height: 200px;">
+                Audit Tax Payments
+            </button>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <button type="button" class="btn btn-primary btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-image: url('{{ asset('assets/img/check.jpg') }}'); background-size: cover; height: 200px;">
+                General ledger
+            </button>
+        </div>
+        <!-- Add more buttons as needed -->
+    </div>
+</div>
+
 
 <!-- Modal -->
 <div class="modal fade" id="fixedAssetPaymentsModal" tabindex="-1" aria-labelledby="fixedAssetPaymentsModalLabel" aria-hidden="true">
@@ -213,6 +237,81 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-custom " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="paymentModalLabel">Payments</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Name/Description</th>
+                                        <th>Amount</th>
+                                        <th>Payment Date</th>
+                                        <th>Payment Method</th>
+                                        <th>Payment Reference</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($payments as $payment)
+                                        <tr>
+                                            <td>{{ isset($payment->tax_type) ? 'Tax Payment' : 'Fixed Asset Payment' }}</td>
+                                            <td>{{ isset($payment->tax_type) ? $payment->taxpayer_name : $payment->asset_name }}</td>
+                                            <td>{{ $payment->amount }}</td>
+                                            <td>{{ $payment->payment_date }}</td>
+                                            <td>{{ $payment->payment_method }}</td>
+                                            <td>{{ isset($payment->payment_reference) ? $payment->payment_reference : 'N/A' }}</td>
+                                            <td id="paymentStatus{{$payment->id}}">{{ $payment->status }}</td>
+                                            <td>
+                                                @if (isset($payment->tax_type) && $payment->status == 'Paid')
+                                                    <form action="{{ route('add.revenue', $payment->id) }}" method="POST">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-primary">Add to Revenue</button>
+                                                    </form>
+                                                @else
+                                                    <span class="text-muted">Not Paid</span>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Disable "Add to Revenue" button if status is not "Paid"
+        var addToRevenueBtns = document.querySelectorAll('.addToRevenueBtn');
+        addToRevenueBtns.forEach(function(btn) {
+            btn.addEventListener('click', function(event) {
+                var paymentId = this.getAttribute('data-payment-id');
+                var paymentStatus = document.querySelector('#paymentStatus' + paymentId).textContent.trim();
+                if (paymentStatus !== 'Paid') {
+                    alert('You can only add to revenue for payments with "Paid" status.');
+                    event.preventDefault(); // Prevent form submission
+                }
+            });
+        });
+    });
+</script>
 
 <!-- Modal -->
 <div class="modal fade" id="freightPaymentsModal" tabindex="-1" aria-labelledby="freightPaymentsModalLabel" aria-hidden="true">
@@ -329,56 +428,68 @@
 </div>
 
 
-<section class="section">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Invoice Payment Details</h5>
-                    <div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Reference No</th>
-                                        <th>Invoice ID</th>
-                                        <th>Account Holder Name</th>
-                                        <th>Bank Name</th>
-                                        <th>PPTS Code</th>
-                                        <th>Account Number</th>
-                                        <th>Terms & Conditions</th>
-                                        <th>Notes</th>
-                                        <th>Created At</th>
-                                        <th>Updated At</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($invoicePaymentDetails as $detail)
-                                    <tr>
-                                        <td>{{ $detail->id }}</td>
-                                        <td>{{ $detail->reference_no }}</td>
-                                        <td>{{ $detail->invoice_id }}</td>
-                                        <td>{{ $detail->account_holder_name }}</td>
-                                        <td>{{ $detail->bank_name }}</td>
-                                        <td>{{ $detail->ppts_code }}</td>
-                                        <td>{{ $detail->account_number }}</td>
-                                        <td>{{ $detail->add_terms_and_conditions }}</td>
-                                        <td>{{ $detail->add_notes }}</td>
-                                        <td>{{ $detail->created_at }}</td>
-                                        <td>{{ $detail->updated_at }}</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">General Ledger</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Your content goes here -->
+          <!-- Section 1 -->
+          <section class="section">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Invoice Payment Details</h5>
+                        <div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Reference No</th>
+                                            <th>Invoice ID</th>
+                                            <th>Account Holder Name</th>
+                                            <th>Bank Name</th>
+                                            <th>PPTS Code</th>
+                                            <th>Account Number</th>
+                                            <th>Terms & Conditions</th>
+                                            <th>Notes</th>
+                                            <th>Created At</th>
+                                            <th>Updated At</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($invoicePaymentDetails as $detail)
+                                        <tr>
+                                            <td>{{ $detail->id }}</td>
+                                            <td>{{ $detail->reference_no }}</td>
+                                            <td>{{ $detail->invoice_id }}</td>
+                                            <td>{{ $detail->account_holder_name }}</td>
+                                            <td>{{ $detail->bank_name }}</td>
+                                            <td>{{ $detail->ppts_code }}</td>
+                                            <td>{{ $detail->account_number }}</td>
+                                            <td>{{ $detail->add_terms_and_conditions }}</td>
+                                            <td>{{ $detail->add_notes }}</td>
+                                            <td>{{ $detail->created_at }}</td>
+                                            <td>{{ $detail->updated_at }}</td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <section class="section">
-        <div class="row">
+          </section>
+
+          <!-- Section 2 -->
+          <section class="section">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
@@ -420,216 +531,52 @@
                     </div>
                 </div>
             </div>
-        </div>
+          </section>
 
-        <section class="section">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Invoice Customer Names</h5>
-                            <div class="table-responsive">
-                                <table class="table datatable datatable-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Reference</th>
-                                            <th>Customer Name</th>
-                                            <th>PO Number</th>
-                                            <th>Date</th>
-                                            <th>Due Date</th>
-                                            <th>Enable Tax</th>
-                                            <th>Recurring Invoice</th>
-                                            <th>By Month</th>
-                                            <th>Month</th>
-                                            <th>Amount</th>
-                                            <th>Invoice From</th>
-                                            <th>Invoice To</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($invoiceCustomerNames as $invoiceCustomerName)
-                                        <tr>
-                                            <td>{{ $invoiceCustomerName->customer_name }}</td>
-                                            <td>{{ $invoiceCustomerName->reference }}</td>
-                                            <td>{{ $invoiceCustomerName->customer_name }}</td>
-                                            <td>{{ $invoiceCustomerName->po_number }}</td>
-                                            <td>{{ $invoiceCustomerName->date }}</td>
-                                            <td>{{ $invoiceCustomerName->due_date }}</td>
-                                            <td>{{ $invoiceCustomerName->enable_tax }}</td>
-                                            <td>{{ $invoiceCustomerName->recurring_invoice }}</td>
-                                            <td>{{ $invoiceCustomerName->by_month }}</td>
-                                            <td>{{ $invoiceCustomerName->month }}</td>
-                                            <td>{{ $invoiceCustomerName->amount }}</td>
-                                            <td>{{ implode(', ', $invoiceCustomerName->invoice_from) }}</td>
-                                            <td>{{ implode(', ', $invoiceCustomerName->invoice_to) }}</td>
-                                            <td>{{ implode(', ', $invoiceCustomerName->status) }}</td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="section">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">AR Invoice Total Amounts</h5>
-                            <div class="table-responsive">
-                                <table class="table datatable datatable-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Invoice ID</th>
-                                            <th>Taxable Amount</th>
-                                            <th>Round Off</th>
-                                            <th>Total Amount</th>
-                                            <th>Upload Sign</th>
-                                            <th>Name of the Signatory</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($arInvoiceTotalAmounts as $arInvoiceTotalAmount)
-                                        <tr>
-                                            <td>{{ $arInvoiceTotalAmount->invoice_id }}</td>
-                                            <td>{{ $arInvoiceTotalAmount->taxable_amount }}</td>
-                                            <td>{{ $arInvoiceTotalAmount->round_off }}</td>
-                                            <td>{{ $arInvoiceTotalAmount->total_amount }}</td>
-                                            <td>{{ $arInvoiceTotalAmount->upload_sign }}</td>
-                                            <td>{{ $arInvoiceTotalAmount->name_of_the_signatory }}</td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-12">
-                    <div class="card">
-
-
-                        <div class="card-body">
-                            <div class="card-title">Fixed Asset Payments</div>
-                            <table class="table">
+          <!-- Section 3 -->
+          <section class="section">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Invoice Customer Names</h5>
+                        <div class="table-responsive">
+                            <table class="table datatable datatable-table">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>Asset Name</th>
-                                        <th>Description</th>
+                                        <th>Name</th>
+                                        <th>Reference</th>
+                                        <th>Customer Name</th>
+                                        <th>PO Number</th>
+                                        <th>Date</th>
+                                        <th>Due Date</th>
+                                        <th>Enable Tax</th>
+                                        <th>Recurring Invoice</th>
+                                        <th>By Month</th>
+                                        <th>Month</th>
                                         <th>Amount</th>
-                                        <th>Payment Date</th>
-                                        <th>Payment Method</th>
-                                        <th>Payment Reference</th>
+                                        <th>Invoice From</th>
+                                        <th>Invoice To</th>
                                         <th>Status</th>
-                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($payments as $payment)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $payment->asset_name }}</td>
-                                            <td>{{ $payment->asset_description }}</td>
-                                            <td>{{ $payment->amount }}</td>
-                                            <td>{{ $payment->payment_date }}</td>
-                                            <td>{{ $payment->payment_method }}</td>
-                                            <td>{{ $payment->payment_reference }}</td>
-                                            <td>{{ $payment->status }}</td>
-                                            <td>
-                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#paymentModal{{$payment->id}}">
-                                                    View Details
-                                                </button>
-                                            </td>
-                                        </tr>
-
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-12">
-                    <div class="card">
-
-
-                        <div class="card-body">
-                            <div class="card-title">HRMS Payments</div>
-                            <table class="table">
-                                <thead>
+                                    @foreach($invoiceCustomerNames as $invoiceCustomerName)
                                     <tr>
-
-                                        <th>Product Name</th>
-                                        <th>Transaction Name</th>
-                                        <th>Payment Method</th>
-                                        <th>Transaction Type</th>
-                                        <th>Transaction Amount</th>
-                                        <th>Transaction Date</th>
-                                        <th>Description</th>
-                                        <th>Transaction Status</th>
-                                        <th>Actions</th>
+                                        <td>{{ $invoiceCustomerName->customer_name }}</td>
+                                        <td>{{ $invoiceCustomerName->reference }}</td>
+                                        <td>{{ $invoiceCustomerName->customer_name }}</td>
+                                        <td>{{ $invoiceCustomerName->po_number }}</td>
+                                        <td>{{ $invoiceCustomerName->date }}</td>
+                                        <td>{{ $invoiceCustomerName->due_date }}</td>
+                                        <td>{{ $invoiceCustomerName->enable_tax }}</td>
+                                        <td>{{ $invoiceCustomerName->recurring_invoice }}</td>
+                                        <td>{{ $invoiceCustomerName->by_month }}</td>
+                                        <td>{{ $invoiceCustomerName->month }}</td>
+                                        <td>{{ $invoiceCustomerName->amount }}</td>
+                                        <td>{{ implode(', ', $invoiceCustomerName->invoice_from) }}</td>
+                                        <td>{{ implode(', ', $invoiceCustomerName->invoice_to) }}</td>
+                                        <td>{{ implode(', ', $invoiceCustomerName->status) }}</td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($paymentGateways as $paymentGateway)
-                                    <tr>
-
-                                        <td>{{ $paymentGateway->productName }}</td>
-                                        <td>{{ $paymentGateway->transactionName }}</td>
-                                        <td>{{ $paymentGateway->paymentMethod }}</td>
-                                        <td>{{ $paymentGateway->transactionType }}</td>
-                                        <td>${{ $paymentGateway->transactionAmount }}</td>
-                                        <td>{{ $paymentGateway->transactionDate }}</td>
-                                        <td>{{ $paymentGateway->description }}</td>
-                                        <td>{{ $paymentGateway->transactionStatus }}</td>
-                                        <td>
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewModal{{ $paymentGateway->id }}">View</button>
-
-
-                                        </td>
-                                    </tr>
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="viewModal{{ $paymentGateway->id }}" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel{{ $paymentGateway->id }}" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="viewModalLabel{{ $paymentGateway->id }}">Payment Gateway Details</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p><strong>Reference:</strong> {{ $paymentGateway->reference }}</p>
-                                                    <p><strong>Product Name:</strong> {{ $paymentGateway->productName }}</p>
-                                                    <p><strong>Transaction Name:</strong> {{ $paymentGateway->transactionName }}</p>
-                                                    <p><strong>Payment Method:</strong> {{ $paymentGateway->paymentMethod }}</p>
-                                                    <p><strong>Transaction Type:</strong> {{ $paymentGateway->transactionType }}</p>
-                                                    <p><strong>Transaction Amount:</strong> ${{ $paymentGateway->transactionAmount }}</p>
-                                                    <p><strong>Transaction Date:</strong> {{ $paymentGateway->transactionDate }}</p>
-                                                    <p><strong>Description:</strong> {{ $paymentGateway->description }}</p>
-                                                    <p><strong>Transaction Status:</strong> {{ $paymentGateway->transactionStatus }}</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                     @endforeach
                                 </tbody>
                             </table>
@@ -637,106 +584,53 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- payment_modal.blade.php -->
-        <div class="modal fade" id="paymentModal{{$payment->id}}" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel{{$payment->id}}" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <!-- Modal header -->
-                    <div class="modal-header bg-primary text-white">
-                        <h5 class="modal-title" id="paymentModalLabel{{$payment->id}}">Invoice - Payment Details</h5>
-                    </div>
-                    <!-- Modal body -->
-                    <div class="modal-body" id="modalBody{{$payment->id}}">
-                        <!-- Invoice Header -->
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h4>Invoice for: Fixed Assets</h4>
-                                <p><strong>Asset Name:</strong> {{$payment->asset_name}}</p>
-                                <p><strong>Description:</strong> {{$payment->asset_description}}</p>
-                            </div>
-                            <div class="col-md-6 text-right">
-                                <h4>Payment Details:</h4>
-                                <p><strong>Payment Date:</strong> {{$payment->payment_date}}</p>
-                                <p><strong>Payment Method:</strong> {{$payment->payment_method}}</p>
-                                <p><strong>Payment Reference:</strong> {{$payment->payment_reference}}</p>
-                                <p><strong>Status:</strong> {{$payment->status}}</p>
-                            </div>
-                        </div>
+          </section>
 
-                        <!-- Invoice Table -->
-                        <div class="table-responsive mt-3">
-                            <table class="table table-bordered">
+          <!-- Section 4 -->
+          <section class="section">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">AR Invoice Total Amounts</h5>
+                        <div class="table-responsive">
+                            <table class="table datatable datatable-table">
                                 <thead>
                                     <tr>
-                                        <th>Description</th>
-                                        <th class="text-right">Amount</th>
+                                        <th>Invoice ID</th>
+                                        <th>Taxable Amount</th>
+                                        <th>Round Off</th>
+                                        <th>Total Amount</th>
+                                        <th>Upload Sign</th>
+                                        <th>Name of the Signatory</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($arInvoiceTotalAmounts as $arInvoiceTotalAmount)
                                     <tr>
-                                        <td>{{$payment->asset_description}}</td>
-                                        <td class="text-right">${{$payment->amount}}</td>
+                                        <td>{{ $arInvoiceTotalAmount->invoice_id }}</td>
+                                        <td>{{ $arInvoiceTotalAmount->taxable_amount }}</td>
+                                        <td>{{ $arInvoiceTotalAmount->round_off }}</td>
+                                        <td>{{ $arInvoiceTotalAmount->total_amount }}</td>
+                                        <td>{{ $arInvoiceTotalAmount->upload_sign }}</td>
+                                        <td>{{ $arInvoiceTotalAmount->name_of_the_signatory }}</td>
                                     </tr>
-                                    <!-- Add additional rows for more items if needed -->
+                                    @endforeach
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th class="text-right" colspan="1">Total:</th>
-                                        <th class="text-right">${{$payment->amount}}</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
                     </div>
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="printButton{{$payment->id}}">Print as image</button>
-                    </div>
                 </div>
             </div>
+          </section>
         </div>
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
-        <script>
-            // Function to print modal content as image
-            function printModalAsImage(id) {
-                // Get modal content element
-                var modalContent = document.getElementById('modalBody' + id);
-
-                // Use html2canvas to capture modal content as image
-                html2canvas(modalContent, {
-                    onrendered: function(canvas) {
-                        // Convert canvas to data URL
-                        var imageData = canvas.toDataURL('image/png');
-
-                        // Create a new window with the image for printing
-                        var printWindow = window.open('');
-                        printWindow.document.open();
-                        printWindow.document.write('<html><head><title>Print</title></head><body>');
-                        printWindow.document.write('<img src="' + imageData + '" style="width:100%;">');
-                        printWindow.document.write('</body></html>');
-                        printWindow.document.close();
-
-                        // Print the window
-                        printWindow.print();
-                        printWindow.close();
-                    }
-                });
-            }
-
-            // Event listener for print button
-            document.getElementById('printButton{{$payment->id}}').addEventListener('click', function() {
-                printModalAsImage({{$payment->id}});
-            });
-        </script>
-
-        @endforeach
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
-
-</section>
 
 
 

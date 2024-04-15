@@ -29,4 +29,17 @@ class FmsG1CashManagement extends Model
         $this->revenue += $amount;
         $this->save();
     }
+    /**
+ * Add revenue to cash management.
+ *
+ * @param  float  $amount
+ * @return void
+ */
+public static function addRevenue($amount)
+{
+    $cashManagement = self::firstOrNew([]);
+    $cashManagement->revenue += $amount;
+    $cashManagement->save();
+}
+
 }

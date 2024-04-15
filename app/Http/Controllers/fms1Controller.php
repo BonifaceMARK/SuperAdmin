@@ -14,6 +14,17 @@ use App\Models\FmsG1CashManagement;
 class fms1Controller extends Controller
 {
 
+    public function addToRevenue(Request $request, $id)
+    {
+        $taxPayment = TaxPayment::findOrFail($id);
+        $amount = $taxPayment->amount;
+
+        // Add the amount to revenue in cash management
+        FmsG1CashManagement::addRevenue($amount);
+
+        return redirect()->back()->with('success', 'Revenue added successfully!');
+    }
+
     public function fms1index()
     {
 
@@ -41,6 +52,7 @@ class fms1Controller extends Controller
           $customersPercentage = $lastYearCustomersCount ? (($customersCount - $lastYearCustomersCount) / $lastYearCustomersCount) * 100 : 0;
         $payments = FixedAssetPayment::all();
         $investments = Investments::all();
+
        return view ('F1.index', compact('cashManagements', 'totalRevenue', 'totalIncome', 'totalOutflow', 'totalNetIncome','freightPayments','taxPayments','payments','investments','salesCount', 'salesPercentage', 'revenueAmount', 'revenuePercentage', 'customersCount', 'customersPercentage'));
     }
 

@@ -10,30 +10,73 @@ use App\Models\FreightPayment;
 use App\Models\FixedAssetPayment;
 use App\Models\AdminPayment;
 use App\Models\Investments;
+use App\Models\FmsG1CashManagement;
 
 class fms2Controller extends Controller
 {
+
+
     public function fms2index()
-{
-    // Fetch investments data
-    $investments = Investments::all();
-    $payments = FixedAssetPayment::all();
-    // Fetch payments data
-    $taxPayments = TaxPayment::all();
-    $paymentGateways = PaymentGateway::all();
-    $freightPayments = FreightPayment::all();
-    $fixedAssetPayments = FixedAssetPayment::all();
-    $adminPayments = AdminPayment::all();
+    {
+        // Fetch investments data
+        $investments = Investments::all();
+        $payments = FixedAssetPayment::all();
+        // Fetch payments data
+        $taxPayments = TaxPayment::all();
+        $paymentGateways = PaymentGateway::all();
+        $freightPayments = FreightPayment::all();
+        $fixedAssetPayments = FixedAssetPayment::all();
+        $adminPayments = AdminPayment::all();
+
+        // Calculate totals
+        $taxPaymentsTotal = $taxPayments->sum('amount');
+        $paymentGatewayTotal = $paymentGateways->sum('transactionAmount');
+        $freightPaymentsTotal = $freightPayments->sum('freightAmount');
+        $fixedAssetPaymentsTotal = $fixedAssetPayments->sum('amount');
+        $adminPaymentsTotal = $adminPayments->sum('amount');
+
+        // Format data for ApexCharts
+        $taxData = $taxPayments->pluck('amount')->toArray();
+        $paymentGatewayData = $paymentGateways->pluck('transactionAmount')->toArray();
+        $freightData = $freightPayments->pluck('freightAmount')->toArray();
+        $fixedAssetData = $fixedAssetPayments->pluck('amount')->toArray();
+        $adminData = $adminPayments->pluck('amount')->toArray();
+
+        // Merge data from all models into a single dataset
+        $allPayments = collect([
+            'Tax Payments' => $taxPayments,
+            'Payment Gateways' => $paymentGateways,
+            'Freight Payments' => $freightPayments,
+            'Fixed Asset Payments' => $fixedAssetPayments,
+            'Admin Payments' => $adminPayments
+        ]);
+        $adminPayments = AdminPayment::all();
+        $fixedAssetPayments = FixedAssetPayment::all();
+        $freightPayments = FreightPayment::all();
+        $paymentGateways = PaymentGateway::all();
+        $taxPayments = TaxPayment::all();
+
+        // Combine data from all models into a single dataset
+
+
 
         return view('F2.index', compact(
             'taxPaymentsTotal',
             'paymentGatewayTotal',
             'freightPaymentsTotal',
             'fixedAssetPaymentsTotal',
-            'adminPaymentsTotal'
+            'adminPaymentsTotal',
+            'payments',
+            'investments',
+            'taxData',
+            'paymentGatewayData',
+
+            'freightData',
+            'fixedAssetData',
+            'adminData',
+            'taxPayments' // Make sure to pass $taxPayments to the view
         ));
     }
-
 
 // Example usage:
     function generateRandomString($length) {
@@ -47,56 +90,76 @@ class fms2Controller extends Controller
     return $randomString;
     }
 
+    public function index()
+    {
+        // Retrieve data from each model
+        $freightData = FreightPayment::select('freightDate as payment_date', 'freightAmount as amount')->get();
+        $fixedAssetData = FixedAssetPayment::select('payment_date', 'amount')->get();
+        $adminData = AdminPayment::select('paymentDate as payment_date', 'amount')->get();
+        $taxPayments = TaxPayment::select('payment_date', 'amount')->get();
 
-<<<<<<< HEAD
-        'freightData',
-        'fixedAssetData',
-        'adminData',
-        'taxPayments' // Make sure to pass $taxPayments to the view
-    ));
-}
-public function getTaxPaymentData()
-{
-    // Retrieve historical tax payment data
-    $historicalData = TaxPayment::select('payment_date', 'amount')->orderBy('payment_date')->get();
+        // Merge all payment data
+        $allPayments = $freightData->merge($fixedAssetData)->merge($adminData)->merge($taxPayments);
 
-    // Apply exponential smoothing
-    $smoothedData = $this->applyExponentialSmoothing($historicalData);
+        // Group payments by date and calculate total revenue for each date
+        $revenueByDate = $allPayments->groupBy('payment_date')->map(function ($payments) {
+            return $payments->sum('amount');
+        });
 
-    // Return the smoothed data as JSON
-    return response()->json($smoothedData);
-}
+        // Sort revenue by date
+        $revenueByDate = $revenueByDate->sortKeys();
 
-// Function to apply exponential smoothing
-private function applyExponentialSmoothing($historicalData, $alpha = 0.2) {
-    $smoothedData = [];
-
-    $previousSmoothedValue = null;
-    foreach ($historicalData as $entry) {
-        $amount = $entry->amount;
-
-        if ($previousSmoothedValue === null) {
-            // For the first data point, use the actual amount
-            $smoothedValue = $amount;
-        } else {
-            // Apply exponential smoothing
-            $smoothedValue = $alpha * $amount + (1 - $alpha) * $previousSmoothedValue;
-        }
-
-        // Store the smoothed value for this data point
-        $smoothedData[] = [
-            'payment_date' => $entry->payment_date,
-            'smoothed_amount' => $smoothedValue,
+        // Prepare data for chart
+        $chartData = [
+            'dates' => $revenueByDate->keys()->toJson(),
+            'revenue' => $revenueByDate->values()->toJson(),
         ];
 
-        // Update the previous smoothed value for the next iteration
-        $previousSmoothedValue = $smoothedValue;
+        // Pass data to the view
+        return view('F2.index', compact('chartData', 'freightData', 'fixedAssetData', 'adminData', 'taxPayments'));
     }
 
-    return $smoothedData;
-}
-=======
->>>>>>> 4dc4774e1c33773aa91de417466b50207428de1e
+    public function getTaxPaymentData()
+    {
+        // Retrieve historical tax payment data
+        $historicalData = TaxPayment::select('payment_date', 'amount')->orderBy('payment_date')->get();
+
+        // Apply exponential smoothing
+        $smoothedData = $this->applyExponentialSmoothing($historicalData);
+
+        // Return the smoothed data as JSON
+        return response()->json($smoothedData);
+    }
+
+    // Function to apply exponential smoothing
+    private function applyExponentialSmoothing($historicalData, $alpha = 0.2) {
+        $smoothedData = [];
+
+        $previousSmoothedValue = null;
+        foreach ($historicalData as $entry) {
+            $amount = $entry->amount;
+
+            if ($previousSmoothedValue === null) {
+                // For the first data point, use the actual amount
+                $smoothedValue = $amount;
+            } else {
+                // Apply exponential smoothing
+                $smoothedValue = $alpha * $amount + (1 - $alpha) * $previousSmoothedValue;
+            }
+
+            // Store the smoothed value for this data point
+            $smoothedData[] = [
+                'payment_date' => $entry->payment_date,
+                'smoothed_amount' => $smoothedValue,
+            ];
+
+            // Update the previous smoothed value for the next iteration
+            $previousSmoothedValue = $smoothedValue;
+        }
+
+        return $smoothedData;
+    }
+
     public function storeCostAllocation(Request $request)
 {
     $request->validate([

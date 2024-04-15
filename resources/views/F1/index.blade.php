@@ -11,7 +11,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="{{ route('superadmin') }}" class="logo d-flex align-items-center">
         <img src="{{ asset('assets/img/fmslogo.png')}}" alt="">
         <span class="d-none d-lg-block">Financial Guardians</span>
       </a>
@@ -253,54 +253,52 @@
             </div>
         </div>
     </div><!-- End Tax Payments Card -->
-
-   <!-- Budget Plan Button -->
+<!-- Budget Plan Button -->
 <div class="col-xxl-6 col-md-12">
     <div class="card">
         <div class="card-body">
             <button type="button" class="btn btn-primary btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#financialPlanningModal" style="background-image: url('{{ asset('assets/img/budget.jpg') }}'); background-size: cover; height: 110px;">
                 <strong>Budget Plan</strong>
             </button>
-            <div class="container mt-4">
-                <h1 class="mb-4">Cash Management</h1>
+
+            <div class="container mt-6">
+                <h1 class="mb-6">Cash Management</h1>
 
                 @if($cashManagements->isNotEmpty())
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-
-                                <th>Revenue</th>
-                                <th>Income</th>
-                                <th>Outflow</th>
-                                <th>Net Income</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($cashManagements as $cashManagement)
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
                                 <tr>
-
-                                    <td>{{ $cashManagement->revenue }}</td>
-                                    <td>{{ $cashManagement->income }}</td>
-                                    <td>{{ $cashManagement->outflow }}</td>
-                                    <td>{{ $cashManagement->net_income }}</td>
+                                    <th>Revenue</th>
+                                    <th>Income</th>
+                                    <th>Outflow</th>
+                                    <th>Net Income</th>
                                 </tr>
-                            @endforeach
-                            <tr class="total-row">
-                                <td><strong>Total</strong></td>
-                                <td><strong>{{ $totalRevenue }}</strong></td>
-                                <td><strong>{{ $totalIncome }}</strong></td>
-                                <td><strong>{{ $totalOutflow }}</strong></td>
-                                <td><strong>{{ $totalNetIncome }}</strong></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach($cashManagements as $cashManagement)
+                                    <tr>
+                                        <td>{{ $cashManagement->revenue }}</td>
+                                        <td>{{ $cashManagement->income }}</td>
+                                        <td>{{ $cashManagement->outflow }}</td>
+                                        <td>{{ $cashManagement->net_income }}</td>
+                                    </tr>
+                                @endforeach
+                                <tr class="total-row">
+                                    <td><strong>{{ $totalRevenue }}</strong></td>
+                                    <td><strong>{{ $totalIncome }}</strong></td>
+                                    <td><strong>{{ $totalOutflow }}</strong></td>
+                                    <td><strong>{{ $totalNetIncome }}</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 @else
-                    <p class="no-records">No cash management records found.</p>
+                    <div class="alert alert-info" role="alert">
+                        No cash management records found.
+                    </div>
                 @endif
             </div>
-        </div>
-    </div>
-</div><!-- End Budget Plan Button -->
 
 
 
@@ -404,7 +402,7 @@
         // Update description input field based on chart trend
         const descriptionInput = document.getElementById('description');
         if (fixedAssetTrend === "Going Down") {
-            descriptionInput.value = "Chart trend is going down";
+            descriptionInput.value = "Fixed Assets are in a dangerous phase we should track our revenue and expenses in order to stop the chart going down";
         } else {
             descriptionInput.value = "";
         }

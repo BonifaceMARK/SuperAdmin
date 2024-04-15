@@ -11,7 +11,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="{{ route('superadmin') }}" class="logo d-flex align-items-center">
         <img src="{{ asset('assets/img/fmslogo.png')}}" alt="">
         <span class="d-none d-lg-block">Financial Guardians</span>
       </a>
@@ -159,7 +159,21 @@
 
 
 
-
+<div class="container mt-4">
+    <div class="alert alert-info" role="alert">
+        <h4 class="alert-heading">Report Notification</h4>
+        <p>Here is your report:</p>
+        <ul>
+            <li>Data 1: Value 1</li>
+            <li>Data 2: Value 2</li>
+            <li>Data 3: Value 3</li>
+            <!-- Add more data points as needed -->
+        </ul>
+        <hr>
+        <p class="mb-0">You can customize this notification to include any relevant information from your report.</p>
+        <button id="downloadReportButton" class="btn btn-primary mt-2">Download Report</button>
+    </div>
+</div>
 
 
 

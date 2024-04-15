@@ -24,7 +24,11 @@ class fms4Controller extends Controller
         $fixedAssetPayments = FixedAssetPayment::all();
         $invoiceDetails = InvoiceDetail::all();
         $taxPayments = TaxPayment::all();
-        return view('F4.index', compact('freightPayments','fixedAssetPayments','payments','paymentGateways','taxPayments','invoicePaymentDetails','arInvoiceTotalAmounts','invoiceDetails','invoiceCustomerNames'));
+
+        $taxPayments = TaxPayment::all();
+        $fixedAssetPayments = FixedAssetPayment::all();
+        $payments = $taxPayments->merge($fixedAssetPayments);
+        return view('F4.index', compact('payments','freightPayments','fixedAssetPayments','payments','paymentGateways','taxPayments','invoicePaymentDetails','arInvoiceTotalAmounts','invoiceDetails','invoiceCustomerNames'));
     }
 
 }

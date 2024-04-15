@@ -55,7 +55,7 @@ Route::get('/logout',           [AuthController::class,'logout'])->name('logout'
 // ********** Super Admin Routes *********
 Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],function(){
 
-    Route::get('/',[SuperAdminController::class,'dashboard']);
+    Route::get('/',[SuperAdminController::class,'dashboard'])->name('superadmin');
     Route::get('/dashboard',[SuperAdminController::class,'dashboard'])->name('home');
 
 
@@ -94,7 +94,7 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
     // FINANCIAL PLANNING FINANCIAL REPORTING CASH MANAGEMENT
     Route::post('/financial-planning', [fms1Controller::class, 'storeBudgetPlan'])->name('budget-plans.store');
     Route::get('/fms1index', [fms1Controller::class, 'fms1index'])->name('fms1.index');
-
+    Route::post('/add-to-revenue/{payment}', [fms1Controller::class, 'addToRevenue'])->name('add.revenue');
 
     // EXPENSE BUDGETING & FORECAST COST ALLOCATION MANAGEMENT
     Route::get('/fms2index', [fms2Controller::class, 'fms2index'])->name('fms2.index');

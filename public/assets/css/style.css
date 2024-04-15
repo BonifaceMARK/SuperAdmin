@@ -1327,14 +1327,14 @@
     top: 0;
     right: 0;
     bottom: 0;
-    width: 300px; /* Adjust the width as needed */
+    width: 1000; /* Adjust the width as needed */
     margin: 0;
     z-index: 1050; /* Ensure it appears above other elements */
     transform: translateX(100%);
 }
 /* Custom CSS for Payment Options modal */
 .modal-dialog-custom {
-    max-width: 350px;
+    max-width: 1050px;
 }
 
 .modal-dialog-left{
@@ -1420,4 +1420,13 @@ tr:nth-child(even) {
 }
 .no-records {
     color: #666;
+}
+.modal-dialog {
+    overflow-y: auto !important; /* Enable scrolling for modal content */
+    max-height: 100% !important; /* Set maximum height to 100% */
+    margin: 0 !important; /* Remove margin */
+}
+
+.modal-content {
+    height: 100%; /* Set height to 100% */
 }
