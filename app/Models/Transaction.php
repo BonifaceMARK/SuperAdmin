@@ -9,7 +9,7 @@ class Transaction extends Model
 {
     use HasFactory;
 
-    protected $table = 'transactions'; 
+    protected $table = 'fms10_transactions'; 
 
     protected $fillable = [
         'firstname',

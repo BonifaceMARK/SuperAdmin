@@ -121,13 +121,6 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
 
 
 
-
-
-
-
-
-
-
     // Route::get('/dashboard',        [SuperAdminController::class,'dashboard'])  ->name('home');
     Route::get('/users',            [SuperAdminController::class,'users'])->name('superAdminUsers');
     Route::get('/manage-role',      [SuperAdminController::class,'manageRole'])->name('manageRole');
@@ -206,10 +199,24 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
 
     // JAKE VENDOR AND INVESMENT WEB :) nagrredirect sayo pagkalogin ng superadmin
 
-
     // Route::get('dashboard', [G10Controller::class, 'dashboard'])->name('index.dashboard');
     Route::get('vendorManagement', [G10Controller::class, 'vendorDashboard'])->name('vendor.dashboard');
     Route::get('investmentManagement', [G10Controller::class, 'investmentDashboard'])->name('investment.dashboard');
+
+    ////// Investment
+    Route::get('/invest-receipt/{id}', [G10Controller::class,'printReceiptInvestment'])->name('receiptinvestment');
+    ////// deposit
+    Route::get('/print-receipt/{id}', [G10Controller::class,'printReceipt'])->name('print.receipt');
+
+    //////VIEW EDIT
+    Route::get('/edit/{id}', [G10Controller::class, 'viewVendor'])->name('edit.vendor');
+    Route::put('/update/{id}', [G10Controller::class, 'updateVendor'])->name('update.vendor');  
+    
+    Route::get('/vendorview',[G10Controller::class,'vendorView'])->name('view.vendor');
+
+
+
+    
 
     // F2 ROUTES
     Route::post('/change-password',                     [AuthController::class, 'changePassword'])->name('change.password');

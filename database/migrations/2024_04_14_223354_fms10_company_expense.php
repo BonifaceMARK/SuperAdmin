@@ -9,11 +9,13 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('fms10_companybudget', function (Blueprint $table) {
             $table->id();
-            $table->string('name',255);
+            $table->string('user_id')->nullable();
+            $table->decimal('budget', 10, 2)->nullable();
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }
@@ -21,9 +23,8 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down()
+    public function down(): void
     {
-        //
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('fms10_companybudget');
     }
 };

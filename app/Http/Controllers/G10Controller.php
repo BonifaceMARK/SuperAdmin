@@ -7,8 +7,14 @@ use App\Models\Vendors;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Account;
+use App\Models\ActivityLog;
 use App\Models\Payouts;
+use App\Models\Companybudget;
+use App\Models\Transactionhistory;
+use App\Models\Transferhistory;
 use App\Models\Investments;
+use App\Models\Transaction;
+use App\Models\Vendor;
 use App\Models\DepositRequest;
 use App\Models\InvestmentRequest;
 use Illuminate\Support\Facades\Hash;
@@ -22,25 +28,30 @@ class G10Controller extends Controller
     //
     public function dashboard()
     {
-        $userCount = User::where('role', '=', 0)->count();
+        $userCount = User::where('role', '=', 100)->count();
 
         $investment = DB::table('fms10_investments')->sum(DB::raw('CAST(amount AS DECIMAL(10, 2))'));
 
-        $countBalance = DB::table('fms10_accounts')->sum(DB::raw('CAST(balance AS DECIMAL(10, 2))'));
+        $countBalance = DB::table('fms10_companybudget')->sum(DB::raw('CAST(budget AS DECIMAL(10, 2))'));
 
-        $data = Payouts::whereNotNull('amount')->sum('amount');
+        $data = Payouts::whereNotNull('id')->count('id');
 
         return view('F10.dashboard', compact('countBalance','investment','data','userCount'));
     }
 
     public function investmentDashboard()
     {
-        return view('F10.investment');
+        $user = auth()->user();
+
+        $investment  = Investments::all();
+        return view('F10.investment', compact('investment'));
     }
 
     public function vendorDashboard()
     {
-        return view('F10.vendor');
+        $user = auth()->user();
+        $vendor  = Vendor::all();
+        return view('F10.vendor',compact('vendor'));
     }
 
 
@@ -463,28 +474,26 @@ class G10Controller extends Controller
     public function viewVendor($id) {
         $user = auth()->user();
 
-        $vendor = Vendorsuser::findOrFail($id);
-        return view('admin.sidebar.layout.edit', compact('vendor','user'));
+        $vendor = Vendor::findOrFail($id);
+        return view('F10.components.edit', compact('vendor','user'));
     }
     
     public function updateVendor(Request $request, $id) {
-        $vendor = Vendorsuser::findOrFail($id);
+        $vendor = Vendor::findOrFail($id);
 
         // Update vendor attributes based on form data
-        $vendor->name = $request->input('name');
-        $vendor->email = $request->input('email');
-        $vendor->join_date = $request->input('date'); // Assuming 'join_date' is the attribute name
-        $vendor->role_name = $request->input('role_name'); // Assuming 'role_name' is the attribute name
+        $vendor->full_name = $request->input('name');
+        $vendor->company_name = $request->input('company');
+        $vendor->address = $request->input('address');
+        $vendor->created_at = $request->input('date'); // Assuming 'join_date' is the attribute name
+
         
         // Update other attributes as needed
         // $vendor->other_attribute = $request->input('other_attribute');
         
         $vendor->save();
         
-        // Get the updated role name
-        $role_name = $request->input('role_name');
-        
-        return redirect()->route('vendorManage')->with('success', "$role_name updated successfully");
+        return redirect()->route('vendor.dashboard')->with('success', "updated successfully");
         
     }
     
@@ -546,7 +555,7 @@ class G10Controller extends Controller
         $invest = Investments::findOrFail($id);
     
         // Load the view for printing
-        $html = view('admin.investments.printinvest', compact('invest'))->render();
+        $html = view('F10.inc.printinvest', compact('invest'))->render();
     
         // Create a new Dompdf instance
         $dompdf = new Dompdf();
@@ -570,7 +579,7 @@ class G10Controller extends Controller
         $deposit = Payouts::findOrFail($id);
     
         // Load the view for printing
-        $html = view('admin.investments.print', compact('deposit'))->render();
+        $html = view('F10.inc.print', compact('deposit'))->render();
     
         // Create a new Dompdf instance
         $dompdf = new Dompdf();

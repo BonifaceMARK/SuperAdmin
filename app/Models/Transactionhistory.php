@@ -5,7 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class activityLog extends Model
+class Transactionhistory extends Model
 {
     use HasFactory;
+
+    protected $table = 'fms10_transactionhistory'; 
 }

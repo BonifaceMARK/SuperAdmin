@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Transferhistory extends Model
 {
-    protected $table = 'transferhistory'; 
+    protected $table = 'fms10_transferhistory'; 
 
     protected $fillable = [
         'user_id',

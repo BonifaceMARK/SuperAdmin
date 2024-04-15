@@ -11,20 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fms10_transactions', function (Blueprint $table) {
+        Schema::create('fms10_transactionhistory', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('firstname');
             $table->string('lastname');
-            $table->unsignedBigInteger('user_id');
-            $table->uuid('reference_no');
             $table->decimal('amount', 10, 2);
-            $table->string('type'); // Example: deposit, withdrawal, etc.
-            // Add any other relevant fields to the transaction record
-
-            // Define foreign key constraint
-            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-
+            $table->string('description');
+            $table->string('type');
             $table->timestamps();
+            
+            // Define foreign key constraints
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            // Add more foreign key constraints if needed
         });
     }
 
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fms10_transactions');
+        Schema::dropIfExists('fms10_transactionhistory');
     }
 };
