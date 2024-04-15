@@ -3,14 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\FreightPayment;
+use App\Models\PaymentGateway;
+use App\Models\AdminPayment;
 class fms6Controller extends Controller
 {
     public function fms6index()
     {
+        $paymentData = PaymentGateway::all();
+        $freightData = FreightPayment::all();
+        $adminData = AdminPayment::all();
 
-
-       return view ('F6.index');
+        return view('F6.index', compact('paymentData', 'freightData', 'adminData'));
     }
     public function store(Request $request)
     {

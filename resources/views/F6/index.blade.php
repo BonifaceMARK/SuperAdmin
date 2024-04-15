@@ -158,22 +158,169 @@
 @endif
 
 
-
-<div class="container mt-4">
+<div class="container mt-12">
     <div class="alert alert-info" role="alert">
         <h4 class="alert-heading">Report Notification</h4>
-        <p>Here is your report:</p>
-        <ul>
-            <li>Data 1: Value 1</li>
-            <li>Data 2: Value 2</li>
-            <li>Data 3: Value 3</li>
-            <!-- Add more data points as needed -->
-        </ul>
+        <p >Here is your report:</p>
         <hr>
-        <p class="mb-0">You can customize this notification to include any relevant information from your report.</p>
+        <p id="reportContent" class="mb-0"></p>
         <button id="downloadReportButton" class="btn btn-primary mt-2">Download Report</button>
     </div>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Function to handle displaying the report content
+        function displayReport() {
+            // Get the content of the report notification
+            let reportContent = document.getElementById('reportContent').innerText;
+
+            // Update the report content paragraph
+            document.getElementById('reportContent').innerText = reportContent;
+        }
+
+        // Add event listener to the download report button
+        let downloadReportButton = document.getElementById('downloadReportButton');
+        downloadReportButton.addEventListener('click', displayReport);
+    });
+</script>
+
+<!-- Reports -->
+<div class="col-12">
+    <div class="card">
+
+      <div class="card-body">
+        <h5 class="card-title">Reports <span>/Today</span></h5>
+
+        <!-- Line Chart -->
+        <div id="reportsChart"></div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+              let paymentData = @json($paymentData);
+              let freightData = @json($freightData);
+              let adminData = @json($adminData);
+
+              // Function to check trend
+              function checkTrend(data) {
+                let trend = 'stable';
+                for (let i = 1; i < data.length; i++) {
+                  if (data[i] > data[i - 1]) {
+                    if (trend === 'down') {
+                      return 'mixed'; // Data was previously going down, now going up
+                    }
+                    trend = 'up';
+                  } else if (data[i] < data[i - 1]) {
+                    if (trend === 'up') {
+                      return 'mixed'; // Data was previously going up, now going down
+                    }
+                    trend = 'down';
+                  }
+                }
+                return trend;
+              }
+
+              // Function to update report content based on trend
+              function updateReportContent(trend) {
+                let reportContent = document.getElementById('reportContent');
+                let trendText = '';
+                switch (trend) {
+                  case 'up':
+                    trendText = 'going up';
+                    break;
+                  case 'down':
+                    trendText = 'going down';
+                    break;
+                  case 'stable':
+                    trendText = 'stable';
+                    break;
+                  case 'mixed':
+                    trendText = 'mixed'; // If the trend is mixed, don't provide a clear trend
+                    break;
+                  default:
+                    trendText = 'unknown';
+                    break;
+                }
+                reportContent.innerHTML = `Here is your report:<br>The chart data is currently ${trendText}.`;
+              }
+
+              // Check trend for payment data
+              let paymentTrend = checkTrend(paymentData.map(item => item.transactionAmount));
+              // Check trend for freight data
+              let freightTrend = checkTrend(freightData.map(item => item.freightAmount));
+              // Check trend for admin data
+              let adminTrend = checkTrend(adminData.map(item => item.amount));
+
+              // Update report content based on the most significant trend
+              if (paymentTrend === 'mixed' || freightTrend === 'mixed' || adminTrend === 'mixed') {
+                updateReportContent('mixed');
+              } else if (paymentTrend === 'up' || freightTrend === 'up' || adminTrend === 'up') {
+                updateReportContent('up');
+              } else if (paymentTrend === 'down' || freightTrend === 'down' || adminTrend === 'down') {
+                updateReportContent('down');
+              } else {
+                updateReportContent('stable');
+              }
+
+              // Render the chart
+              new ApexCharts(document.querySelector("#reportsChart"), {
+                series: [
+                  {
+                    name: 'Payment Gateway',
+                    data: paymentData.map(item => item.transactionAmount)
+                  },
+                  {
+                    name: 'Freight Payment',
+                    data: freightData.map(item => item.freightAmount)
+                  },
+                  {
+                    name: 'Admin Payment',
+                    data: adminData.map(item => item.amount)
+                  }
+                ],
+                chart: {
+                  height: 350,
+                  type: 'area',
+                  toolbar: {
+                    show: false
+                  },
+                },
+                markers: {
+                  size: 4
+                },
+                fill: {
+                  type: "gradient",
+                  gradient: {
+                    shadeIntensity: 1,
+                    opacityFrom: 0.3,
+                    opacityTo: 0.4,
+                    stops: [0, 90, 100]
+                  }
+                },
+                dataLabels: {
+                  enabled: false
+                },
+                stroke: {
+                  curve: 'smooth',
+                  width: 2
+                },
+                xaxis: {
+                  type: 'datetime',
+                  categories: paymentData.map(item => item.transactionDate)
+                },
+                tooltip: {
+                  x: {
+                    format: 'dd/MM/yy HH:mm'
+                  },
+                }
+              }).render();
+            });
+          </script>
+
+
+      </div>
+
+    </div>
+  </div><!-- End Reports -->
 
 
 
