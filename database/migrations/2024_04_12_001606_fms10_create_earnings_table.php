@@ -13,13 +13,12 @@ return new class extends Migration
     {
         Schema::create('fms10_earnings', function (Blueprint $table) {
             $table->id();
-            $table->uuid('reference_no');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('investment_id');
             $table->decimal('amount', 10, 2);
             $table->timestamps();
-
-            // Define foreign key constraints
+            
+            // // Define foreign key constraints
             // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             // $table->foreign('investment_id')->references('id')->on('investments')->onDelete('cascade');
         });
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fms10_earnings');
+        Schema::dropIfExists('earnings');
     }
 };

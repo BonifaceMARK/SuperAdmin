@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fms10_Senderhistory', function (Blueprint $table) {
+        Schema::create('fms10_transferhistory', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('sender_id');
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->uuid('reference_no');
+            $table->string('firstname'); 
+            $table->string('lastname'); 
             $table->unsignedBigInteger('recipient_id');
             $table->decimal('amount', 12, 2);
             $table->string('type'); // Added 'type' column
@@ -35,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fms10_Senderhistory');
+        Schema::dropIfExists('Transferhistory');
     }
 };

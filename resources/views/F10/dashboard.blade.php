@@ -238,7 +238,7 @@
                             <div class="card info-card customers-card">
 
                                 <div class="card-body">
-                                    <h5 class="card-title">Deposits</h5>
+                                    <h5 class="card-title">Company Budget</h5>
 
                                     <div class="d-flex align-items-center">
                                         <div

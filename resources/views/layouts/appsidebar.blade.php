@@ -699,12 +699,6 @@
  <hr>
      <li class="nav-heading">Finance 10</li>
      {{-- @include('f10.inc.navbar') --}}
-     <li class="nav-item">
-       <a class="nav-link collapsed" href="{{ route('home') }}">
-         {{-- <a href="{{ route('index.dashboard') }}"> --}}
-         <i class="bi bi-grid-fill fs-5"></i></i><span style="font-size: 0.8rem;">Vendor & Investment</span>
-       </a>
-     </li>
 
      <li class="nav-item">
        <a class="nav-link collapsed" href="{{ route('vendor.dashboard') }}">

@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('payment_id');
             $table->string('payer_id');
             $table->string('payer_email');
-            $table->uuid('reference_no');
             $table->decimal('amount', 10, 2);
             $table->string('currency');
             $table->string('payment_status');

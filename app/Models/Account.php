@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Account extends Model
 {
-    protected $table = 'accounts'; 
+    protected $table = 'fms10_accounts'; 
     
     protected $fillable = [
         'firstname',

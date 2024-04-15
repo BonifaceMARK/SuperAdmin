@@ -9,7 +9,7 @@ class SenderHistory extends Model
 {
     use HasFactory;
 
-    protected $table = 'senderhistory'; 
+    protected $table = 'fms10_senderhistory'; 
 
     protected $fillable = [
         'user_id',

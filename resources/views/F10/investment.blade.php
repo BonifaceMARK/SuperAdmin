@@ -7,160 +7,201 @@
 
     <!-- ======= Header ======= -->
 
-    <header id="header" class="header fixed-top d-flex align-items-center">
-
-        <div class="d-flex align-items-center justify-content-between">
-            <a href="index.html" class="logo d-flex align-items-center">
-                <img src="{{ asset('assets/img/fmslogo.png') }}" alt="">
-                <span class="d-none d-lg-block">Financial Guardians</span>
-            </a>
-            <i class="bi bi-list toggle-sidebar-btn"></i>
-        </div><!-- End Logo -->
-
-
-
-        <nav class="header-nav ms-auto">
-            <ul class="d-flex align-items-center">
-
-                <li class="nav-item d-block d-lg-none">
-                    <a class="nav-link nav-icon search-bar-toggle " href="#">
-                        <i class="bi bi-search"></i>
-
-                    </a>
-                </li><!-- End Search Icon-->
-
-                <li class="nav-item dropdown">
-
-                    <!-- Notifications Nav -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                        <i class="bi bi-bell"></i>
-
-                    </a>
-                    <!-- Notification Dropdown Items -->
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-                        <li class="dropdown-header">
-
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <!-- Notification Items -->
-                        <div class="notification-scroll">
-                            <!-- Notification Items for Expenses -->
-
-                            <!-- End of Notification Items for Expenses -->
-
-                            <!-- Notification Items for RequestBudget -->
-
-                            <!-- End of Notification Items for RequestBudget -->
-
-                            <!-- Notification Items for CostAllocation -->
-
-                            <!-- End of Notification Items for CostAllocation -->
-                        </div>
-                        <li class="dropdown-footer">
-                        </li>
-                    </ul>
-                    <!-- End Notification Dropdown Items -->
-                </li>
-                <!-- End Notifications Nav -->
-
-
-                <li class="nav-item dropdown">
-
-
-
-                </li><!-- End Messages Nav -->
-
-
-
-                <li class="nav-item dropdown pe-3">
-
-                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#"
-                        data-bs-toggle="dropdown">
-                        <img src="{{ asset('assets/img/admin.png') }}" alt="Profile" class="rounded-circle">
-                        <span class="d-none d-md-block dropdown-toggle ps-2">{{ auth()->user()->name }}</span>
-
-                    </a><!-- End Profile Iamge Icon -->
-
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                        <li class="dropdown-header">
-                            <h6> {{ auth()->user()->email }} </h6>
-                            <span>{{ auth()->user()->department }}</span>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="">
-                                <i class="bi bi-person"></i>
-                                <span>My Profile</span>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center btn btn-primary btn-notification"
-                                data-bs-toggle="modal" data-bs-target="#recentActivityModal">
-                                <i class="bi bi-bell-fill"></i> View Recent Activity
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="">
-                                <i class="bi bi-question-circle"></i>
-                                <span>Need Help?</span>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="/logout">
-                                <i class="bi bi-box-arrow-right"></i>
-                                <span>Sign Out</span>
-                            </a>
-                        </li>
-
-                    </ul><!-- End Profile Dropdown Items -->
-
-                </li><!-- End Profile Nav -->
-
-            </ul>
-        </nav><!-- End Icons Navigation -->
-
-    </header><!-- End Header -->
+    @include('layouts.appheader');
+    
+    <!-- End Header -->
 
     <!-- ======= Sidebar ======= -->
     @include('layouts.appsidebar');
 
     <main id="main" class="main">
+
         <div class="pagetitle">
-            <div class="d-flex justify-content-between align-items-center">
-                <h1 class="mb-0"><i class="bi bi-house-door"></i> Investment</h1>
-                <div class="d-flex">
+            <h1>Dashboard</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active">Investment</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
+
+        <section class="section dashboard">
+            <div class="row">
+                <!-- Left side columns -->
+                <div class="col-lg-12">
+                    <div class="row justify-content-center">
+                        <div class="col-md-12 col-12">
+                            <div class="card">
+
+                                <div class="card-body">
+                                    <div class="card-title">Investment</div>
+                                    <div class="table-responsive">
+                                    <table id="example" class="table display"  width="100%">
+                                        <thead class="text-center">
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Acc Name</th>
+                                                <th>Amount</th>
+                                                <th>Type</th>
+                                                <th>Date</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($investment as $row)
+                                                <tr class="text-center">
+                                                    <th scope="row">{{ $row->id }}</th>
+                                                        <?php
+                                                        $firstname = $row->firstname;
+                                                        $lastname = $row->lastname;
+                                                        
+                                                        // Get the first character of the first name
+                                                        $firstCharFirstName = substr($firstname, 0, 1);
+                                                        
+                                                        // Replace all characters of the first name except the first character with '*'
+                                                        $asteriskFirstName = $firstCharFirstName . str_repeat('*', strlen($firstname) - 1);
+                                                        
+                                                        // Get the first character of the last name
+                                                        $firstCharLastName = substr($lastname, 0, 1);
+                                                        
+                                                        // Replace all characters of the last name except the first character with '*'
+                                                        $asteriskLastName = $firstCharLastName . str_repeat('*', strlen($lastname) - 1);
+                                                        ?>
+                                                        
+                                                        <td>{{ $asteriskFirstName }} {{ $asteriskLastName }}</td>  
+                                                    <td>{{ number_format($row->amount, 2) }}</td>
+                                                    <td>{{ ($row->type) }}</td>
+                                                    <td>{{ $row->created_at->format('F d, Y') }}</td>
+                                                    <td>
+                                                        @if ($row->status == 'Active')
+                                                            <span
+                                                                class="badge bg-success">{{ $row->status }}</span>
+                                                        @elseif($row->status == 'Inactive')
+                                                            <span class="badge bg-danger">{{ $row->status }}</span>
+                                                        @elseif($row->status == 'Pending')
+                                                            <span
+                                                                class="badge bg-warning text-dark">{{ $row->status }}</span>
+                                                        @elseif($row->status == 'Completed')
+                                                            <span
+                                                                class="badge bg-primary">{{ $row->status }}</span>
+                                                        @elseif($row->status == 'Cancelled')
+                                                            <span
+                                                                class="badge bg-secondary">{{ $row->status }}</span>
+                                                        @elseif($row->status == 'Suspended')
+                                                            <span class="badge bg-info">{{ $row->status }}</span>
+                                                        @elseif($row->status == 'Failed')
+                                                            <span class="badge bg-dark">{{ $row->status }}</span>
+                                                        @elseif($row->status == 'Refunded')
+                                                            <span
+                                                                class="badge bg-light text-dark">{{ $row->status }}</span>
+                                                        @elseif($row->status == 'Approve')
+                                                            <span
+                                                                class="badge bg-primary">{{ $row->status }}</span>
+                                                        @elseif($row->status == 'Cancel')
+                                                            <span
+                                                                class="badge bg-warning text-black">{{ $row->status }}</span>
+                                                        @elseif($row->status == 'Delete')
+                                                            <span
+                                                                class="badge bg-danger text-white">{{ $row->status }}</span>
+                                                        @endif
+                                                    </td>
+                                                    <td class="d-flex">
+                                                        <a href="{{ route('receiptinvestment', ['id' => $row->id]) }}" class="btn btn-primary btn-sm mr-3" title="Print Receipt">
+                                                            <i class="bi bi-print"></i> Print Receipt
+                                                        </a>                                                        
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                    </div>
+
+                                    {{-- <button type="button" class="btn btn-success btn-sm mr-2"><i class="bi bi-check2"></i></button>
+                                    <button type="button" class="btn btn-primary btn-sm"><i class="bi bi-x"></i></button>
+                                    <button type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash3-fill"></i></button> --}}
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- End Left side columns -->
+            </div>
+        </section>
+        {{-- <div class="modal fade" id="investmentapprove" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Approve</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        @foreach ($InvestmentRequest as $invest)
+                            <form id="approveInvestForm{{ $invest->id }}"
+                                action="{{ route('investment_requests.approve', $invest->id) }}" method="POST">
+                                @csrf
+                                @method('POST')
+
+                            </form>
+                        @endforeach
+                    </div>
+                    <h1>Are you sure you want to approve this Investment request?</h1>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary"
+                            onclick="approveInvestRequest('approveInvestForm{{ $invest->id }}')">Confirm</button>
+                    </div>
+                    <script>
+                        function approveInvestRequest(formId) {
+                            document.getElementById(formId).submit();
+                        }
+                    </script>
 
                 </div>
             </div>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Investment Management</li>
-                </ol>
-            </nav>
         </div>
 
-        <h1>INVESTMENT MANAGEMENT</h1>
-    </main>
+        <div class="modal fade" id="investmentcancel" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Delete</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        @foreach ($InvestmentRequest as $data)
+                            <form id="cancelInvestForm{{ $data->id }}"
+                                action="{{ route('investment_requests.cancel', ['id' => $data->id]) }}"
+                                method="POST">
+                                @csrf
+                                @method('DELETE')
+                            </form>
+                        @endforeach
+                        <h1>Are you sure you want to Cancel this Investment request?</h1>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary"
+                                onclick="cancelInvestRequest('cancelInvestForm{{ $data->id }}')">Confirm</button>
+                        </div>
+                    </div>
 
+                    <script>
+                        function cancelInvestRequest(formId) {
+                            document.getElementById(formId).submit();
+                        }
+                    </script>
+
+                </div>
+            </div>
+        </div> --}}
+    </main><!-- End #main -->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i>
+    </a>
     @include('layout.footer')
 
 </body>
