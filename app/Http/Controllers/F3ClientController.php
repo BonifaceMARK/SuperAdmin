@@ -35,7 +35,13 @@ class F3ClientController extends Controller
                 'status' => $status,
             ]);
         }
-
+        $referenceNo = $item->reference_no;
+        $costs = FmsG2Budget::where('reference_no', $referenceNo)->get(); //cost
+        foreach ($costs as $cost) {
+            $cost->update([
+                'status' => $status,
+            ]);
+        }
         $name = $item->title;
         $costs = BudgetPlan::where('name', $name)->get(); //budgetplan
         foreach ($costs as $cost) {
