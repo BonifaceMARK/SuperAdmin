@@ -157,6 +157,57 @@
     </div>
 @endif
 
+<div class="col-12">
+    <div class="card recent-sales overflow-auto">
+
+        <div class="card-body">
+            <h5 class="card-title">Bank Reconcilation</h5>
+            <table class="table table-borderless datatable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Date of Birth</th>
+                        <th>Address</th>
+                        <th>Phone 1</th>
+                        <th>Phone 2</th>
+                        <th>Phone 3</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{-- eto yung pag pasok ng data sa table --}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<tr>
+    <td>
+        <!-- The Modal -->
+        {{-- pagkuha ng ID need baguhin --}}
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Details for ID: </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {{-- dito papasok ung sa modal data --}}
+                    </div>
+                    {{-- <div class="modal-footer">
+
+                    </div> --}}
+                </div>
+            </div>
+        </div> <!--  end of modal -->
+    </td>
+</tr>
 
 
 
@@ -164,6 +215,92 @@
 
 
 
+<div class="container-fluid">
+    <div class="col-lg-12">
+        <div class="card">
+
+            <div class="card-header">
+                <large class="card-title">
+                    <b>Client Feedback</b>
+                </large>
+                {{-- <a  class="btn btn-primary btn-block col-md-2 float-right" href="https://docs.google.com/forms/d/e/1FAIpQLSc-Zxf3Ttd_naLtQehBzI5t-4caj_i7KxNxl-ecjucTGW1FVQ/viewform?usp=sf_link"> Report Link</a> --}}
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered" id="loan-list">
+                    <colgroup>
+                        <col width="20%">
+                        <col width="20%">
+                        <col width="20%">
+                        <col width="20%">
+                        <col width="20%">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th class="text-center">Name</th>
+                            <th class="text-center">Email</th>
+                            <th class="text-center">Contact Number</th>
+                            <th class="text-center">Comments</th>
+                            <th class="text-center">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       {{-- data sa table --}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    td p {
+        margin: unset;
+    }
+    td img {
+        width: 8vw;
+        height: 12vh;
+    }
+    td {
+        vertical-align: middle !important;
+    }
+</style>
+
+<div class="container-fluid">
+	<div class="col-lg-12">
+		<div class="card">
+			<div class="card-header">
+				<large class="card-title">
+					<b>Application List</b>
+				</large>
+				<button class="btn btn-primary btn-block col-md-2 float-right" type="button" id="new_borrower"><i class="fa fa-plus"></i> Apply</button>
+			</div>
+			<div class="card-body">
+				<table class="table table-bordered" id="borrower-list">
+					<colgroup>
+						<col width="10%">
+						<col width="35%">
+						<col width="30%">
+						<col width="15%">
+						<col width="10%">
+					</colgroup>
+					<thead>
+						<tr>
+							<th class="text-center">#</th>
+							<th class="text-center">Client Details</th>
+							<th class="text-center">Credit Details</th>
+							<!-- <th class="text-center">Next Payment Schedule</th> -->
+							<th class="text-center">Client Status</th>
+							<th class="text-center">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{--  data --}}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
 
 </main>
 

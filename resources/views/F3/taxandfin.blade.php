@@ -1,6 +1,6 @@
 @include('f3.inc.head')
 @include('f3.inc.head2')
-@include('f3.inc.navbar')
+@include('layouts.appsidebar');
 <main id="main" class="main">
     <div class="col-lg-6">
         <div class="card">

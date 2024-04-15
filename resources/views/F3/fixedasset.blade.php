@@ -1,6 +1,6 @@
 @include('f3.inc.head')
 @include('f3.inc.head2')
-@include('f3.inc.navbar')
+@include('layouts.appsidebar');
 <style>
 /* Styles for the balance sheet title */
 h1 {

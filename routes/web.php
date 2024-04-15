@@ -6,9 +6,7 @@ use App\Http\Controllers\SubAdminController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
-USE App\Http\Controllers\F3PendingController;
 USE App\Http\Controllers\F3ClientController;
-USE App\Http\Controllers\F3Reports;
 use App\Http\Controllers\fms5Controller;
 use App\Http\Controllers\fms1Controller;
 use App\Http\Controllers\fms2Controller;
@@ -71,12 +69,12 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
     // ********** F3 Routes *********
     Route::post('/clients/s{id}',           [F3ClientController::class, 'update'])->name('update');
     // Route::get('/dashboard',                [PendingController::class, 'indexp'])->name('dashboard');
-    Route::get('/clients',                  [F3PendingController::class, 'indexpage'])->name('Clients');
-    Route::get('/ap-ar-fetch-chart-data',   [F3Reports::class, 'fetchChartData'])->name('fetchChartData');
-    Route::get('/ap-ar-reports',            [F3Reports::class, 'apar'])->name('apar');
-    Route::get('/fix-asset-reports',        [F3Reports::class, 'fixass'])->name('fixass');
-    Route::get('/tax-management-reports',   [F3Reports::class, 'taxfin'])->name('taxfin');
-    Route::get('/bank',                     [F3Reports::class, 'bank'])->name('bank');
+    Route::get('/clients',                  [F3ClientController::class, 'indexpage'])->name('Clients');
+    Route::get('/ap-ar-fetch-chart-data',   [F3ClientController::class, 'fetchChartData'])->name('fetchChartData');
+    Route::get('/ap-ar-reports',            [F3ClientController::class, 'apar'])->name('apar');
+    Route::get('/fix-asset-reports',        [F3ClientController::class, 'fixass'])->name('fixass');
+    Route::get('/tax-management-reports',   [F3ClientController::class, 'taxfin'])->name('taxfin');
+    Route::get('/bank',                     [F3ClientController::class, 'bank'])->name('bank');
 
 
 
