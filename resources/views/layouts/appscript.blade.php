@@ -13,6 +13,14 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<script>
+     var myVar=setInterval(function(){myTimer()},1000);
+     function myTimer() {
+         var d = new Date();
+         document.getElementById("horas").innerHTML = d.toLocaleTimeString();
+     }
+     </script>
+
 
 <script type="text/javascript">
 

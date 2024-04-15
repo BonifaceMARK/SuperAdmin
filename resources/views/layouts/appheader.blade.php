@@ -44,9 +44,15 @@
         <button type="submit" title="Search"><i class="bi bi-search"></i></button>
       </form> --}}
     </div><!-- End Search Bar -->
+    
   
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
+        <li>
+          <div>
+            <span class="badge badge-primary"style="background-color: white; color: black;" id="horas">NULL</span>
+            </div>
+        </li>
   
         <li class="nav-item d-block d-lg-none">
           <a class="nav-link nav-icon search-bar-toggle " href="#">
