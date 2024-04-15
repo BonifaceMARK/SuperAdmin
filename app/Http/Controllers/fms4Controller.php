@@ -11,6 +11,7 @@ use App\Models\TaxPayment;
 use App\Models\FreightPayment;
 use App\Models\PaymentGateway;
 use App\Models\FixedAssetPayment;
+use App\Models\Transactionhistory;
 class fms4Controller extends Controller
 {
     public function fms4index()
@@ -18,17 +19,21 @@ class fms4Controller extends Controller
         $freightPayments = FreightPayment::all();
         $paymentGateways = PaymentGateway::all();
         $payments = FixedAssetPayment::all();
+        $f10 = Transactionhistory::all();
+        
         $arInvoiceTotalAmounts = ArInvoiceTotalAmount::all();
         $invoiceCustomerNames = InvoiceCustomerName::all();
         $invoicePaymentDetails = InvoicePaymentDetail::all();
         $fixedAssetPayments = FixedAssetPayment::all();
         $invoiceDetails = InvoiceDetail::all();
         $taxPayments = TaxPayment::all();
+        $transach = Transactionhistory::all();
+        
 
         $taxPayments = TaxPayment::all();
         $fixedAssetPayments = FixedAssetPayment::all();
         $payments = $taxPayments->merge($fixedAssetPayments);
-        return view('F4.index', compact('payments','freightPayments','fixedAssetPayments','payments','paymentGateways','taxPayments','invoicePaymentDetails','arInvoiceTotalAmounts','invoiceDetails','invoiceCustomerNames'));
+        return view('F4.index', compact('payments','freightPayments','f10','transach','fixedAssetPayments','payments','paymentGateways','taxPayments','invoicePaymentDetails','arInvoiceTotalAmounts','invoiceDetails','invoiceCustomerNames'));
     }
 
 }

@@ -23,7 +23,6 @@ class Pendingdocu extends Model
         'submitted_by',
         'reference',
         'created_at'
-
     ];
 
     public function comment()

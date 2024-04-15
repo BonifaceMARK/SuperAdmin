@@ -16,6 +16,7 @@ use App\Models\Investments;
 use App\Models\Transaction;
 use App\Models\Vendor;
 use App\Models\DepositRequest;
+use App\Models\Pendingdocu;
 use App\Models\InvestmentRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Artisan;
@@ -42,9 +43,11 @@ class G10Controller extends Controller
     public function investmentDashboard()
     {
         $user = auth()->user();
+        
+        $approve  = Pendingdocu::all();
 
         $investment  = Investments::all();
-        return view('F10.investment', compact('investment'));
+        return view('F10.investment', compact('investment','approve'));
     }
 
     public function vendorDashboard()

@@ -11,6 +11,7 @@ use App\Models\AdminPayment;
 use App\Models\Investments;
 use App\Models\BudgetPlan;
 use App\Models\FmsG1CashManagement;
+use App\Models\Pendingdocu;
 class fms1Controller extends Controller
 {
 
@@ -33,6 +34,9 @@ class fms1Controller extends Controller
         $totalIncome = $cashManagements->sum('income');
         $totalOutflow = $cashManagements->sum('outflow');
         $totalNetIncome = $cashManagements->sum('net_income');
+        
+        $approve = Pendingdocu::all();
+        
 
           $salesCount = AdminPayment::count();
 
@@ -53,7 +57,26 @@ class fms1Controller extends Controller
         $payments = FixedAssetPayment::all();
         $investments = Investments::all();
 
-       return view ('F1.index', compact('cashManagements', 'totalRevenue', 'totalIncome', 'totalOutflow', 'totalNetIncome','freightPayments','taxPayments','payments','investments','salesCount', 'salesPercentage', 'revenueAmount', 'revenuePercentage', 'customersCount', 'customersPercentage'));
+       return view ('F1.index', compact('cashManagements','approve', 'totalRevenue', 'totalIncome', 'totalOutflow', 'totalNetIncome','freightPayments','taxPayments','payments','investments','salesCount', 'salesPercentage', 'revenueAmount', 'revenuePercentage', 'customersCount', 'customersPercentage'));
+    }
+
+    public function planningrequest(Request $request){
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'budget' => 'required|numeric',
+            'submitted_by' => 'required|numeric',
+            'created_at' => 'required|date|after:start_date',
+        ]);
+
+        $budgetPlan = Pendingdocu::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'budget' => $request->budget,
+            'submitted_by' => $request->submitted_by,
+            'created_at' => $request->created_at,
+        ]);
+        return redirect()->back()->with('success', 'Financial planning has been created Waiting For Approval.');
     }
 
     public function storeBudgetPlan(Request $request)

@@ -95,6 +95,7 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
     Route::post('/financial-planning', [fms1Controller::class, 'storeBudgetPlan'])->name('budget-plans.store');
     Route::get('/fms1index', [fms1Controller::class, 'fms1index'])->name('fms1.index');
     Route::post('/add-to-revenue/{payment}', [fms1Controller::class, 'addToRevenue'])->name('add.revenue');
+    Route::post('planrequest', [fms1Controller::class, 'planningrequest'])->name('planrequest');
 
     // EXPENSE BUDGETING & FORECAST COST ALLOCATION MANAGEMENT
     Route::get('/fms2index', [fms2Controller::class, 'fms2index'])->name('fms2.index');
@@ -214,6 +215,8 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
     Route::put('/update/{id}', [G10Controller::class, 'updateVendor'])->name('update.vendor');
 
     Route::get('/vendorview',[G10Controller::class,'vendorView'])->name('view.vendor');
+
+    Route::get('/vendorview',[G10Controller::class,'vendorView'])->name('superadmin');
 
 
 
