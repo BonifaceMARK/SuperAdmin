@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->decimal('amount', 10, 2);
             $table->string('type'); // Example: deposit, withdrawal, etc.
+            $table->enum('status', ['Paid'])->default('Paid');
             // Add any other relevant fields to the transaction record
 
             // Define foreign key constraint

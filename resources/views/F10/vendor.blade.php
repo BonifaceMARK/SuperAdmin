@@ -1,9 +1,6 @@
-@extends('layout.title')
+@extends('layouts.app')
 
-@section('title', env('APP_NAME'))
-@include('layout.title')
-
-<body>
+@section('content')
 
     <!-- ======= Header ======= -->
 
@@ -21,7 +18,7 @@
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item active">Vendor View</li>
+                    <li class="breadcrumb-item active">Vendor</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -153,7 +150,6 @@
     </a>
     @include('layout.footer')
 
-
-</body>
+@endsection
 
 </html>
