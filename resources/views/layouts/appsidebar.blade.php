@@ -276,13 +276,17 @@
   </li><!-- End Components Nav -->
 
   <li class="nav-heading">Finance 3</li>
-  <li class="nav-heading">Workflow Approval</li>
+  <li class="nav-item">
+    <a class="nav-link collapsed" data-bs-target="#components-reports" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-bar-chart"></i></i><span style="font-size: 0.8rem;">Reports</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+    <ul id="components-reports" class="nav-content collapse " data-bs-parent="#sidebar-nav">
 <li class="nav-item">
   <a  class="nav-link collapsed" href="tax-management-reports">
     <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Tax and Financial Reports</span>
   </a>
 </li>
-<hr>
+
 <li class="nav-item">
   <a class="nav-link collapsed" href="fix-asset-reports">
     <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Fixed Assets</span>
@@ -298,11 +302,13 @@
     <i class="bi bi-circle"></i><span style="font-size: 0.8rem;">Credit Management - Bank Reconcilation</span>
   </a>
 </li>
-<li class="nav-item">
-  <a class="nav-link collapsed" class="nav-link " data-bs-target="#forms-nav"  href="fms3index">
-    <i class="bi bi-journal-text"></i><span style="font-size: 0.8rem;">Clients</span>
-  </a>
-</li>
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link collapsed" class="nav-link " data-bs-target="#forms-nav"  href="fms3index">
+      <i class="bi bi-journal-text"></i><span style="font-size: 0.8rem;">Clients</span>
+    </a>
+  </li>
       <hr>
       <li class="nav-heading">Finance 4</li>
       <li class="nav-item">
@@ -310,7 +316,7 @@
             <i class="bi bi-list-check"></i><span style="font-size: 0.8rem;">General Ledger Audit & Compliance</span>
         </a>
       </li><!-- End Components Nav -->
-      <hr>
+
 
 
     <hr>
@@ -392,7 +398,7 @@
 
 
 
-    <hr>
+
     {{-- @include('f3.inc.navbar') --}}
 
     {{-- <li class="nav-item">
