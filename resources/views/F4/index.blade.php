@@ -162,25 +162,25 @@
 <div class="row">
     <div class="col-lg-3 col-md-6">
         <!-- Button to trigger the modal -->
-        <button type="button" class="btn btn-primary btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#taxPayersModal" style="background-image: url('{{ asset('assets/img/RE.jpg') }}'); background-size: cover; height: 200px;">
+        <button type="button" class="btn btn-primary gallery-item v-100" data-bs-toggle="modal" data-bs-target="#taxPayersModal" style="background-image: url('{{ asset('assets/img/RE.jpg') }}'); background-size: cover; height: 200px;">
             Tax Payers
         </button>
     </div>
     <div class="col-lg-3 col-md-6">
         <!-- Button to trigger the modal -->
-        <button type="button" class="btn btn-primary btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#paymentGatewaysModal" style="background-image: url('{{ asset('assets/img/REST.jpg') }}'); background-size: cover; height: 200px;">
+        <button type="button" class="btn btn-primary gallery-item v-100" data-bs-toggle="modal" data-bs-target="#paymentGatewaysModal" style="background-image: url('{{ asset('assets/img/REST.jpg') }}'); background-size: cover; height: 200px;">
             Hotel & Restaurant
         </button>
     </div>
     <div class="col-lg-3 col-md-6">
         <!-- Button to trigger the modal -->
-        <button type="button" class="btn btn-primary btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#freightPaymentsModal" style="background-image: url('{{ asset('assets/img/finance_1.jpg') }}'); background-size: cover; height: 200px;">
+        <button type="button" class="btn btn-primary gallery-item v-100" data-bs-toggle="modal" data-bs-target="#freightPaymentsModal" style="background-image: url('{{ asset('assets/img/finance_1.jpg') }}'); background-size: cover; height: 200px;">
             Freight Payments
         </button>
     </div>
     <div class="col-lg-3 col-md-6">
         <!-- Button to trigger the modal -->
-        <button type="button" class="btn btn-primary btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#fixedAssetPaymentsModal" style="background-image: url('{{ asset('assets/img/account.jpg') }}'); background-size: cover; height: 200px;">
+        <button type="button" class="btn btn-primary gallery-item v-100" data-bs-toggle="modal" data-bs-target="#fixedAssetPaymentsModal" style="background-image: url('{{ asset('assets/img/account.jpg') }}'); background-size: cover; height: 200px;">
             Fixed Asset Payments
         </button>
     </div>
@@ -188,13 +188,13 @@
 <div class="row mt-3">
     <div class="col-lg-6 col-md-6">
         <!-- Button to trigger the modal -->
-        <button type="button" class="btn btn-primary btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#paymentModal" style="background-image: url('{{ asset('assets/img/allocated.jpg') }}'); background-size: cover; height: 200px;">
+        <button type="button" class="btn btn-primary gallery-item v-100" data-bs-toggle="modal" data-bs-target="#paymentModal" style="background-image: url('{{ asset('assets/img/allocated.jpg') }}'); background-size: cover; height: 200px;">
             Audit Tax Payments
         </button>
     </div>
     <div class="col-lg-6 col-md-6">
         <!-- Button to trigger the modal -->
-        <button type="button" class="btn btn-primary btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-image: url('{{ asset('assets/img/check.jpg') }}'); background-size: cover; height: 200px;">
+        <button type="button" class="btn btn-primary gallery-item v-100" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-image: url('{{ asset('assets/img/check.jpg') }}'); background-size: cover; height: 200px;">
             General ledger
         </button>
     </div>

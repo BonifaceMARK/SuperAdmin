@@ -16,6 +16,7 @@ class BudgetPlan extends Model
         'start_date',
         'end_date',
         'status',
+        'severity', // Add 'severity' attribute to fillable array
     ];
 
     protected $casts = [

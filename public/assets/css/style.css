@@ -1430,3 +1430,32 @@ tr:nth-child(even) {
 .modal-content {
     height: 100%; /* Set height to 100% */
 }
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.gallery-item {
+    height: 200px;
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+}
+ #chart {
+            width: 900px; /* Adjust the width as needed */
+            height: 350px; /* Adjust the height as needed */
+            margin: auto; /* Center the chart horizontally */
+        }

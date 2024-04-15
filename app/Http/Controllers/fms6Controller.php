@@ -6,63 +6,71 @@ use Illuminate\Http\Request;
 use App\Models\FreightPayment;
 use App\Models\PaymentGateway;
 use App\Models\AdminPayment;
+use App\Models\RiskManagement;
+use App\Models\TaxPayment;
+use App\Models\FixedAssetPayment;
+use App\Models\FmsG2Budget;
+use App\Models\BudgetPlan;
+use App\Models\FmsG2CostAllocation;
 class fms6Controller extends Controller
 {
     public function fms6index()
     {
+        $riskManagements = RiskManagement::all();
+        $costAllocations = FmsG2CostAllocation::all();
         $paymentData = PaymentGateway::all();
         $freightData = FreightPayment::all();
         $adminData = AdminPayment::all();
+        $budgetPlans  = BudgetPlan::all();
 
-        return view('F6.index', compact('paymentData', 'freightData', 'adminData'));
+           // Retrieve data from models
+           $taxData = TaxPayment::sum('amount');
+           $paymentData = PaymentGateway::sum('transactionAmount');
+           $budgetData = FmsG2Budget::sum('amount');
+           $fixedAssetData = FixedAssetPayment::sum('amount');
+           $adminData = AdminPayment::sum('amount');
+        return view('F6.index', compact('budgetPlans','taxData', 'paymentData', 'budgetData', 'fixedAssetData', 'adminData','riskManagements','costAllocations','paymentData', 'freightData', 'adminData'));
     }
-    public function store(Request $request)
+    public function updateSeverity(Request $request, $id)
+{
+    // Validate the incoming request data
+    $request->validate([
+        'severity' => 'required|integer|min:0|max:100', // Add any additional validation rules if needed
+    ]);
+
+    // Find the budget plan by its ID
+    $budgetPlan = BudgetPlan::findOrFail($id);
+
+    // Update the severity attribute with the new value from the request
+    $budgetPlan->update([
+        'severity' => $request->severity,
+    ]);
+
+    // Redirect back with a success message
+    return redirect()->back()->with('success', 'Severity updated successfully!');
+}
+
+    public function storeRiskCost(Request $request)
     {
-        // Validate the incoming request data
-        $validatedData = $request->validate([
-            'client_name' => 'required',
-            'company_name' => 'required',
-            /* 'risk_manager' => 'required',
-            'commercia_budget' => 'required',
-            'currency' => 'required',
-            'industry_sector' => 'required',
-            'description' => 'required',
-            'facility' => 'required',
-            'risk_owner' => 'required',
-            'date_raised' => 'required',
-            'risk_occurrence' => 'required',
-            'probability' => 'required',
-            'hsse_health_safety' => 'required',
-            'hsse_security' => 'required',
-            'hsse_environmental' => 'required', */
-            // Add other validation rules for additional form fields
+        // Validate the request data
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'severity' => 'required|numeric',
+            'status' => 'required|string|max:255',
         ]);
-        // Create a new client instance
-        $client = new Client();
-        // $client->client_name = $validatedData['client_name'];
-        // Assign form data to the client model properties
-        $client->client_name = $request->input('client_name');
-        $client->company_name = $request->input('company_name');
-        $client->risk_manager = $request->input('risk_manager');
-        $client->commercial_budget = $request->input('commercial_budget');
-        $client->currency = $request->input('currency');
-        $client->industry_sector = $request->input('industry_sector');
-        $client->description = $request->input('description');
-        $client->facility = $request->input('facility');
-        $client->risk_owner = $request->input('risk_owner');
-        $client->date_raised = $request->input('date_raised');
-        $client->risk_occurrence = $request->input('risk_occurrence');
-        $client->risk_bearer = $request->input('risk_bearer');
-        $client->probability = $request->input('probability');
-        $client->hsse_health_safety = $request->has('hsse_health_safety') ? true : false;
-        $client->hsse_security = $request->has('hsse_security') ? true : false;
-        $client->hsse_environment = $request->has('hsse_environment') ? true : false;
-        // Assign other fields similarly
 
-        // Save the client instance to the database
-        $client->save();
+        // Create a new risk management instance
+        $riskManagement = new RiskManagement();
+        $riskManagement->title = $request->title;
+        $riskManagement->description = $request->description;
+        $riskManagement->severity = $request->severity;
+        $riskManagement->status = $request->status;
 
-        // Redirect back with success message
-        return redirect()->route('risk.index')->with('success', 'Form created successfully.');
+        // Save the risk management
+        $riskManagement->save();
+
+        // Redirect to the index page with success message
+        return redirect()->route('fms6.index')->with('success', 'Risk Management created successfully.');
     }
 }

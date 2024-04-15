@@ -160,13 +160,13 @@
 <div class="row">
     <div class="col-lg-6 col-md-6 col-sm-12">
         <!-- Button to trigger the modal -->
-        <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#dashboardModal" style="background-image: url('{{ asset('assets/img/fan1.jpg') }}'); background-size: cover; height: 200px;">
+        <button type="button" class="btn btn-primary gallery-item w-100" data-bs-toggle="modal" data-bs-target="#dashboardModal" style="background-image: url('{{ asset('assets/img/fan1.jpg') }}'); background-size: cover; height: 200px;">
             <strong>Financial reports</strong>
         </button>
     </div>
     <div class="col-lg-6 col-md-6 col-sm-12">
         <!-- Button to trigger the modal -->
-        <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#financialPlanningModal" style="background-image: url('{{ asset('assets/img/budget.jpg') }}'); background-size: cover; height: 200px;">
+        <button type="button" class="btn btn-primary gallery-item w-100" data-bs-toggle="modal" data-bs-target="#financialPlanningModal" style="background-image: url('{{ asset('assets/img/budget.jpg') }}'); background-size: cover; height: 200px;">
             <strong>Budget Plan</strong>
         </button>
     </div>
@@ -174,19 +174,19 @@
 <div class="row mt-3">
     <div class="col-lg-4 col-md-6 col-sm-12">
         <!-- Button to trigger the modal -->
-        <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#cashManagementModal" style="background-image: url('{{ asset('assets/img/finance_1dash.jpg') }}'); background-size: cover; height: 200px;">
+        <button type="button" class="btn btn-primary gallery-item w-100" data-bs-toggle="modal" data-bs-target="#cashManagementModal" style="background-image: url('{{ asset('assets/img/finance_1dash.jpg') }}'); background-size: cover; height: 200px;">
             Cash Management
         </button>
     </div>
     <div class="col-lg-4 col-md-6 col-sm-12">
         <!-- Button to trigger the modal -->
-        <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#investmentsReportModal" style="background-image: url('{{ asset('assets/img/forecast.jpg') }}'); background-size: cover; height: 200px;">
+        <button type="button" class="btn btn-primary gallery-item w-100" data-bs-toggle="modal" data-bs-target="#investmentsReportModal" style="background-image: url('{{ asset('assets/img/forecast.jpg') }}'); background-size: cover; height: 200px;">
             Investments Report
         </button>
     </div>
     <div class="col-lg-4 col-md-6 col-sm-12">
         <!-- Button to trigger the modal -->
-        <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#fixedAssetReportsModal" style="background-image: url('{{ asset('assets/img/calculate.jpg') }}'); background-size: cover; height: 200px;">
+        <button type="button" class="btn btn-primary gallery-item w-100" data-bs-toggle="modal" data-bs-target="#fixedAssetReportsModal" style="background-image: url('{{ asset('assets/img/calculate.jpg') }}'); background-size: cover; height: 200px;">
             Fixed Asset Reports
         </button>
     </div>

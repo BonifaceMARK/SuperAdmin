@@ -2,14 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FinancialPlanning extends Model
+class BudgetPlan extends Model
 {
-    use HasFactory;
-
-    protected $table = 'fms_g1financial_planning';
+    protected $table = 'fms_g1budget_plan';
 
     protected $fillable = [
         'name',
@@ -18,6 +15,8 @@ class FinancialPlanning extends Model
         'target_expense',
         'start_date',
         'end_date',
+        'status',
+        'severity', // Add the 'severity' attribute to the fillable array
     ];
 
     protected $casts = [

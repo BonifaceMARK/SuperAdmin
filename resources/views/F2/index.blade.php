@@ -159,41 +159,39 @@
 @endif
 
 
-<div class="card">
-    <div class="card-body">
 
-
-
-<!-- Button to trigger the modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#fixedAssetModal">
-    Fixed Asset Report
-</button>
-<!-- Button to trigger the modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#paymentModal">
-    Expenses
-</button>
-<!-- Button to trigger the modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#areaChartModal">
-    Predict Tax
-</button>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pieChartModal">
-Expenses Pie Chart
-</button>
-<!-- Button to trigger the modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#investmentModal">
-Investment Report
-</button>
-<!-- Button to trigger the modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createCostAllocationModal">
-    Cost Allocation
+<div class="gallery-container">
+    <!-- Button to trigger the modal -->
+    <button type="button" class="btn btn-primary gallery-item" data-bs-toggle="modal" data-bs-target="#fixedAssetModal" style="background-image: url('{{ asset('assets/img/fan1.jpg') }}'); background-size: cover;">
+        Fixed Asset Report
     </button>
-<!-- Button to trigger the modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createBudgetProposalModal">
-    Create Budget Proposal
-</button>
+    <!-- Button to trigger the modal -->
+    <button type="button" class="btn btn-primary gallery-item" data-bs-toggle="modal" data-bs-target="#paymentModal" style="background-image: url('{{ asset('assets/img/fan2.jpg') }}'); background-size: cover;">
+        Expenses
+    </button>
+    <!-- Button to trigger the modal -->
+    <button type="button" class="btn btn-primary gallery-item" data-bs-toggle="modal" data-bs-target="#areaChartModal" style="background-image: url('{{ asset('assets/img/fan3.jpg') }}'); background-size: cover;">
+        Predict Tax
+    </button>
+    <!-- Button to trigger the modal -->
+    <button type="button" class="btn btn-primary gallery-item" data-bs-toggle="modal" data-bs-target="#pieChartModal" style="background-image: url('{{ asset('assets/img/fan4.jpg') }}'); background-size: cover;">
+        Expenses Pie Chart
+    </button>
+    <!-- Button to trigger the modal -->
+    <button type="button" class="btn btn-primary gallery-item" data-bs-toggle="modal" data-bs-target="#investmentModal" style="background-image: url('{{ asset('assets/img/fan5.jpg') }}'); background-size: cover;">
+        Investment Report
+    </button>
+    <!-- Button to trigger the modal -->
+    <button type="button" class="btn btn-primary gallery-item" data-bs-toggle="modal" data-bs-target="#createCostAllocationModal" style="background-image: url('{{ asset('assets/img/fan6.jpg') }}'); background-size: cover;">
+        Cost Allocation
+    </button>
+    <!-- Button to trigger the modal -->
+    <button type="button" class="btn btn-primary gallery-item" data-bs-toggle="modal" data-bs-target="#createBudgetProposalModal" style="background-image: url('{{ asset('assets/img/fan7.jpg') }}'); background-size: cover;">
+        Create Budget Proposal
+    </button>
 </div>
-</div>
+
+
 <section class="section dashboard">
     <div class="row">
 

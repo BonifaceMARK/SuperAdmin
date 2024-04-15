@@ -21,6 +21,7 @@ return new class extends Migration
             $table->date('start_date');
             $table->date('end_date');
             $table->string('status')->default('pending'); // Adding status column with default value 'pending'
+            $table->integer('severity')->nullable();
             $table->timestamps();
         });
     }

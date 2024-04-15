@@ -109,6 +109,9 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
 
     // FINANCIAL ANALYTICS & BUSINESS INTELLIGENCE RISK MANAGEMENT
     Route::get('/fms6index', [fms6Controller::class, 'fms6index'])->name('fms6.index');
+    Route::post('/riskcost', [fms6Controller::class, 'storeRiskCost'])->name('risk_managements.store');
+    Route::put('/budget_plans/{id}/update_severity', [fms6Controller::class, 'updateSeverity'])->name('budget_plans.update_severity');
+
 
 
     // ACCOUNTS PAYABLE & RECEIVABLE
