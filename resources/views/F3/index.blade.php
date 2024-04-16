@@ -20,7 +20,7 @@
     @endif
 
 
-    <div class="card">
+    {{-- <div class="card">
         <div class="card-body">
 
 
@@ -51,7 +51,7 @@
                 Investment Report
             </button>
         </div>
-    </div>
+    </div> --}}
 
 
     <!-- Recent Sales -->
@@ -69,7 +69,7 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title">Recent Sales <span>| Today</span></h5>
-                <table class="table table-borderless datatable">
+                 <table id="example" class="table display" width="100%">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
