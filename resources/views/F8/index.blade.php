@@ -157,11 +157,91 @@
     </div>
 @endif
 
+<!-- Modal -->
+<div class="modal fade" id="bankTransactionModal" tabindex="-1" role="dialog" aria-labelledby="bankTransactionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bankTransactionModalLabel">Bank Transaction Reports</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="card-body">
+                        <h5 class="card-title">Bank Transaction Details</h5>
+
+                        <div class="activity">
+
+                            <div class="activity-item d-flex">
+                                <div class="activite-label">Description:</div>
+                                <div class="activity-content">{{ $cashManagement->description }}</div>
+                            </div><!-- End activity item-->
+
+                            <div class="activity-item d-flex">
+                                <div class="activite-label">Revenue:</div>
+                                <div class="activity-content">${{ number_format($cashManagement->revenue, 2) }}</div>
+                            </div><!-- End activity item-->
+
+                            <div class="activity-item d-flex">
+                                <div class="activite-label">Outflow:</div>
+                                <div class="activity-content">${{ number_format($cashManagement->outflow, 2) }}</div>
+                            </div><!-- End activity item-->
+
+                            <div class="activity-item d-flex">
+                                <div class="activite-label">Net Income:</div>
+                                <div class="activity-content">${{ number_format($cashManagement->net_income, 2) }}</div>
+                            </div><!-- End activity item-->
+
+                            <div class="activity-item d-flex">
+                                <div class="activite-label">Financial Health Status:</div>
+                                <div class="activity-content">
+                                    @if ($financialHealthStatus === 'Healthy')
+                                        <span class="text-success">Congratulations! Your financial health is healthy.</span>
+                                    @else
+                                        <span class="text-danger">Warning! Your financial health is poor. Please take necessary actions to improve it.</span>
+                                    @endif
+                                </div>
+                            </div><!-- End activity item-->
+                            <div class="card-body">
+                                <h5 class="card-title">Recent Activity <span>| Today</span></h5>
+                            
+                                <div class="activity">
+                                    @foreach($activities as $activity)
+                                    <div class="activity-item d-flex">
+                                        <div class="activite-label">{{ $activity->created_at->diffForHumans() }}</div>
+                                        <i class="bi bi-circle-fill activity-badge text-{{ $activity->net_income >= 0 ? 'success' : 'danger' }} align-self-start"></i>
+                                        <div class="activity-content">
+                                            Description: {{ $activity->description }} <br>
+                                            Revenue: ${{ number_format($activity->revenue, 2) }} <br>
+                                            Outflow: ${{ number_format($activity->outflow, 2) }} <br>
+                                            Net Income: ${{ number_format($activity->net_income, 2) }}
+                                        </div>
+                                    </div><!-- End activity item-->
+                                    @endforeach
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="col-12">
     <div class="card recent-sales overflow-auto">
 
         <div class="card-body">
-            <h5 class="card-title">Bank Reconcilation</h5>
+            <h5 class="card-title">Bank Reconcilation <!-- Button to trigger the modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bankTransactionModal">
+                    View Bank Transaction Reports
+                </button></h5>
             <table class="table table-borderless datatable">
                 <thead>
                     <tr>

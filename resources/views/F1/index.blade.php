@@ -243,7 +243,6 @@
                                     <thead>
                                         <tr>
                                             <th>Revenue</th>
-                                            <th>Income</th>
                                             <th>Outflow</th>
                                             <th>Net Income</th>
                                         </tr>
@@ -252,14 +251,12 @@
                                         @foreach ($cashManagements as $cashManagement)
                                             <tr>
                                                 <td>{{ $cashManagement->revenue }}</td>
-                                                <td>{{ $cashManagement->income }}</td>
                                                 <td>{{ $cashManagement->outflow }}</td>
                                                 <td>{{ $cashManagement->net_income }}</td>
                                             </tr>
                                         @endforeach
                                         <tr class="total-row">
                                             <td><strong>{{ $totalRevenue }}</strong></td>
-                                            <td><strong>{{ $totalIncome }}</strong></td>
                                             <td><strong>{{ $totalOutflow }}</strong></td>
                                             <td><strong>{{ $totalNetIncome }}</strong></td>
                                         </tr>
@@ -309,10 +306,29 @@
                                                         <td>{{ \Carbon\Carbon::parse($costAllocation->created_at)->toDateTimeString() }}</td>
                                                         <td>{{ $costAllocation->status }}</td>
                                                         <td>
-                                                            <form action="{{ route('cost_allocations.allocate', $costAllocation->id) }}" method="POST">
+                                                            <form id="allocationForm" action="{{ route('cost_allocations.allocate', $costAllocation->id) }}" method="POST">
                                                                 @csrf
-                                                                <button type="submit" class="btn btn-primary">Allocate</button>
+                                                                <button id="allocateBtn" type="submit" class="btn btn-primary">Allocate</button>
                                                             </form>
+                                                            
+                                                            <script>
+                                                                document.addEventListener('DOMContentLoaded', function() {
+                                                                    var allocateBtn = document.getElementById('allocateBtn');
+                                                                    var allocationForm = document.getElementById('allocationForm');
+                                                            
+                                                                    allocateBtn.addEventListener('click', function(event) {
+                                                                        // Prevent default form submission
+                                                                        event.preventDefault();
+                                                            
+                                                                        // Disable the button to prevent multiple submissions
+                                                                        allocateBtn.disabled = true;
+                                                            
+                                                                        // Submit the form
+                                                                        allocationForm.submit();
+                                                                    });
+                                                                });
+                                                            </script>
+                                                            
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -325,10 +341,62 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <form action="{{ route('calculate.net.income') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-primary" id="calculateNetIncomeBtn">Calculate Net Income</button>
+                        </form>
+                        <!-- Button to trigger the modal -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#financialhealth">
+                            View Financial Health Status
+                            </button> 
                     </div>
+                    
                 </div>
             </div>
         </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="financialhealth" tabindex="-1" role="dialog" aria-labelledby="financialhealth" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="financialhealth">Cash Management Report</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h2>Cash Management Details</h2>
+                            <ul>
+                                <li><strong>Description:</strong> {{ $cashManagement->description }}</li>
+                                <li><strong>Revenue:</strong> ${{ number_format($cashManagement->revenue, 2) }}</li>
+                                <li><strong>Outflow:</strong> ${{ number_format($cashManagement->outflow, 2) }}</li>
+                                <li><strong>Net Income:</strong> ${{ number_format($cashManagement->net_income, 2) }}</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h2>Financial Health Status</h2>
+                            <p>
+                                @if ($financialHealthStatus === 'Healthy')
+                                    Congratulations! Your financial health is healthy.
+                                @else
+                                    Warning! Your financial health is poor. Please take necessary actions to improve it.
+                                @endif
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
         <!-- Modal -->
         <div class="modal fade" id="dashboardModal" tabindex="-1" aria-labelledby="dashboardModalLabel"
@@ -336,7 +404,7 @@
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="dashboardModalLabel">Dashboard Overview</h5>
+                        <h5 class="modal-title" id="dashboardModalLabel">Financial report overview </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
@@ -596,9 +664,9 @@
                             <div class="card">
 
                                 <div class="card-body">
-                                    <div class="card-title">Approval</div>
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#financialPlanningModal1">Create Planning</button>
+                                    <div class="card-title">Approval <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#financialPlanningModal1">Create Planning</button></div>
+                                  
                                     <div class="table-responsive">
                                         <table id="example" class="table display" width="100%">
                                             <thead class="text-center">

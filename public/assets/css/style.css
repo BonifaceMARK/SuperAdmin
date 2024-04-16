@@ -1468,3 +1468,51 @@ tr:nth-child(even) {
             height: 350px; /* Adjust the height as needed */
             margin: auto; /* Center the chart horizontally */
         }
+/* Add custom CSS for the modal */
+.modal-content {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.modal-header {
+    background-color: #007bff; /* Header background color */
+    border-bottom: 1px solid #dee2e6;
+    color: #fff; /* Header text color */
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.modal-body h2 {
+    margin-top: 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: #343a40; /* Body header text color */
+}
+
+.modal-body ul {
+    list-style: none;
+    padding: 0;
+}
+
+.modal-body li {
+    margin-bottom: 10px;
+    color: #495057; /* Body text color */
+}
+
+.modal-footer {
+    border-top: 1px solid #dee2e6;
+    padding: 20px;
+    justify-content: center;
+}
+
+.modal-footer .btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.modal-footer .btn-secondary:hover {
+    background-color: #5a6268;
+}

@@ -151,15 +151,12 @@
                 {{ Session::get('success') }}
             </div>
         @endif
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+        @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+    
 
 
 
@@ -320,25 +317,47 @@
             </div>
         </div>
         </div>
-
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                // Disable "Add to Revenue" button if status is not "Paid"
-                var addToRevenueBtns = document.querySelectorAll('.addToRevenueBtn');
-                addToRevenueBtns.forEach(function(btn) {
-                    btn.addEventListener('click', function(event) {
-                        var paymentId = this.getAttribute('data-payment-id');
+                // Attach event listener to form submission
+                var paymentForms = document.querySelectorAll('.addToRevenueForm');
+                paymentForms.forEach(function(form) {
+                    form.addEventListener('submit', function(event) {
+                        var button = this.querySelector('.addToRevenueBtn');
+                        var paymentId = button.getAttribute('data-payment-id');
                         var paymentStatus = document.querySelector('#paymentStatus' + paymentId)
                             .textContent.trim();
+        
+                        // Check if the payment status is "Paid"
                         if (paymentStatus !== 'Paid') {
                             alert('You can only add to revenue for payments with "Paid" status.');
                             event.preventDefault(); // Prevent form submission
+                        } else {
+                            // Disable the button after the form is submitted
+                            button.setAttribute('disabled', 'true');
+                            button.textContent = 'Adding to Revenue...';
+        
+                            // Store the clicked payment ID in local storage
+                            var clickedPayments = JSON.parse(localStorage.getItem('clickedPayments')) || [];
+                            clickedPayments.push(paymentId);
+                            localStorage.setItem('clickedPayments', JSON.stringify(clickedPayments));
                         }
                     });
                 });
+        
+                // Disable "Add to Revenue" buttons for previously clicked payments
+                var clickedPayments = JSON.parse(localStorage.getItem('clickedPayments')) || [];
+                clickedPayments.forEach(function(paymentId) {
+                    var button = document.querySelector('.addToRevenueBtn[data-payment-id="' + paymentId + '"]');
+                    if (button) {
+                        button.setAttribute('disabled', 'true');
+                        button.textContent = 'Added to Revenue';
+                    }
+                });
             });
         </script>
-
+        
+        
         <!-- Modal -->
         <div class="modal fade" id="freightPaymentsModal" tabindex="-1" aria-labelledby="freightPaymentsModalLabel"
             aria-hidden="true">

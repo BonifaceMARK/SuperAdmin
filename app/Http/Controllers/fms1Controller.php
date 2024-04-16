@@ -60,7 +60,10 @@ class fms1Controller extends Controller
         $payments = FixedAssetPayment::all();
         $investments = Investments::all();
 
-       return view ('F1.index', compact('costAllocations','cashManagements','approve', 'totalRevenue', 'totalIncome', 'totalOutflow', 'totalNetIncome','freightPayments','taxPayments','payments','investments','salesCount', 'salesPercentage', 'revenueAmount', 'revenuePercentage', 'customersCount', 'customersPercentage'));
+        $cashManagement = FmsG1CashManagement::firstOrNew([]);
+        $financialHealthStatus = $cashManagement->financialHealthStatus();
+
+       return view ('F1.index', compact('cashManagement', 'financialHealthStatus','costAllocations','cashManagements','approve', 'totalRevenue', 'totalIncome', 'totalOutflow', 'totalNetIncome','freightPayments','taxPayments','payments','investments','salesCount', 'salesPercentage', 'revenueAmount', 'revenuePercentage', 'customersCount', 'customersPercentage'));
     }
 
     public function planningrequest(Request $request){
@@ -81,44 +84,95 @@ class fms1Controller extends Controller
         ]);
         return redirect()->back()->with('success', 'Financial planning has been created Waiting For Approval.');
     }
-  public function allocate($id)
-  {
-      // Find the cost allocation record
-      $costAllocation = FmsG2CostAllocation::findOrFail($id);
+    private function isRevenueSufficient($amount)
+    {
+        // Find or create the cash management record
+        $cashManagement = FmsG1CashManagement::firstOrNew([]);
+    
+        // If revenue is null or zero, set it to zero
+        if ($cashManagement->revenue === null || $cashManagement->revenue === 0) {
+            $cashManagement->revenue = 0;
+        }
+    
+        // Check if revenue is enough
+        $isSufficient = $cashManagement->revenue >= $amount;
+    
+        if (!$isSufficient) {
+            return [
+                'isSufficient' => false,
+                'message' => 'Insufficient funds. Revenue amount is lower than the cost.'
+            ];
+        }
+    
+        return [
+            'isSufficient' => true,
+            'message' => ''
+        ];
+    }
+    
+    public function allocate($id)
+    {
+        // Find the cost allocation record
+        $costAllocation = FmsG2CostAllocation::findOrFail($id);
+    
+        // Deduct the cost from revenue
+        $revenueToDeduct = $costAllocation->budget; // Change from 'cost' to 'budget'
+    
+        // Check if revenue is sufficient
+        $revenueCheck = $this->isRevenueSufficient($revenueToDeduct);
+        if (!$revenueCheck['isSufficient']) {
+            return redirect()->back()->with('error', $revenueCheck['message']);
+        }
+    
+        // Deduct revenue
+        $this->deductRevenue($revenueToDeduct);
+    
+        // Update the status of the cost allocation
+        $costAllocation->status = 'Allocated';
+        $costAllocation->save();
+    
+        // Redirect back or return a response as needed
+        return redirect()->back()->with('success', 'Revenue deducted successfully and cost allocation updated.');
+    }
+    public function calculateNetIncome(Request $request)
+    {
+        // Your logic to calculate net income and update cash management here
 
-      // Deduct the cost from revenue
-      $revenueToDeduct = $costAllocation->cost;
+        // Example logic:
+        $cashManagement = FmsG1CashManagement::firstOrNew([]);
+        $totalExpenses = $cashManagement->outflow;
+        $totalRevenue = $cashManagement->revenue;
 
-      // Check if revenue is sufficient
-      if (!$this->isRevenueSufficient($revenueToDeduct)) {
-          return redirect()->back()->with('error', 'Insufficient funds. Revenue amount is lower than the cost.');
-      }
+        // Calculate net income
+        $netIncome = $totalRevenue - $totalExpenses;
 
-      // Deduct revenue
-      $this->deductRevenue($revenueToDeduct);
+        // Update net income in cash management
+        $cashManagement->net_income = $netIncome;
+        $cashManagement->save();
 
-      // Update the status of the cost allocation
-      $costAllocation->status = 'Allocated';
-      $costAllocation->save();
+        // Redirect back or return a response as needed
+        return redirect()->back()->with('success', 'Net income calculated and updated successfully.');
+    }
 
-      // Redirect back or return a response as needed
-      return redirect()->back()->with('success', 'Revenue deducted successfully and cost allocation updated.');
-  }
+    private function deductRevenue($amount)
+    {
+        // Find or create the cash management record
+        $cashManagement = FmsG1CashManagement::firstOrNew([]);
 
-  private function isRevenueSufficient($amount)
-  {
-      // Find or create the cash management record
-      $cashManagement = FmsG1CashManagement::firstOrNew([]);
+        // If revenue is null or zero, set it to zero
+        if ($cashManagement->revenue === null || $cashManagement->revenue === 0) {
+            $cashManagement->revenue = 0;
+        }
 
-      // If revenue is null or zero, set it to zero
-      if ($cashManagement->revenue === null || $cashManagement->revenue === 0) {
-          $cashManagement->revenue = 0;
-      }
+        // Deduct the amount from revenue
+        $cashManagement->revenue -= $amount;
 
-      // Check if revenue is enough
-      return $cashManagement->revenue >= $amount;
-  }
+        // Add the deducted amount to outflow
+        $cashManagement->outflow += $amount;
 
+        // Save the changes
+        $cashManagement->save();
+    }
 
     public function storeBudgetPlan(Request $request)
     {

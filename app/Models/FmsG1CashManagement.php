@@ -41,5 +41,14 @@ public static function addRevenue($amount)
     $cashManagement->revenue += $amount;
     $cashManagement->save();
 }
+ /**
+     * Get the financial health status based on net income.
+     *
+     * @return string
+     */
+    public function financialHealthStatus()
+    {
+        return $this->net_income >= 0 ? 'Healthy' : 'Poor';
+    }
 
 }
