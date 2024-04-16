@@ -227,7 +227,7 @@ Route::group(['prefix' => 'superadmin','middleware'=>['web','isSuperAdmin']],fun
 
 
 
-    // F2 ROUTES
+
     Route::post('/change-password',                     [AuthController::class, 'changePassword'])->name('change.password');
     Route::get('/upload-image',                         [ImageController::class, 'showUploadForm'])->name('upload.form');
     Route::post('/upload-image',                        [ImageController::class, 'uploadImage'])->name('upload.image');

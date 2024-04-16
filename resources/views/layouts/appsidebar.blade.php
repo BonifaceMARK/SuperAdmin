@@ -276,7 +276,7 @@
   </li><!-- End Components Nav -->
 <hr>
   <li class="nav-heading">Finance 3</li>
-  <li class="nav-item">
+  {{-- <li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#components-reports" data-bs-toggle="collapse" href="#">
         <i class="bi bi-bar-chart"></i></i><span style="font-size: 0.8rem;">Reports</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
@@ -303,7 +303,7 @@
   </a>
 </li>
     </ul>
-  </li>
+  </li> --}}
   <li class="nav-item">
     <a class="nav-link collapsed" class="nav-link " data-bs-target="#forms-nav"  href="fms3index">
       <i class="bi bi-journal-text"></i><span style="font-size: 0.8rem;">Workflow & Approval</span>

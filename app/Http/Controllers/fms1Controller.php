@@ -71,7 +71,7 @@ class fms1Controller extends Controller
             'title' => 'required',
             'description' => 'required',
             'budget' => 'required|numeric',
-            'submitted_by' => 'required|numeric',
+            'submitted_by' => 'required',
             'created_at' => 'required|date|after:start_date',
         ]);
 

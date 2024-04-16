@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('fms_g5hotel_payments', function (Blueprint $table) {
             $table->id();
             $table->uuid('reference');
-            $table->string('service');
+            $table->string('service')->nullable();
             $table->string('productName');
             $table->string('transactionName');
             $table->string('paymentMethod');

@@ -206,7 +206,7 @@
                             </div><!-- End activity item-->
                             <div class="card-body">
                                 <h5 class="card-title">Recent Activity <span>| Today</span></h5>
-                            
+
                                 <div class="activity">
                                     @foreach($activities as $activity)
                                     <div class="activity-item d-flex">
@@ -222,7 +222,7 @@
                                     @endforeach
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -383,6 +383,16 @@
 </div>
 
 </main>
+
+
+
+
+<script>
+    // JavaScript to trigger the modal
+    document.getElementById('new_borrower').addEventListener('click', function () {
+        $('#applyModal').modal('show');
+    });
+</script>
 
 
 
